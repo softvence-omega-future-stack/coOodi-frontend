@@ -5,6 +5,11 @@ import HomePage from './pages/Home';
 import Tiers from './pages/Tiers';
 import FAQ from './pages/Faq';
 import Contact from './pages/Contact';
+import gsap from 'gsap';
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+
+// Register the plugin
+gsap.registerPlugin(ScrollToPlugin);
 
 const App = () => {
   const [currentPage, setCurrentPage] = useState('home');

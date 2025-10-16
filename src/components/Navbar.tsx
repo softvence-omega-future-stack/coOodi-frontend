@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ChevronDown, ShoppingBag } from 'lucide-react';
+import { Link } from 'react-router';
 
 
 
@@ -26,30 +27,10 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate, navRef }) => {
           </div>
 
           <div className="hidden md:flex space-x-8">
-            <button 
-              onClick={() => onNavigate('/shop')}
-              className={`${currentPage === 'shop' ? 'text-amber-400 font-bold' : 'text-slate-300'} hover:text-amber-400 transition-colors`}
-            >
-              Shop
-            </button>
-            <button 
-              onClick={() => onNavigate('/tiers')}
-              className={`${currentPage === 'tiers' ? 'text-amber-400 font-bold' : 'text-slate-300'} hover:text-amber-400 transition-colors`}
-            >
-              Tiers
-            </button>
-            <button 
-              onClick={() => onNavigate('/faq')}
-              className={`${currentPage === 'faq' ? 'text-amber-400 font-bold' : 'text-slate-300'} hover:text-amber-400 transition-colors`}
-            >
-              FAQ
-            </button>
-            <button 
-              onClick={() => onNavigate('/contact')}
-              className={`${currentPage === 'contact' ? 'text-amber-400 font-bold' : 'text-slate-300'} hover:text-amber-400 transition-colors`}
-            >
-              Contact
-            </button>
+            <Link to={"/shop"} className={`${currentPage === 'shop' ? 'text-amber-400 font-bold' : 'text-slate-300'} hover:text-amber-400 transition-colors`}>Shop</Link>
+            <Link to={"/tiers"} className={`${currentPage === 'tiers' ? 'text-amber-400 font-bold' : 'text-slate-300'} hover:text-amber-400 transition-colors`}>Tiers</Link>
+            <Link to={"/faq"} className={`${currentPage === 'faq' ? 'text-amber-400 font-bold' : 'text-slate-300'} hover:text-amber-400 transition-colors`}>FAQ</Link>
+            <Link to={"/contact"} className={`${currentPage === 'contact' ? 'text-amber-400 font-bold' : 'text-slate-300'} hover:text-amber-400 transition-colors`}>Contact</Link>
           </div>
 
           <div className="flex items-center space-x-4">
