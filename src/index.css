@@ -15,3 +15,10 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.gradient-text {
+  background: linear-gradient(270deg, rgba(118, 47, 25, 1), rgba(136, 132, 19, 1), rgba(12, 151, 156, 1), rgba(255, 78, 2, 1));
+  background-size: 400% 400%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

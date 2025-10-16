@@ -7,93 +7,182 @@ gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 const Shop = () => {
   useEffect(() => {
+    // Kill existing ScrollTriggers
+    ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+
+    // Animate shop items with ScrollTrigger
     gsap.fromTo(
       '.shop-item',
-      { opacity: 0, y: 50, scale: 0.9 },
+      { 
+        opacity: 0, 
+        y: 60, 
+        scale: 0.85,
+        rotationX: -10
+      },
       {
         opacity: 1,
         y: 0,
         scale: 1,
-        duration: 0.6,
-        stagger: 0.1,
-        ease: 'power2.out',
+        rotationX: 0,
+        duration: 0.8,
+        stagger: {
+          amount: 0.3,
+          from: "start",
+          grid: "auto",
+          ease: "power2.out"
+        },
+        ease: 'back.out(1.7)',
+        scrollTrigger: {
+          trigger: '.shop-grid',
+          start: 'top 80%',
+          toggleActions: 'play none none reverse',
+        }
       }
     );
+
+    // Hover animations for each item
+    gsap.utils.toArray('.shop-item').forEach((item) => {
+      const shopItem = item as HTMLElement;
+      const btn = shopItem.querySelector('button');
+      
+      shopItem.addEventListener('mouseenter', () => {
+        gsap.to(shopItem, {
+          scale: 1.02,
+          boxShadow: '0 10px 20px rgba(251, 191, 36, 0.3)',
+          duration: 0.3,
+          ease: 'power2.out'
+        });
+        gsap.to(btn, {
+          scale: 1.05,
+          y: -2,
+          duration: 0.3,
+          ease: 'power2.out'
+        });
+      });
+
+      shopItem.addEventListener('mouseleave', () => {
+        gsap.to(shopItem, {
+          scale: 1,
+          boxShadow: '0 0 0 rgba(251, 191, 36, 0)',
+          duration: 0.3,
+          ease: 'power2.out'
+        });
+        gsap.to(btn, {
+          scale: 1,
+          y: 0,
+          duration: 0.3,
+          ease: 'power2.out'
+        });
+      });
+    });
+
+    // Title animation
+    gsap.fromTo(
+      'h1',
+      { 
+        opacity: 0, 
+        y: -30,
+        scale: 0.9 
+      },
+      {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        duration: 1,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: 'h1',
+          start: 'top 90%',
+        }
+      }
+    );
+
+    // Cleanup
+    return () => {
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    };
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 pt-24 pb-12 px-4">
-      <h1 className="text-6xl font-bold text-center mb-16 bg-gradient-to-r from-amber-400 via-yellow-500 to-amber-400 bg-clip-text text-transparent">
+    <div className="min-h-screen bg-[#001117] pt-22 pb-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden ">
+      {/* Background Decorations */}
+      <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
+        <svg className="absolute top-10 left-10 w-12 h-12 text-yellow-500/20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 3v1m0 14v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+        </svg>
+        <svg className="absolute top-20 right-10 w-10 h-10 text-yellow-500/20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <svg className="absolute bottom-10 left-20 w-8 h-8 text-yellow-500/20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+        </svg>
+      </div>
+
+      <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-center mb-6 sm:mb-8 lg:mb-12 bg-gradient-to-r from-red-400 via-yellow-500 to-green-400 bg-clip-text text-transparent">
         Shop
       </h1>
       
-      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="shop-item border-2 border-amber-600/50 rounded-lg p-8 bg-slate-900/30 backdrop-blur-sm hover:border-amber-500 transition-all">
+      <div className="shop-grid max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 sm:gap-6">
+        {/* Poster */}
+        <div className="shop-item relative border-4 border-yellow-500/30 rounded-lg p-2 sm:p-3 lg:p-4 bg-slate-900/50 backdrop-blur-md hover:border-yellow-400 transition-all overflow-hidden">
           <div className="flex flex-col items-center space-y-4">
-            <svg className="w-32 h-32 text-amber-500" viewBox="0 0 100 100" fill="none" stroke="currentColor">
-              <rect x="20" y="10" width="60" height="70" strokeWidth="2" rx="2" />
-              <circle cx="50" cy="40" r="12" strokeWidth="2" />
-              <path d="M35 55 Q50 65 65 55" strokeWidth="2" />
-              <line x1="30" y1="75" x2="70" y2="75" strokeWidth="2" />
-            </svg>
-            <h3 className="text-2xl font-semibold bg-gradient-to-r from-amber-400 to-yellow-500 bg-clip-text text-transparent">Poster</h3>
-            <button className="bg-gradient-to-r from-red-800 to-red-900 hover:from-red-700 hover:to-red-800 text-white px-8 py-2 rounded-full transition-all">ADD TO BAG</button>
+            <img src="/shop1.png" alt="Poster" className="w-32 h-32 sm:w-40 sm:h-40 lg:w-48 lg:h-48 object-contain" />
+            <h3 className="text-lg sm:text-xl lg:text-2xl font-semibold text-yellow-400 text-center">Poster</h3>
+            <button className="bg-gradient-to-r from-red-800 to-red-900 hover:from-red-700 hover:to-red-800 text-white px-16 py-2 rounded-full text-sm sm:text-base transition-all">
+              ADD TO BAG
+            </button>
           </div>
         </div>
 
-        <div className="shop-item border-2 border-amber-600/50 rounded-lg p-8 bg-slate-900/30 backdrop-blur-sm hover:border-amber-500 transition-all">
+        {/* Hoodie */}
+        <div className="shop-item relative border-4 border-yellow-500/30 rounded-lg p-2 sm:p-3 lg:p-4 bg-slate-900/50 backdrop-blur-md hover:border-yellow-400 transition-all overflow-hidden">
           <div className="flex flex-col items-center space-y-4">
-            <svg className="w-32 h-32 text-amber-500" viewBox="0 0 100 100" fill="none" stroke="currentColor">
-              <path d="M30 30 Q25 25 20 30 L20 50 L30 55 L30 30 Z" strokeWidth="2" />
-              <path d="M70 30 Q75 25 80 30 L80 50 L70 55 L70 30 Z" strokeWidth="2" />
-              <rect x="30" y="30" width="40" height="50" strokeWidth="2" rx="5" />
-              <circle cx="50" cy="45" r="8" strokeWidth="2" />
-            </svg>
-            <h3 className="text-2xl font-semibold bg-gradient-to-r from-amber-400 to-yellow-500 bg-clip-text text-transparent">Hoodie</h3>
-            <button className="bg-gradient-to-r from-red-800 to-red-900 hover:from-red-700 hover:to-red-800 text-white px-8 py-2 rounded-full transition-all">ADD TO BAG</button>
+            <img src="/shop2.png" alt="Hoodie" className="w-32 h-32 sm:w-40 sm:h-40 lg:w-48 lg:h-48 object-contain" />
+            <h3 className="text-lg sm:text-xl lg:text-2xl font-semibold text-yellow-400 text-center">Hoodie</h3>
+            <button className="bg-gradient-to-r from-red-800 to-red-900 hover:from-red-700 hover:to-red-800 text-white px-16 py-2 rounded-full text-sm sm:text-base transition-all">
+              ADD TO BAG
+            </button>
           </div>
         </div>
 
-        <div className="shop-item border-2 border-amber-600/50 rounded-lg p-8 bg-slate-900/30 backdrop-blur-sm hover:border-amber-500 transition-all">
+        {/* Token Pack */}
+        <div className="shop-item relative border-4 border-yellow-500/30 rounded-lg p-2 sm:p-3 lg:p-4 bg-slate-900/50 backdrop-blur-md hover:border-yellow-400 transition-all overflow-hidden">
           <div className="flex flex-col items-center space-y-4">
-            <svg className="w-32 h-32 text-amber-500" viewBox="0 0 100 100" fill="none" stroke="currentColor">
-              <circle cx="35" cy="45" r="15" strokeWidth="2" />
-              <circle cx="50" cy="40" r="15" strokeWidth="2" />
-              <circle cx="55" cy="55" r="15" strokeWidth="2" />
-            </svg>
-            <h3 className="text-2xl font-semibold bg-gradient-to-r from-amber-400 to-yellow-500 bg-clip-text text-transparent">Token Pack</h3>
-            <button className="bg-gradient-to-r from-red-800 to-red-900 hover:from-red-700 hover:to-red-800 text-white px-8 py-2 rounded-full transition-all">ADD TO BAG</button>
+            <img src="/shop3.png" alt="Token Pack" className="w-32 h-32 sm:w-40 sm:h-40 lg:w-48 lg:h-48 object-contain" />
+            <h3 className="text-lg sm:text-xl lg:text-2xl font-semibold text-yellow-400 text-center">Token Pack</h3>
+            <button className="bg-gradient-to-r from-red-800 to-red-900 hover:from-red-700 hover:to-red-800 text-white px-16 py-2 rounded-full text-sm sm:text-base transition-all">
+              ADD TO BAG
+            </button>
           </div>
         </div>
 
-        <div className="shop-item border-2 border-amber-600/50 rounded-lg p-8 bg-slate-900/30 backdrop-blur-sm hover:border-amber-500 transition-all">
+        {/* Collectible Coin */}
+        <div className="shop-item relative border-4 border-yellow-500/30 rounded-lg p-2 sm:p-3 lg:p-4 bg-slate-900/50 backdrop-blur-md hover:border-yellow-400 transition-all overflow-hidden">
           <div className="flex flex-col items-center space-y-4">
-            <svg className="w-32 h-32 text-amber-500" viewBox="0 0 100 100" fill="none" stroke="currentColor">
-              <circle cx="50" cy="50" r="25" strokeWidth="3" />
-              <path d="M50 30 L55 45 L70 45 L58 55 L63 70 L50 60 L37 70 L42 55 L30 45 L45 45 Z" strokeWidth="2" />
-            </svg>
-            <h3 className="text-2xl font-semibold bg-gradient-to-r from-amber-400 to-yellow-500 bg-clip-text text-transparent">Collectible Coin ($25)</h3>
-            <button className="bg-gradient-to-r from-red-800 to-red-900 hover:from-red-700 hover:to-red-800 text-white px-8 py-2 rounded-full transition-all">ADD TO BAG</button>
+            <img src="/shop4.png" alt="Collectible Coin" className="w-32 h-32 sm:w-40 sm:h-40 lg:w-48 lg:h-48 object-contain" />
+            <h3 className="text-lg sm:text-xl lg:text-2xl font-semibold text-yellow-400 text-center">Collectible Coin ($25)</h3>
+            <button className="bg-gradient-to-r from-red-800 to-red-900 hover:from-red-700 hover:to-red-800 text-white px-16 py-2 rounded-full text-sm sm:text-base transition-all">
+              ADD TO BAG
+            </button>
           </div>
         </div>
 
-        <div className="shop-item md:col-span-2 border-2 border-amber-600/50 rounded-lg p-8 bg-slate-900/30 backdrop-blur-sm hover:border-amber-500 transition-all">
-          <div className="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
-            <svg className="w-32 h-32 text-amber-500" viewBox="0 0 100 100" fill="none" stroke="currentColor">
-              <rect x="25" y="40" width="50" height="40" strokeWidth="2" rx="2" />
-              <path d="M25 40 L50 25 L75 40" strokeWidth="2" />
-              <line x1="50" y1="25" x2="50" y2="80" strokeWidth="2" />
-              <circle cx="50" cy="60" r="5" fill="currentColor" />
-            </svg>
-            <div className="text-center md:text-left">
-              <h3 className="text-3xl font-semibold bg-gradient-to-r from-amber-400 to-yellow-500 bg-clip-text text-transparent">Mystery Box</h3>
-              <p className="text-xl text-amber-500">$50</p>
+        {/* Mystery Box - Full width */}
+        <div className="shop-item relative col-span-full border-4 border-yellow-500/30 rounded-lg p-2 sm:p-3 lg:p-4 bg-slate-900/50 backdrop-blur-md hover:border-yellow-400 transition-all overflow-hidden">
+          <div className="flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0 sm:space-x-4">
+            <img src="/shop5.png" alt="Mystery Box" className="w-32 h-32 sm:w-40 sm:h-40 lg:w-48 lg:h-48 object-contain" />
+            <div className="text-center">
+              <h3 className="text-lg sm:text-xl lg:text-2xl font-semibold text-yellow-400">Mystery Box</h3>
+              <p className="text-lg sm:text-xl text-yellow-400 font-bold">$50</p>
             </div>
-            <button className="bg-gradient-to-r from-red-800 to-red-900 hover:from-red-700 hover:to-red-800 text-white px-8 py-2 rounded-full transition-all">ADD TO BAG</button>
+            <button className="bg-gradient-to-r from-red-800 to-red-900 hover:from-red-700 hover:to-red-800 text-white px-16 py-2 rounded-full text-sm sm:text-base transition-all">
+              ADD TO BAG
+            </button>
           </div>
         </div>
       </div>
     </div>
   );
 };
+
 export default Shop;
