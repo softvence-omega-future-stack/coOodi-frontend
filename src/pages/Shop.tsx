@@ -118,8 +118,8 @@ const Shop = () => {
         </svg>
       </div>
 
-      <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-center mb-6 sm:mb-8 lg:mb-12 bg-gradient-to-r from-red-400 via-yellow-500 to-green-400 bg-clip-text text-transparent">
-        Shop
+      <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-center mb-6 sm:mb-8 lg:mb-12">
+        <span className='gradient-text' >Shop</span>
       </h1>
       
       <div className="shop-grid max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 sm:gap-6">

@@ -95,8 +95,8 @@ const Navbar: React.FC<NavbarProps> = ({ navRef }) => {
 
           {/* Right section - Wallet and User Menu - Start from lg */}
           <div className="hidden lg:flex items-center space-x-3">
-            <div className="flex items-center space-x-2 bg-teal-500/20 px-3 py-2 rounded-lg border border-teal-500/30 min-w-[90px]">
-              <span className="text-teal-400 font-bold text-sm">$22,450</span>
+            <div className="flex items-center space-x-2 min-w-[90px]">
+              <span className="gradient-text font-semibold text-md">$22,450</span>
             </div>
 
             <div className="relative">
