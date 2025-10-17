@@ -3,7 +3,7 @@
 
 const Contact = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 pt-24 pb-12 px-4">
+    <div className="min-h-screen bg-[#001117] pt-24 pb-12 px-4">
       <h1 className="text-6xl font-bold text-center mb-8">
         <span className="gradient-text">Contact</span>
       </h1>

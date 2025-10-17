@@ -22,3 +22,265 @@
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
+/* Chalkboard styles */
+
+.chalk-frame {
+  position: relative;
+  background: #011419; /* chalkboard base */
+  border-radius: 10px;
+  overflow: hidden; /* contain everything */
+  isolation: isolate;
+}
+
+/* draw border INSIDE instead of around */
+.chalk-frame::before {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  right: 2px;
+  bottom: 2px;
+  border: 4px solid #9F854B;
+  border-radius: 8px;
+  opacity: 0.85;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  filter:
+    blur(0.8px)
+    brightness(1.2)
+    contrast(150%);
+  box-shadow:
+    inset 0 0 5px rgba(159, 133, 75, 0.3),
+    inset 0 0 15px rgba(159, 133, 75, 0.15);
+
+  /* chalk noise mask */
+  mask-image: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='5' seed='8'/%3E%3CfeDisplacementMap in='SourceGraphic' scale='6'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='5' seed='8'/%3E%3CfeDisplacementMap in='SourceGraphic' scale='6'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mask-mode: alpha;
+  -webkit-mask-mode: alpha;
+}
+
+/* subtle hover shimmer (optional) */
+.chalk-frame:hover::before {
+  filter:
+    blur(1.1px)
+    brightness(1.35)
+    contrast(160%);
+  box-shadow:
+    inset 0 0 6px rgba(159, 133, 75, 0.35),
+    inset 0 0 18px rgba(159, 133, 75, 0.2);
+  transition: all 0.3s ease-in-out;
+}
+
+
+
+/* ==== Chalk Dropdown Border (special for Navbar) ==== */
+.chalk-dropdown {
+  /* background: #011419; */
+  border-radius: 10px;
+  /* border: 3px solid #9F854B; */
+  box-shadow:
+    inset 0 0 10px rgba(159, 133, 75, 0.3),
+    0 0 12px rgba(159, 133, 75, 0.15);
+  position: absolute;
+  overflow: hidden;
+}
+
+.chalk-dropdown::before {
+  content: "";
+  position: absolute;
+  inset: 2px;
+  border: 3px solid #9F854B;
+  border-radius: 8px;
+  opacity: 0.8;
+  mix-blend-mode: screen;
+  filter:
+    blur(0.8px)
+    brightness(1.2)
+    contrast(150%);
+  mask-image: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='4' seed='5'/%3E%3CfeDisplacementMap in='SourceGraphic' scale='5'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='4' seed='5'/%3E%3CfeDisplacementMap in='SourceGraphic' scale='5'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mask-mode: alpha;
+  -webkit-mask-mode: alpha;
+  pointer-events: none;
+}
+
+.chalk-dropdown:hover::before {
+  filter:
+    blur(1px)
+    brightness(1.3)
+    contrast(160%);
+  transition: all 0.3s ease-in-out;
+}
+
+
+
+
+/*  Login signin */
+@keyframes chalkFlicker {
+          0%, 100% { opacity: 0.7; }
+          50% { opacity: 0.9; }
+        }
+        
+        /* MAIN CONTAINER */
+        .chalk-container {
+          position: relative;
+          width: 100%;
+          max-width: 400px;
+          background: #C9A961;
+          border-radius: 12px;
+          box-shadow: inset 0 0 10px rgba(159, 133, 75, 0.3), 0 0 12px rgba(159, 133, 75, 0.15);
+          overflow: hidden;
+        }
+
+        .chalk-container::before {
+          content: "";
+          position: absolute;
+          top: 2px;
+          left: 2px;
+          right: 2px;
+          bottom: 2px;
+          border: 3px solid #9F854B;
+          border-radius: 10px;
+          opacity: 0.8;
+          mix-blend-mode: screen;
+          filter: blur(0.8px) brightness(1.2) contrast(150%);
+          mask-image: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='4' seed='5'/%3E%3CfeDisplacementMap in='SourceGraphic' scale='5'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+          -webkit-mask-image: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='4' seed='5'/%3E%3CfeDisplacementMap in='SourceGraphic' scale='5'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+          mask-mode: alpha;
+          -webkit-mask-mode: alpha;
+          pointer-events: none;
+          animation: chalkFlicker 3s ease-in-out infinite;
+        }
+
+        .chalk-container:hover::before {
+          filter: blur(1px) brightness(1.3) contrast(160%);
+          transition: all 0.3s ease-in-out;
+        }
+
+        .chalk-content {
+          position: relative;
+          z-index: 10;
+          padding: 32px;
+        }
+
+        /* INPUT FIELDS */
+        .chalk-input {
+          position: relative;
+          background: #C9A961;
+          border-radius: 6px;
+          overflow: hidden;
+        }
+
+        .chalk-input::before {
+          content: "";
+          position: absolute;
+          top: 2px;
+          left: 2px;
+          right: 2px;
+          bottom: 2px;
+          border: 3px solid #000;
+          border-radius: 4px;
+          opacity: 0.8;
+          mix-blend-mode: multiply;
+          filter: blur(0.8px) brightness(1.2) contrast(150%);
+          mask-image: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='4' seed='5'/%3E%3CfeDisplacementMap in='SourceGraphic' scale='5'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+          -webkit-mask-image: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='4' seed='5'/%3E%3CfeDisplacementMap in='SourceGraphic' scale='5'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+          mask-mode: alpha;
+          -webkit-mask-mode: alpha;
+          pointer-events: none;
+          z-index: 1;
+        }
+
+        .chalk-input input {
+          position: relative;
+          z-index: 2;
+          background: transparent;
+          border: none;
+          outline: none;
+        }
+
+        .chalk-input:focus-within::before {
+          filter: blur(1px) brightness(1.3) contrast(160%);
+          transition: all 0.3s ease-in-out;
+        }
+
+        /* BUTTON */
+        .chalk-button {
+          position: relative;
+          background: #1a1a1a;
+          border-radius: 6px;
+          overflow: hidden;
+        }
+
+        .chalk-button::before {
+          content: "";
+          position: absolute;
+          top: 2px;
+          left: 2px;
+          right: 2px;
+          bottom: 2px;
+          border: 3px solid #000;
+          border-radius: 4px;
+          opacity: 0.8;
+          mix-blend-mode: multiply;
+          filter: blur(0.8px) brightness(1.2) contrast(150%);
+          mask-image: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='4' seed='5'/%3E%3CfeDisplacementMap in='SourceGraphic' scale='5'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+          -webkit-mask-image: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='4' seed='5'/%3E%3CfeDisplacementMap in='SourceGraphic' scale='5'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+          mask-mode: alpha;
+          -webkit-mask-mode: alpha;
+          pointer-events: none;
+          z-index: 1;
+        }
+
+        .chalk-button button {
+          position: relative;
+          z-index: 2;
+          background: transparent;
+          border: none;
+          outline: none;
+        }
+
+        .chalk-button:hover::before {
+          filter: blur(1px) brightness(1.3) contrast(160%);
+          transition: all 0.3s ease-in-out;
+        }
+
+        /* ICON */
+        .chalk-icon {
+          position: relative;
+          width: 64px;
+          height: 64px;
+          background: #C9A961;
+          border-radius: 8px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          overflow: hidden;
+        }
+
+        .chalk-icon::before {
+          content: "";
+          position: absolute;
+          top: 2px;
+          left: 2px;
+          right: 2px;
+          bottom: 2px;
+          border: 3px solid #000;
+          border-radius: 6px;
+          opacity: 0.8;
+          mix-blend-mode: multiply;
+          filter: blur(0.8px) brightness(1.2) contrast(150%);
+          mask-image: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='4' seed='5'/%3E%3CfeDisplacementMap in='SourceGraphic' scale='5'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+          -webkit-mask-image: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='4' seed='5'/%3E%3CfeDisplacementMap in='SourceGraphic' scale='5'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+          mask-mode: alpha;
+          -webkit-mask-mode: alpha;
+          pointer-events: none;
+          z-index: 1;
+        }
+
+        .chalk-icon svg {
+          position: relative;
+          z-index: 2;
+        }
