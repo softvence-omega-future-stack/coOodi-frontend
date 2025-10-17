@@ -396,7 +396,7 @@ export default function Checkout() {
         <h1 className="text-5xl font-bold text-center mb-2">
           <span className='gradient-text'>Checkout</span>
         </h1>
-        <div className="flex justify-center gap-4 text-sm text-gray-400 mb-12">
+        <div className="hidden sm:flex justify-center gap-4 text-sm text-gray-400 mb-12">
           <span>Cart</span>
           <span>•</span>
           <span>Details</span>

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router';
 
 export default function MyBag() {
   const [items, setItems] = useState([
@@ -411,7 +412,7 @@ export default function MyBag() {
         <div className="flex justify-end">
           <div className="chalk-button" style={{ width: '200px' }}>
             <button className="w-full py-3 text-white font-semibold uppercase tracking-wide text-sm">
-              Proceed Checkout
+              <Link to="/checkout">Proceed to Checkout</Link>
             </button>
           </div>
         </div>
