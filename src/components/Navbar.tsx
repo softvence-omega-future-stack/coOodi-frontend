@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { ChevronDown, LockKeyhole, ShoppingBag, Menu, X } from "lucide-react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { LockKeyhole, Menu, X } from "lucide-react";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 
 interface NavbarProps {
   navRef: React.RefObject<HTMLElement | null>;
@@ -24,16 +24,21 @@ const Navbar: React.FC<NavbarProps> = ({ navRef }) => {
     }
   }, [currentPath, navRef]);
 
-  const toggleMobileMenu = () => {
-    setMobileMenuOpen(!mobileMenuOpen);
-  };
-
+  const toggleMobileMenu = () => setMobileMenuOpen(!mobileMenuOpen);
   const closeMobileMenu = () => {
     setMobileMenuOpen(false);
     setDropdownOpen(false);
   };
 
-  const NavLink = ({ to, children, className = "" }: { to: string; children: React.ReactNode; className?: string }) => (
+  const NavLink = ({
+    to,
+    children,
+    className = "",
+  }: {
+    to: string;
+    children: React.ReactNode;
+    className?: string;
+  }) => (
     <button
       onClick={() => {
         navigate(to);
@@ -55,7 +60,8 @@ const Navbar: React.FC<NavbarProps> = ({ navRef }) => {
       className="fixed top-0 left-0 right-0 z-50 transition-opacity duration-500"
     >
       <div className="container mx-auto px-4 lg:px-6 py-3 lg:py-4">
-        <div className="flex items-center justify-between backdrop-blur-md bg-transparent">
+        {/* ✅ Navbar height fixed so dropdown never moves it */}
+        <div className="flex items-center justify-between h-[64px] backdrop-blur bg-transparent relative">
           {/* Logo */}
           <div
             className="flex items-center space-x-2 cursor-pointer flex-shrink-0"
@@ -64,10 +70,12 @@ const Navbar: React.FC<NavbarProps> = ({ navRef }) => {
               closeMobileMenu();
             }}
           >
-            <span className="gradient-text text-lg lg:text-[1.75rem] font-semibold">Yhe Silk Road</span>
+            <span className="gradient-text text-lg lg:text-[1.75rem] font-semibold">
+              The Silk Road
+            </span>
           </div>
 
-          {/* Mobile menu button - Only show on small screens */}
+          {/* Mobile Menu Toggle */}
           <div className="lg:hidden">
             <button
               onClick={toggleMobileMenu}
@@ -81,7 +89,7 @@ const Navbar: React.FC<NavbarProps> = ({ navRef }) => {
             </button>
           </div>
 
-          {/* Desktop Links - Start from lg breakpoint */}
+          {/* Desktop Links */}
           <div className="hidden lg:flex items-center space-x-6">
             <NavLink to="/shop">Shop</NavLink>
             <NavLink to="/tiers">Tiers</NavLink>
@@ -93,41 +101,61 @@ const Navbar: React.FC<NavbarProps> = ({ navRef }) => {
             </NavLink>
           </div>
 
-          {/* Right section - Wallet and User Menu - Start from lg */}
-          <div className="hidden lg:flex items-center space-x-3">
+          {/* Wallet + Dropdown */}
+          <div className="hidden lg:flex items-center space-x-3 relative">
             <div className="flex items-center space-x-2 min-w-[90px]">
-              <span className="gradient-text font-semibold text-md">$22,450</span>
+              <span className="gradient-text font-semibold text-lg">
+                $22,450
+              </span>
             </div>
 
+            {/* User Menu */}
             <div className="relative">
               <button
                 onClick={() => setDropdownOpen(!dropdownOpen)}
                 className="p-2 hover:bg-slate-800/50 rounded-lg transition-colors flex items-center space-x-1"
               >
-                <ShoppingBag className="w-6 h-6 text-amber-400" />
-                <ChevronDown
-                  className={`w-4 h-4 text-amber-400 transition-transform ${
+                <img
+                  src="/user.svg"
+                  alt="User Menu"
+                  className="w-8 h-8 text-amber-400"
+                />
+                <img
+                  src="/dropdown.svg"
+                  alt="Dropdown"
+                  className={`w-5 h-5 text-amber-400 transition-transform ${
                     dropdownOpen ? "rotate-180" : ""
                   }`}
                 />
               </button>
 
+              {/* ✅ Fixed dropdown positioning */}
               {dropdownOpen && (
-                <div className="absolute right-0 mt-2 w-48 bg-gradient-to-b from-amber-900 to-amber-950 rounded-lg shadow-xl overflow-hidden border border-amber-600/30 z-50">
-                  <NavLink to="/my-account" className="block w-full text-left px-6 py-3">
+                <div
+                  className="
+                    chalk-dropdown
+                    absolute left-[-20px] top-[calc(100%+10px)]
+                    w-56 z-[9999]
+                    backdrop-blur-md shadow-xl
+                  "
+                >
+                  <NavLink
+                    to="/my-account"
+                    className="block w-full text-left px-6 py-3 text-[#d4b373] hover:bg-[#3d0c0a]/60 transition-all duration-200"
+                  >
                     My Account
                   </NavLink>
-                  <NavLink to="/tiers" className="block w-full text-left px-6 py-3">
+                  <NavLink
+                    to="/tiers"
+                    className="block w-full text-left px-6 py-3 text-[#d4b373] hover:bg-[#3d0c0a]/60 transition-all duration-200"
+                  >
                     Tiers
                   </NavLink>
                   <button
-                    onClick={() => {
-                      setDropdownOpen(false);
-                      // Handle logout
-                    }}
-                    className="w-full text-left px-6 py-3 text-amber-100 hover:bg-amber-800/50 transition-colors border-t border-amber-700/30"
+                    onClick={() => setDropdownOpen(false)}
+                    className="w-full text-left px-6 py-3 text-[#d4b373] border-t border-[#9F854B]/40 hover:bg-[#3d0c0a]/60 transition-all duration-200"
                   >
-                    Log Out
+                    <Link to="/login">Log Out</Link>
                   </button>
                 </div>
               )}
@@ -135,35 +163,45 @@ const Navbar: React.FC<NavbarProps> = ({ navRef }) => {
           </div>
         </div>
 
-        {/* Mobile/Tablet Menu - Show on screens smaller than lg */}
+        {/* Mobile Menu */}
         {mobileMenuOpen && (
           <div className="lg:hidden mt-2 bg-slate-900/95 backdrop-blur-md rounded-lg border border-slate-700/50 overflow-hidden">
             <div className="py-2">
-              <NavLink to="/shop" className="w-full text-left px-4 py-3">Shop</NavLink>
-              <NavLink to="/tiers" className="w-full text-left px-4 py-3">Tiers</NavLink>
-              <NavLink to="/faq" className="w-full text-left px-4 py-3">FAQ</NavLink>
-              <NavLink to="/contact" className="w-full text-left px-4 py-3">Contact</NavLink>
-              <NavLink to="/my-bag" className="w-full text-left px-4 py-3 flex items-center">
+              <NavLink to="/shop" className="block w-full text-left px-4 py-3">
+                Shop
+              </NavLink>
+              <NavLink to="/tiers" className="block w-full text-left px-4 py-3">
+                Tiers
+              </NavLink>
+              <NavLink to="/faq" className="block w-full text-left px-4 py-3">
+                FAQ
+              </NavLink>
+              <NavLink to="/contact" className="block w-full text-left px-4 py-3">
+                Contact
+              </NavLink>
+              <NavLink
+                to="/my-bag"
+                className=" w-full text-left px-4 py-3 flex items-center"
+              >
                 <LockKeyhole className="w-4 h-4 mr-2" />
                 My Bag
               </NavLink>
-              <NavLink to="/my-account" className="w-full text-left px-4 py-3 border-t border-slate-700/50">
+              <NavLink
+                to="/my-account"
+                className="block w-full text-left px-4 py-3 border-t border-slate-700/50"
+              >
                 My Account
               </NavLink>
-              
-              {/* Wallet Display */}
+
               <div className="px-4 py-3 border-t border-slate-700/50">
                 <div className="flex items-center justify-between">
                   <span className="text-slate-400 text-sm">Wallet Balance</span>
                   <span className="text-teal-400 font-bold">$22,450</span>
                 </div>
               </div>
-              
+
               <button
-                onClick={() => {
-                  // Handle logout
-                  closeMobileMenu();
-                }}
+                onClick={() => closeMobileMenu()}
                 className="w-full text-left px-4 py-3 text-amber-100 hover:bg-amber-800/50 transition-colors border-t border-slate-700/50"
               >
                 Log Out

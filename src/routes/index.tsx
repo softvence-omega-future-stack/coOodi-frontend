@@ -7,6 +7,8 @@ import FAQ from "../pages/Faq";
 import Contact from "../pages/Contact";
 import MyBag from "../pages/MyBag";
 import NotFound from "../pages/NotFound";
+import LoginPage from "../pages/Login";
+import SignUpPage from "../pages/Signup";
 
 export const router = createBrowserRouter([
   {
@@ -18,6 +20,8 @@ export const router = createBrowserRouter([
       { path: "/faq", element: <FAQ /> },
       { path: "/contact", element: <Contact /> },
       { path: "/my-bag", element: <MyBag /> },
+      { path: "/login", element: <LoginPage /> },
+      { path: "/signup", element: <SignUpPage /> },
       { path: "/*", element: <NotFound /> },
     ],
   },

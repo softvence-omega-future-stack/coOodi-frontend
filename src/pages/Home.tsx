@@ -185,7 +185,7 @@ const HomePage: React.FC<HomePageProps> = ({ onEnterNow, navRef }) => {
   }, [navRef]);
 
   return (
-    <div ref={containerRef} className="relative bg-[#001117] min-h-[400vh]">
+    <div ref={containerRef} className="relative bg-[#051318] min-h-[400vh]">
       {/* Scroll to Explore Message - Initially visible */}
       <div 
         ref={scrollMessageRef}
