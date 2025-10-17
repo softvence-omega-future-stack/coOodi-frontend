@@ -19,7 +19,7 @@ const Layout = () => {
   }, [location]);
 
   return (
-    <div >
+    <div className=" min-h-screen text-slate-100">
       <Navbar navRef={navRef} />
       <Outlet /> {/* This renders the current page */}
     </div>

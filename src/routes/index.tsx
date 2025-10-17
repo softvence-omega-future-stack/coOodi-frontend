@@ -9,6 +9,7 @@ import MyBag from "../pages/MyBag";
 import NotFound from "../pages/NotFound";
 import LoginPage from "../pages/Login";
 import SignUpPage from "../pages/Signup";
+import Checkbox from "../pages/Checkbox";
 
 export const router = createBrowserRouter([
   {
@@ -22,6 +23,7 @@ export const router = createBrowserRouter([
       { path: "/my-bag", element: <MyBag /> },
       { path: "/login", element: <LoginPage /> },
       { path: "/signup", element: <SignUpPage /> },
+      { path: "/checkbox", element: <Checkbox /> },
       { path: "/*", element: <NotFound /> },
     ],
   },

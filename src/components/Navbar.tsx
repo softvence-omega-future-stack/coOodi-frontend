@@ -59,9 +59,8 @@ const Navbar: React.FC<NavbarProps> = ({ navRef }) => {
       ref={navRef}
       className="fixed top-0 left-0 right-0 z-50 transition-opacity duration-500"
     >
-      <div className="container mx-auto px-4 lg:px-6 py-3 lg:py-4">
         {/* ✅ Navbar height fixed so dropdown never moves it */}
-        <div className="flex items-center justify-between h-[64px] backdrop-blur bg-transparent relative">
+        <div className="flex items-center justify-between h-[64px] backdrop-blur bg-transparent relative max-w-7xl px-4 sm:px-6 lg:px-8 mx-auto">
           {/* Logo */}
           <div
             className="flex items-center space-x-2 cursor-pointer flex-shrink-0"
@@ -134,7 +133,7 @@ const Navbar: React.FC<NavbarProps> = ({ navRef }) => {
                 <div
                   className="
                     chalk-dropdown
-                    absolute left-[-20px] top-[calc(100%+10px)]
+                    absolute right-0 top-[calc(100%+10px)]
                     w-56 z-[9999]
                     backdrop-blur-md shadow-xl
                   "
@@ -209,7 +208,6 @@ const Navbar: React.FC<NavbarProps> = ({ navRef }) => {
             </div>
           </div>
         )}
-      </div>
     </nav>
   );
 };

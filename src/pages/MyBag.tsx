@@ -27,7 +27,7 @@ export default function MyBag() {
     }, 0);
 
   return (
-    <div className="min-h-screen bg-[#001117] pt-24 pb-12 px-4">
+    <div className="min-h-screen bg-[#001117] pt-28 pb-12">
       <style>{`
         @keyframes chalkFlicker {
           0%, 100% { opacity: 0.7; }
@@ -335,8 +335,8 @@ export default function MyBag() {
         }
       `}</style>
 
-      <div className="max-w-6xl mx-auto">
-        <h1 className="text-6xl font-bold text-center mb-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-center mb-10 lg:mb-16">
           <span className="gradient-text">My Bag</span>
         </h1>
         {/* Table */}
