@@ -72,7 +72,7 @@ const Shop = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#001117] pt-22 pb-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+    <div className="min-h-screen bg-[#001117] pt-28 pb-12 relative overflow-hidden w-full">
       {/* ✨ Floating Decorative Icons in Background */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         {/* Stars / sparkles */}
@@ -122,18 +122,20 @@ const Shop = () => {
         </svg>
       </div>
 
-      {/* Title */}
-      <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-center mb-6 sm:mb-8 lg:mb-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Title */}
+      <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-center mb-10 lg:mb-16">
         <span className="gradient-text">Shop</span>
       </h1>
 
       {/* Cards */}
-      <div className="shop-grid max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 sm:gap-6">
+      <div className="shop-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 sm:gap-6">
         <ShopItem image="/shop1.png" title="Poster" />
         <ShopItem image="/shop3.png" title="Token Pack" />
         <ShopItem image="/shop3.png" title="Token Pack" />
         <ShopItem image="/shop4.png" title="Collectible Coin ($25)" />
         <ShopItem image="/shop5.png" title="Mystery Box" price="$50" fullWidth />
+      </div>
       </div>
     </div>
   );
