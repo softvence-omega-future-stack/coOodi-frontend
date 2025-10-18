@@ -11,6 +11,7 @@ import LoginPage from "../pages/Login";
 import SignUpPage from "../pages/Signup";
 import Checkbox from "../pages/Checkbox";
 import CustomCard from "../pages/CustomCard";
+import AccountPage from "../pages/Account";
 
 export const router = createBrowserRouter([
   {
@@ -26,6 +27,7 @@ export const router = createBrowserRouter([
       { path: "/signup", element: <SignUpPage /> },
       { path: "/checkout", element: <Checkbox /> },
       { path: "/custom", element: <CustomCard /> },
+      { path: "/account", element: <AccountPage /> },
       { path: "/*", element: <NotFound /> },
     ],
   },

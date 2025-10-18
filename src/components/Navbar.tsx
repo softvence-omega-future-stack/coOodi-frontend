@@ -139,7 +139,7 @@ const Navbar: React.FC<NavbarProps> = ({ navRef }) => {
                   "
                 >
                   <NavLink
-                    to="/my-account"
+                    to="/account"
                     className="block w-full text-left px-6 py-3 text-[#d4b373] hover:bg-[#3d0c0a]/60 transition-all duration-200"
                   >
                     My Account
@@ -150,12 +150,14 @@ const Navbar: React.FC<NavbarProps> = ({ navRef }) => {
                   >
                     Tiers
                   </NavLink>
-                  <button
-                    onClick={() => setDropdownOpen(false)}
-                    className="w-full text-left px-6 py-3 text-[#d4b373] border-t border-[#9F854B]/40 hover:bg-[#3d0c0a]/60 transition-all duration-200"
-                  >
-                    <Link to="/login">Log Out</Link>
-                  </button>
+                  <Link to="/login">
+                    <button
+                      onClick={() => setDropdownOpen(false)}
+                      className="w-full text-left px-6 py-3 text-[#d4b373] border-t border-[#9F854B]/40 hover:bg-[#3d0c0a]/60 transition-all duration-200"
+                    >
+                      Log Out
+                    </button>
+                  </Link>
                 </div>
               )}
             </div>

@@ -1,157 +1,131 @@
-export default function FeatureCards() {
-  const features = [
-    {
-      icon: '🕐',
-      title: '24-48h',
-      subtitle: 'Response Time'
-    },
-    {
-      icon: '✨',
-      title: 'FAQ',
-      subtitle: ''
-    },
-    {
-      icon: '👁️',
-      title: 'COMMUNITY',
-      subtitle: ''
-    }
-  ];
+import React from "react";
 
+type Props = {
+  width?: number | string;
+  height?: number | string;
+  children?: React.ReactNode;
+  className?: string;
+};
+
+export default function ChalkBorder({
+  width = 520,
+  height = 420,
+  children,
+  className = "",
+}: Props) {
+  // The 'd' path below is an SVG path hand-traced to match your image's outline.
+  // You can tweak strokeWidth, strokeDasharray, or the filter to taste.
+  const pathD = `M36,86
+    C46,52 86,32 138,44
+    C190,56 244,50 300,38
+    C340,30 370,56 418,46
+    C463,36 494,54 504,94
+    C516,150 518,210 502,268
+    C490,312 460,344 422,362
+    C378,382 312,390 266,386
+    C220,382 176,392 126,378
+    C86,368 62,346 48,312
+    C34,278 24,224 36,188
+    C46,160 34,112 36,86 Z`;
+
+  // Uses viewBox that matches path dimensions (roughly). Adjust if you change path.
   return (
-    <div className="min-h-screen bg-[#001117] flex items-center justify-center p-4">
-      <style>{`
-        @keyframes chalkFlicker {
-          0%, 100% { opacity: 0.7; }
-          50% { opacity: 0.9; }
-        }
+    <div
+      className={`relative inline-block ${className}`}
+      style={{ width: typeof width === "number" ? `${width}px` : width }}
+    >
+      <svg
+        viewBox="0 0 540 420"
+        width="100%"
+        height={height}
+        preserveAspectRatio="xMidYMid meet"
+        aria-hidden="true"
+        style={{ display: "block" }}
+      >
+        <defs>
+          {/* Chalk noise filter */}
+          <filter id="chalkNoise" x="-20%" y="-20%" width="140%" height="140%">
+            <feTurbulence
+              type="fractalNoise"
+              baseFrequency="0.95"
+              numOctaves="2"
+              seed="7"
+              result="noise"
+            />
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="3" xChannelSelector="R" yChannelSelector="G" />
+            <feGaussianBlur stdDeviation="0.6" result="blurred" />
+            {/* boost contrast a bit */}
+            <feComponentTransfer>
+              <feFuncA type="table" tableValues="0 0.95" />
+            </feComponentTransfer>
+          </filter>
 
-        .feature-card {
-          position: relative;
-          background: transparent;
-          border-radius: 20px;
-          padding: 40px 30px;
-          width: 280px;
-          height: 320px;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          text-align: center;
-          overflow: hidden;
-        }
+          {/* soft outer glow */}
+          <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="4" result="coloredBlur" />
+            <feMerge>
+              <feMergeNode in="coloredBlur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
 
-        .feature-card::before {
-          content: "";
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          border: 3px solid #C9A961;
-          border-radius: 20px;
-          opacity: 0.8;
-          mix-blend-mode: screen;
-          filter: blur(0.8px) brightness(1.2) contrast(150%);
-          mask-image: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='4' seed='5'/%3E%3CfeDisplacementMap in='SourceGraphic' scale='5'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-          -webkit-mask-image: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='4' seed='5'/%3E%3CfeDisplacementMap in='SourceGraphic' scale='5'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-          mask-mode: alpha;
-          -webkit-mask-mode: alpha;
-          pointer-events: none;
-          animation: chalkFlicker 3s ease-in-out infinite;
-        }
+          {/* Define a textured stroke by drawing a thin path to act as mask */}
+          <mask id="chalkMask">
+            {/* white where stroke should be visible */}
+            <rect x="0" y="0" width="100%" height="100%" fill="black" />
+            <path d={pathD} fill="none" stroke="white" strokeWidth="7" strokeLinecap="round" strokeLinejoin="round" strokeDasharray="2 8" />
+          </mask>
+        </defs>
 
-        .feature-card::after {
-          content: "";
-          position: absolute;
-          top: 15px;
-          left: 15px;
-          right: 15px;
-          bottom: 15px;
-          border: 2px solid #C9A961;
-          border-radius: 16px;
-          opacity: 0.4;
-          mix-blend-mode: screen;
-          filter: blur(0.5px) brightness(1.1);
-          mask-image: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' seed='2'/%3E%3CfeDisplacementMap in='SourceGraphic' scale='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-          -webkit-mask-image: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' seed='2'/%3E%3CfeDisplacementMap in='SourceGraphic' scale='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-          mask-mode: alpha;
-          -webkit-mask-mode: alpha;
-          pointer-events: none;
-        }
+        {/* background darker area inside the border (so it looks like a frame) */}
+        <path
+          d={pathD}
+          fill="#001117"
+          stroke="none"
+          transform="translate(0,0)"
+        />
 
-        .feature-content {
-          position: relative;
-          z-index: 10;
-        }
+        {/* chalk stroke: draw the path with stroke and apply noise filter for rough edges */}
+        <g filter="url(#chalkNoise)">
+          <path
+            d={pathD}
+            fill="none"
+            stroke="#C9A961"
+            strokeWidth={6}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeDasharray="3 9"
+            style={{ mixBlendMode: "screen" }}
+          />
+        </g>
 
-        .feature-icon {
-          font-size: 60px;
-          margin-bottom: 20px;
-          display: block;
-        }
+        {/* additional inner rough stroke slightly offset for depth */}
+        <g opacity="0.6" transform="translate(1,1)">
+          <path
+            d={pathD}
+            fill="none"
+            stroke="#B58E45"
+            strokeWidth={3}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeDasharray="2 6"
+            opacity="0.9"
+          />
+        </g>
 
-        .feature-title {
-          font-size: 28px;
-          font-weight: bold;
-          color: #C9A961;
-          margin-bottom: 8px;
-          letter-spacing: 2px;
-        }
+        {/* subtle glow using shadow filter */}
+        <path d={pathD} fill="none" stroke="#C9A961" strokeWidth={1} filter="url(#glow)" opacity={0.12} />
+      </svg>
 
-        .feature-subtitle {
-          font-size: 14px;
-          color: #C9A961;
-          font-weight: 400;
-          letter-spacing: 1px;
-        }
-
-        .cards-container {
-          display: flex;
-          gap: 40px;
-          flex-wrap: wrap;
-          justify-content: center;
-          max-width: 1000px;
-          margin: 0 auto;
-        }
-
-        @media (max-width: 768px) {
-          .cards-container {
-            gap: 20px;
-          }
-
-          .feature-card {
-            width: 240px;
-            height: 280px;
-            padding: 30px 20px;
-          }
-
-          .feature-icon {
-            font-size: 48px;
-            margin-bottom: 15px;
-          }
-
-          .feature-title {
-            font-size: 24px;
-          }
-
-          .feature-subtitle {
-            font-size: 12px;
-          }
-        }
-      `}</style>
-
-      <div className="cards-container">
-        {features.map((feature, index) => (
-          <div key={index} className="feature-card">
-            <div className="feature-content">
-              <div className="feature-icon">{feature.icon}</div>
-              <div className="feature-title">{feature.title}</div>
-              {feature.subtitle && (
-                <div className="feature-subtitle">{feature.subtitle}</div>
-              )}
-            </div>
-          </div>
-        ))}
+      {/* content container positioned on top of the SVG frame */}
+      <div
+        className="absolute inset-0 flex flex-col items-center justify-center px-6 py-8"
+        style={{
+          pointerEvents: "auto",
+          // keep some inner padding so text doesn't touch the border
+        }}
+      >
+        {children}
       </div>
     </div>
   );

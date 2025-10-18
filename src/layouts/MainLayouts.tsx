@@ -1,12 +1,13 @@
+// src/layouts/MainLayouts.tsx
 import { Outlet, useLocation } from "react-router-dom";
 import Navbar from "../components/Navbar";
+import FogTransition from "../components/FogTransition"; // ✅ add this
 import { useRef, useEffect } from "react";
 
 const Layout = () => {
   const navRef = useRef<HTMLElement>(null);
   const location = useLocation();
 
-  // Always make navbar visible on all routes except home
   useEffect(() => {
     if (navRef.current) {
       if (location.pathname === "/") {
@@ -19,9 +20,14 @@ const Layout = () => {
   }, [location]);
 
   return (
-    <div className=" min-h-screen text-slate-100">
+    <div className="min-h-screen text-slate-100">
       <Navbar navRef={navRef} />
-      <Outlet /> {/* This renders the current page */}
+
+      {/* ✅ Fog transition overlay */}
+      <FogTransition />
+
+      {/* Main content */}
+      <Outlet />
     </div>
   );
 };

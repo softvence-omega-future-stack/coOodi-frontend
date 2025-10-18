@@ -1,36 +1,41 @@
-import { useState } from 'react';
+import { useState } from "react";
 
 export default function Checkout() {
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    addressLine1: '',
-    city: '',
-    state: '',
-    zip: '',
-    cardholderName: '',
-    cardNumber: '',
-    expirationDate: '',
-    cvc: '',
-    billingCity: '',
-    billingState: '',
-    billingZip: '',
+    firstName: "",
+    lastName: "",
+    email: "",
+    addressLine1: "",
+    city: "",
+    state: "",
+    zip: "",
+    cardholderName: "",
+    cardNumber: "",
+    expirationDate: "",
+    cvc: "",
+    billingCity: "",
+    billingState: "",
+    billingZip: "",
     sameAddress: false,
-    paymentMethod: 'stripe',
-    note: '',
+    paymentMethod: "stripe",
+    note: "",
   });
 
   const [showConfirmation, setShowConfirmation] = useState(false);
-  const [orderId] = useState('ORD-1562536');
+  const [orderId] = useState("ORD-1562536");
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const name = e.target.name;
-    const isCheckbox = 'type' in e.target && (e.target as HTMLInputElement).type === 'checkbox';
-    const value = isCheckbox ? (e.target as HTMLInputElement).checked : e.target.value;
-    setFormData(prev => ({
+    const isCheckbox =
+      "type" in e.target && (e.target as HTMLInputElement).type === "checkbox";
+    const value = isCheckbox
+      ? (e.target as HTMLInputElement).checked
+      : e.target.value;
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
@@ -43,15 +48,15 @@ export default function Checkout() {
   };
 
   const items = [
-    { name: 'Poster', price: '$10.00' },
-    { name: 'Hoodie', price: '$60.00' },
-    { name: 'Token Pack', price: '$25.00' },
-    { name: 'Collectible Coin', price: '$15.00' },
-    { name: 'Mystery Box', price: '$50.00' },
+    { name: "Poster", price: "$10.00" },
+    { name: "Hoodie", price: "$60.00" },
+    { name: "Token Pack", price: "$25.00" },
+    { name: "Collectible Coin", price: "$15.00" },
+    { name: "Mystery Box", price: "$50.00" },
   ];
 
   return (
-          <div className="min-h-screen bg-[#001117] pt-28 pb-12">
+    <div className="min-h-screen bg-[#001117] pt-28 pb-12">
       <style>{`
         @keyframes chalkFlicker {
           0%, 100% { opacity: 0.7; }
@@ -390,13 +395,37 @@ export default function Checkout() {
         .confirmation-btn:hover {
           opacity: 0.9;
         }
+
+        .chalk-top-border {
+  position: relative;
+}
+
+.chalk-top-border::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 2px;
+  right: 2px;
+  height: 2px;
+  border-top: 2px solid #C9A961;
+  opacity: 0.8;
+  mix-blend-mode: screen;
+  filter: blur(0.8px) brightness(1.2) contrast(150%);
+  mask-image: url("data:image/svg+xml,%3Csvg width='100' height='20' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='4' seed='5'/%3E%3CfeDisplacementMap in='SourceGraphic' scale='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg width='100' height='20' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='4' seed='5'/%3E%3CfeDisplacementMap in='SourceGraphic' scale='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mask-mode: alpha;
+  -webkit-mask-mode: alpha;
+  pointer-events: none;
+  animation: chalkFlicker 3s ease-in-out infinite;
+}
+
       `}</style>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 className="text-5xl font-bold text-center mb-2">
-          <span className='gradient-text'>Checkout</span>
+        <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-center mb-10 lg:mb-16">
+          <span className="gradient-text">Checkout</span>
         </h1>
-        <div className="hidden sm:flex justify-center gap-4 text-sm text-gray-400 mb-12">
+        <div className="hidden sm:flex justify-center gap-4 text-sm text-[#B59652] mb-12">
           <span>Cart</span>
           <span>•</span>
           <span>Details</span>
@@ -412,9 +441,11 @@ export default function Checkout() {
           {/* Left Side */}
           <div className="lg:col-span-2 space-y-8">
             {/* Contact Section */}
-            <div className="chalk-section">
+            <div className="">
               <div className="chalk-section-content">
-                <h2 className="text-2xl font-bold text-yellow-600 mb-6">Contact</h2>
+                <h2 className="text-2xl font-bold mb-6">
+                  <span className="gradient-text">Contact Information</span>
+                </h2>
                 <div className="grid grid-cols-2 gap-4 mb-4">
                   <div className="chalk-input">
                     <input
@@ -448,9 +479,11 @@ export default function Checkout() {
             </div>
 
             {/* Shipping Address Section */}
-            <div className="chalk-section">
+            <div className="">
               <div className="chalk-section-content">
-                <h2 className="text-2xl font-bold text-yellow-600 mb-6">Shipping Address</h2>
+                <h2 className="text-2xl font-bold mb-6">
+                  <span className="gradient-text">Shipping Address</span>
+                </h2>
                 <div className="chalk-input mb-4">
                   <input
                     type="text"
@@ -493,15 +526,22 @@ export default function Checkout() {
             </div>
 
             {/* Payment Method Section */}
-            <div className="chalk-section">
+            <div className="">
               <div className="chalk-section-content">
-                <h2 className="text-2xl font-bold text-yellow-600 mb-6">Payment Method</h2>
+                <h2 className="text-2xl font-bold mb-6">
+                <span className="gradient-text">Payment Method</span>
+                </h2>
                 <div className="flex gap-3 mb-6 flex-wrap">
-                  {['stripe', 'paypal', 'wallet'].map((method) => (
+                  {["stripe", "paypal", "wallet"].map((method) => (
                     <button
                       key={method}
-                      onClick={() => setFormData(prev => ({ ...prev, paymentMethod: method }))}
-                      className={`payment-button ${formData.paymentMethod === method ? 'active' : ''}`}
+                      onClick={() =>
+                        setFormData((prev) => ({
+                          ...prev,
+                          paymentMethod: method,
+                        }))
+                      }
+                      className={`payment-button ${formData.paymentMethod === method ? "active" : ""}`}
                     >
                       {method.charAt(0).toUpperCase() + method.slice(1)}
                     </button>
@@ -585,7 +625,9 @@ export default function Checkout() {
                     onChange={handleChange}
                     className="w-4 h-4 border-2 border-yellow-600 rounded"
                   />
-                  <span className="text-sm">Billing address same as shipping address</span>
+                  <span className="text-sm">
+                    Billing address same as shipping address
+                  </span>
                 </label>
               </div>
             </div>
@@ -593,20 +635,25 @@ export default function Checkout() {
 
           {/* Right Side - Order Summary */}
           <div className="lg:col-span-1">
-            <div className="chalk-section">
+            <div className="">
               <div className="chalk-section-content">
-                <h2 className="text-2xl font-bold text-yellow-600 mb-6">Order Summary</h2>
-                
+                <h2 className="text-2xl font-bold mb-6">
+                  <span className="gradient-text">Order Summary</span>
+                </h2>
+
                 <div className="space-y-3 mb-6">
                   {items.map((item, idx) => (
-                    <div key={idx} className="flex justify-between text-sm text-gray-400">
+                    <div
+                      key={idx}
+                      className="flex justify-between text-sm text-gray-400"
+                    >
                       <span>{item.name}</span>
                       <span className="text-yellow-600">{item.price}</span>
                     </div>
                   ))}
                 </div>
 
-                <div className="border-t border-yellow-600 border-opacity-30 pt-4 space-y-2 mb-4 text-sm">
+                <div className="chalk-top-border pt-4 space-y-2 mb-4 text-sm">
                   <div className="flex justify-between text-gray-400">
                     <span>Subtotal</span>
                     <span>$160.00</span>
@@ -625,7 +672,7 @@ export default function Checkout() {
                   </div>
                 </div>
 
-                <div className="border-t border-yellow-600 border-opacity-30 pt-4 mb-6">
+                <div className="chalk-top-border pt-4 mb-6">
                   <div className="flex justify-between text-xl font-bold text-yellow-600">
                     <span>Total</span>
                     <span>$150.00</span>
@@ -633,7 +680,9 @@ export default function Checkout() {
                 </div>
 
                 <div className="mb-6">
-                  <label className="text-xs text-gray-400 mb-2 block">Add a note to the prophet:</label>
+                  <label className="text-xs text-gray-400 mb-2 block">
+                    Add a note to the prophet:
+                  </label>
                   <div className="chalk-input">
                     <textarea
                       name="note"
@@ -660,21 +709,31 @@ export default function Checkout() {
       {showConfirmation && (
         <div className="modal-overlay">
           <div className="confirmation-modal confirmation-card">
-            <button className="close-btn" onClick={() => setShowConfirmation(false)}>
+            <button
+              className="close-btn"
+              onClick={() => setShowConfirmation(false)}
+            >
               ✕
             </button>
             <div className="confirmation-content">
               <div className="gift-icon">🎁</div>
-              <h2 className="confirmation-title">Thank you! Your order has been placed successfully.</h2>
-              <p className="confirmation-subtitle">You can track your order by using the order id.</p>
-              
+              <h2 className="confirmation-title">
+                Thank you! Your order has been placed successfully.
+              </h2>
+              <p className="confirmation-subtitle">
+                You can track your order by using the order id.
+              </p>
+
               <div className="order-id-label">Order ID:</div>
               <div className="order-id-box">
                 <div className="order-id-text">{orderId}</div>
               </div>
 
               <div className="button-group">
-                <button className="confirmation-btn" onClick={() => setShowConfirmation(false)}>
+                <button
+                  className="confirmation-btn"
+                  onClick={() => setShowConfirmation(false)}
+                >
                   <div className="confirmation-btn-content">Track My Order</div>
                 </button>
                 <button className="confirmation-btn" onClick={handleBackToHome}>
