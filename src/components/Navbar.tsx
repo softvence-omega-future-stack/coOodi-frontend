@@ -70,7 +70,7 @@ const Navbar: React.FC<NavbarProps> = ({ navRef }) => {
             }}
           >
             <span className="gradient-text text-lg lg:text-[1.75rem] font-semibold">
-              The Silk Road
+              Yhe Silk Road
             </span>
           </div>
 
@@ -188,7 +188,7 @@ const Navbar: React.FC<NavbarProps> = ({ navRef }) => {
                 My Bag
               </NavLink>
               <NavLink
-                to="/my-account"
+                to="/account"
                 className="block w-full text-left px-4 py-3 border-t border-slate-700/50"
               >
                 My Account
@@ -200,13 +200,14 @@ const Navbar: React.FC<NavbarProps> = ({ navRef }) => {
                   <span className="text-teal-400 font-bold">$22,450</span>
                 </div>
               </div>
-
-              <button
-                onClick={() => closeMobileMenu()}
-                className="w-full text-left px-4 py-3 text-amber-100 hover:bg-amber-800/50 transition-colors border-t border-slate-700/50"
-              >
-                Log Out
-              </button>
+              <Link to="/login">
+                <button
+                  onClick={() => closeMobileMenu()}
+                  className="w-full text-left px-4 py-3 text-amber-100 hover:bg-amber-800/50 transition-colors border-t border-slate-700/50"
+                >
+                  Log Out
+                </button>
+              </Link>
             </div>
           </div>
         )}
