@@ -46,8 +46,8 @@ const Navbar: React.FC<NavbarProps> = ({ navRef }) => {
       }}
       className={`${
         currentPath === to
-          ? "text-amber-400 font-bold"
-          : "text-slate-300 hover:text-amber-400"
+          ? "text-[#B59652] font-bold"
+          : "text-slate-300 hover:text-[#B59652]"
       } ${className} transition-colors`}
     >
       {children}

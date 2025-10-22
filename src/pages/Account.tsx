@@ -1,41 +1,119 @@
-import { useState } from 'react';
+import { useState, useEffect } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import TierCard from "../components/Tiers/TierCard";
+import StatsCard from "../components/account/StatsCard";
+import AccountButton from "../components/button/AccountButton";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function AccountPage() {
-  const [activeTab, setActiveTab] = useState('active');
+  const [activeTab, setActiveTab] = useState("active");
 
   const userProfile = {
-    name: 'Josof Yad',
-    joined: 'March 2024',
-    avatar: '👤'
+    name: "Josof Yad",
+    joined: "March 2024",
+    UserImage: "account/ac.png",
   };
 
   const wallet = {
-    balance: '22,450',
-    icon: '💰'
+    balance: "22,450",
+    icon: "/account/ac2.svg",
   };
-
-  const stats = [
-    { number: '15', label: 'Total Order' },
-    { number: '04', label: 'Active Order' },
-    { number: '11', label: 'Completed Order' },
-    { number: '$8542', label: 'Transactions' }
-  ];
 
   const orders = {
     active: [
-      { id: 'ORD-1562536', item: '📦 Poster', date: '27 Jun, 2024', payment: '$10.00', action: 'active' },
-      { id: 'ORD-1562493', item: '👕 Hoodie', date: '27 Jun, 2024', payment: '$60.00', action: 'active' }
+      {
+        id: "ORD-1562536",
+        item: "📦 Poster",
+        date: "27 Jun, 2024",
+        payment: "$10.00",
+        action: "active",
+      },
+      {
+        id: "ORD-1562493",
+        item: "👕 Hoodie",
+        date: "27 Jun, 2024",
+        payment: "$60.00",
+        action: "active",
+      },
     ],
     completed: [
-      { id: 'ORD-1562478', item: '🎵 Token Pack', date: '27 Jun, 2024', payment: '$25.00', action: 'Completed' },
-      { id: 'ORD-1562583', item: '🪙 Collectible Coin', date: '27 Jun, 2024', payment: '$15.00', action: 'Completed' }
+      {
+        id: "ORD-1562478",
+        item: "🎵 Token Pack",
+        date: "27 Jun, 2024",
+        payment: "$25.00",
+        action: "Completed",
+      },
+      {
+        id: "ORD-1562583",
+        item: "🪙 Collectible Coin",
+        date: "27 Jun, 2024",
+        payment: "$15.00",
+        action: "Completed",
+      },
     ],
     cancelled: [
-      { id: 'ORD-1562527', item: '🎁 Mystery Box', date: '27 Jun, 2024', payment: '$60.00', action: 'Cancelled' }
-    ]
+      {
+        id: "ORD-1562527",
+        item: "🎁 Mystery Box",
+        date: "27 Jun, 2024",
+        payment: "$60.00",
+        action: "Cancelled",
+      },
+    ],
   };
 
+  const stats = [
+    { value: "15", label: "Total Order", image: "/test.png" },
+    { value: "04", label: "Active Order", image: "/test.png" },
+    { value: "11", label: "Completed Order", image: "/test.png" },
+    { value: "$8542", label: "Transactions", image: "/test.png" },
+  ];
+
   const currentOrders = orders[activeTab as keyof typeof orders];
+
+  useEffect(() => {
+    gsap.fromTo(
+      "h1, h2",
+      { opacity: 0, y: -30 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        ease: "power2.out",
+        stagger: 0.2,
+      }
+    );
+
+    gsap.fromTo(
+      ".form-section",
+      { opacity: 0, y: 40 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: .9,
+        stagger: 0.15,
+        ease: "power2.out",
+        delay: 0.3,
+      }
+    );
+
+    gsap.fromTo(
+      ".stats-card",
+      { opacity: 0, y: 60, scale: 0.9 },
+      {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        duration: .9,
+        stagger: 0.2,
+        ease: "back.out(1.7)",
+        delay: 0.6,
+      }
+    );
+  }, []);
 
   return (
     <div className="min-h-screen bg-[#001117] pt-28 pb-12">
@@ -59,7 +137,7 @@ export default function AccountPage() {
           left: 2px;
           right: 2px;
           bottom: 2px;
-          border: 4px solid #C9A961;
+          border: 4px solid #9F854B;
           border-radius: 6px;
           opacity: 0.8;
           mix-blend-mode: screen;
@@ -87,7 +165,7 @@ export default function AccountPage() {
           left: 0;
           right: 0;
           bottom: 0;
-          border: 3px solid #C9A961;
+          border: 3px solid #9F854B;
           border-radius: 8px;
           opacity: 0.8;
           mix-blend-mode: screen;
@@ -110,7 +188,7 @@ export default function AccountPage() {
           background: #8B2E2E;
           border-radius: 20px;
           overflow: hidden;
-          border: 2px solid #C9A961;
+          border: 2px solid #9F854B;
           padding: 8px 16px;
           color: white;
           font-weight: 600;
@@ -150,7 +228,7 @@ export default function AccountPage() {
 
         .tab-button {
           background: #C9A961;
-          border: 2px solid #C9A961;
+          border: 2px solid #9F854B;
           color: #001117;
           padding: 8px 16px;
           margin-right: 8px;
@@ -200,50 +278,6 @@ export default function AccountPage() {
           pointer-events: none;
           animation: chalkFlicker 3s ease-in-out infinite;
           z-index: 1;
-        }
-
-        .profile-avatar-content {
-          position: relative;
-          z-index: 2;
-        }
-
-        .user-section {
-          background: transparent;
-          padding: 24px;
-          border-radius: 8px;
-          margin-bottom: 24px;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          gap: 60px;
-        }
-
-        .user-left {
-          display: flex;
-          align-items: center;
-          gap: 20px;
-          flex: 1;
-        }
-
-        .user-info h2 {
-          font-size: 24px;
-          font-weight: bold;
-          color: #C9A961;
-          margin-bottom: 4px;
-        }
-
-        .user-info p {
-          color: #9ca3af;
-          font-size: 13px;
-          margin-bottom: 12px;
-        }
-
-        .user-right {
-          display: flex;
-          align-items: center;
-          gap: 30px;
-          flex: 1;
-          justify-content: flex-end;
         }
 
         .wallet-info {
@@ -311,7 +345,7 @@ export default function AccountPage() {
         }
 
         tbody tr {
-          border-bottom: 1px solid #C9A961;
+          // border-bottom: 1px solid #C9A961;
           border-opacity: 30%;
         }
 
@@ -343,44 +377,12 @@ export default function AccountPage() {
         }
 
         @media (max-width: 1024px) {
-          .user-section {
-            flex-direction: column;
-            gap: 16px;
-          }
-
-          .user-left, .user-right {
-            width: 100%;
-            justify-content: flex-start;
-          }
-
-          .user-right {
-            justify-content: space-between;
-          }
-
           .tier-content {
             gap: 20px;
           }
         }
 
         @media (max-width: 768px) {
-          .profile-avatar {
-            width: 64px;
-            height: 64px;
-            font-size: 32px;
-          }
-
-          .user-info h2 {
-            font-size: 18px;
-          }
-
-          .wallet-info h3 {
-            font-size: 24px;
-          }
-
-          .wallet-icon {
-            font-size: 40px;
-          }
-
           .chalk-button {
             padding: 6px 12px;
             font-size: 11px;
@@ -411,95 +413,116 @@ export default function AccountPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-center mb-10 lg:mb-16">
-          <span className='gradient-text'>Account</span>
+          <span className="gradient-text">Account</span>
         </h1>
 
-        {/* User Section - Profile and Wallet */}
-        <div className="user-section">
-          <div className="user-left">
-            <div className="profile-avatar">{userProfile.avatar}</div>
-            <div className="user-info">
-              <h2 >{userProfile.name}</h2>
-              <p>Joined: {userProfile.joined}</p>
-              <button className="chalk-button">
-                <span>EDIT PROFILE</span>
-              </button>
+        {/* Profile & Wallet Section */}
+        <div className="form-section">
+          <div className="flex flex-col sm:flex-row items-center justify-center sm:justify-between w-full gap-4 md:gap-0 mb-12">
+            {/* Left: Profile */}
+            <div className="flex items-center gap-4 sm:gap-4">
+              <div className="">
+                <img src={userProfile.UserImage} alt="User Avatar" />
+              </div>
+              <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
+                <h2 className="font-bold text-[#9F854B]">
+                  <span className="text-xl sm:text-2xl md:text-3xl lg:text-4xl">{userProfile.name}</span>
+                </h2>
+
+                <p className="text-sm mb-2">
+                  <span className="text-amber-500">
+                    Joined: {userProfile.joined}
+                  </span>
+                </p>
+                <AccountButton text="EDIT PROFILE" className="mb-2" />
+                {/* <button className="chalk-button">
+                  <span>EDIT PROFILE</span>
+                </button> */}
+              </div>
             </div>
-          </div>
-          <div className="user-right">
-            <div className="wallet-icon">{wallet.icon}</div>
-            <div className="user-info">
-              <h3>{wallet.balance}</h3>
-              <p>Token Wallet Balance</p>
-              <button className="chalk-button">
-                <span>DISCONNECT</span>
-              </button>
+
+            {/* Right: Wallet */}
+            <div className=" flex items-center sm:gap-6">
+              <div className="">
+                <img src={wallet.icon} alt="Wallet Icon" />
+              </div>
+              <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
+                <h2 className="font-bold text-[#9F854B]">
+                  <span className="text-xl sm:text-2xl md:text-3xl lg:text-4xl">
+                    {wallet.balance}
+                  </span>
+                </h2>
+                <p className="text-sm mb-2">
+                  <span className="text-amber-500">Token Wallet Balance</span>
+                </p>
+                <AccountButton text="DISCONNECT" className="mb-2" />
+                {/* <button className="chalk-button">
+                  <span>DISCONNECT</span>
+                </button> */}
+              </div>
             </div>
           </div>
         </div>
 
         {/* Stats Cards */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-8 md:mb-12">
-          {stats.map((stat, idx) => (
-            <div key={idx} className="chalk-card">
-              <div className="chalk-card-content text-center">
-                <p className="text-3xl md:text-4xl font-bold text-yellow-600 mb-2">{stat.number}</p>
-                <p className="text-yellow-600 text-xs md:text-sm">{stat.label}</p>
-              </div>
-            </div>
+        <div className="flex flex-wrap gap-6 mb-18 justify-evenly form-section">
+          {stats.map((card, idx) => (
+            <StatsCard
+              key={idx}
+              value={card.value}
+              label={card.label}
+              image={card.image}
+            />
           ))}
         </div>
 
         {/* Tier Status */}
-        <div className="mb-8 md:mb-12">
-          <h2 className="text-2xl font-bold text-yellow-600 mb-6">Tier Status</h2>
-          <div className="chalk-border">
-            <div className="p-6 md:p-8">
-              <div className="chalk-card-content">
-                <div className="tier-content">
-                  <div className="tier-side-image">🏛️</div>
-                  <div className="tier-middle">
-                    <h3>
-                      Yhe Adventurer <span className="text-sm">(Active)</span>
-                    </h3>
-                    <p>Requirement: 10 000 Silkroad Coins</p>
-                    <p>Duration: 3 months</p>
-                    <ul className="space-y-2 mb-6">
-                      <li>1. All Tier 1 Perks</li>
-                      <li>2. Early Access to Cartoon/Music Releases</li>
-                    </ul>
-                    <button className="chalk-button">
-                      <span>UPGRADE TIER</span>
-                    </button>
-                  </div>
-                  <div className="tier-side-image">👥</div>
-                </div>
-              </div>
-            </div>
+        <div className="form-section">
+          <h2>
+            <span className="gradient-text text-2xl">Your Tier Status</span>
+          </h2>
+          <div
+            className="chalk-border 
+          my-5 "
+          >
+            <TierCard
+              leftImage="/tiers/TC.svg"
+              rightImage="/tiers/help.svg"
+              title="Adventurer (Active)"
+              requirement="10,000 Silkroad Coins"
+              duration="3 months"
+              perks={[
+                "All Tier 1 Perks",
+                "Early Access to Cartoon/Music Releases",
+              ]}
+              buttonText="UPGRADE TIER"
+            />
           </div>
         </div>
 
         {/* Order History */}
-        <div>
-          <h2 className="text-2xl font-bold text-yellow-600 mb-6">Order History</h2>
-          
+        <div className="form-section">
+          <h2 className="text-2xl font-bold text-yellow-600 mb-6">
+            <span className="gradient-text">Order History</span>
+          </h2>
+
           {/* Tabs */}
           <div className="flex gap-2 mb-6 flex-wrap">
-            <button 
-              className={`tab-button ${activeTab === 'active' ? '' : 'inactive'}`}
-              onClick={() => setActiveTab('active')}
+            <button
+              className={`tab-button ${activeTab === "active" ? "" : "inactive"}`}
+              onClick={() => setActiveTab("active")}
             >
               Active
             </button>
-            <button 
-              className={`tab-button ${activeTab === 'completed' ? '' : 'inactive'}`}
-              onClick={() => setActiveTab('completed')}
+            <button
+              className={`tab-button ${activeTab === "completed" ? "" : "inactive"}`}
+              onClick={() => setActiveTab("completed")}
             >
               Completed
             </button>
-            <button 
-              className={`tab-button ${activeTab === 'cancelled' ? '' : 'inactive'}`}
-              onClick={() => setActiveTab('cancelled')}
+            <button
+              className={`tab-button ${activeTab === "cancelled" ? "" : "inactive"}`}
+              onClick={() => setActiveTab("cancelled")}
             >
               Cancelled
             </button>
