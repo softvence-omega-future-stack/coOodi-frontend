@@ -1,31 +1,106 @@
-import { useState } from 'react';
-import { Link } from 'react-router';
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { gsap } from "gsap";
+import AnimatedButton from "../components/button/AddButton";
 
 export default function MyBag() {
+  const navigate = useNavigate();
+
   const [items, setItems] = useState([
-    { id: 1, name: 'Poster', date: '27 Jun, 2024', quantity: '01', payment: '$10.00', selected: false },
-    { id: 2, name: 'Hoodie', date: '27 Jun, 2024', quantity: '02', payment: '$120.00', selected: false },
-    { id: 3, name: 'Token Pack', date: '27 Jun, 2024', quantity: '01', payment: '$25.00', selected: false },
-    { id: 4, name: 'Collectible Coin', date: '27 Jun, 2024', quantity: '02', payment: '$30.00', selected: false },
-    { id: 5, name: 'Mystery Box', date: '27 Jun, 2024', quantity: '01', payment: '$50.00', selected: false },
+    {
+      id: 1,
+      name: "Poster",
+      date: "27 Jun, 2024",
+      quantity: "01",
+      payment: "$10.00",
+      selected: false,
+    },
+    {
+      id: 2,
+      name: "Hoodie",
+      date: "27 Jun, 2024",
+      quantity: "02",
+      payment: "$120.00",
+      selected: false,
+    },
+    {
+      id: 3,
+      name: "Token Pack",
+      date: "27 Jun, 2024",
+      quantity: "01",
+      payment: "$25.00",
+      selected: false,
+    },
+    {
+      id: 4,
+      name: "Collectible Coin",
+      date: "27 Jun, 2024",
+      quantity: "02",
+      payment: "$30.00",
+      selected: false,
+    },
+    {
+      id: 5,
+      name: "Mystery Box",
+      date: "27 Jun, 2024",
+      quantity: "01",
+      payment: "$50.00",
+      selected: false,
+    },
   ]);
 
   const toggleItem = (id: number) => {
-    setItems(items.map(item => 
-      item.id === id ? { ...item, selected: !item.selected } : item
-    ));
+    setItems(
+      items.map((item) =>
+        item.id === id ? { ...item, selected: !item.selected } : item
+      )
+    );
   };
 
   const removeItem = (id: number) => {
-    setItems(items.filter(item => item.id !== id));
+    setItems(items.filter((item) => item.id !== id));
   };
 
   const subtotal = items
-    .filter(item => item.selected)
+    .filter((item) => item.selected)
     .reduce((sum, item) => {
-      const amount = parseFloat(item.payment.replace('$', ''));
+      const amount = parseFloat(item.payment.replace("$", ""));
       return sum + amount;
     }, 0);
+
+  // ✅ GSAP ANIMATION (like FAQ)
+  useEffect(() => {
+    gsap.fromTo(
+      "h1",
+      { opacity: 0, y: -30 },
+      { opacity: 1, y: 0, duration: 1, ease: "power2.out" }
+    );
+
+    gsap.fromTo(
+      ".chalk-table",
+      { opacity: 0, y: 30 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        delay: 0.4,
+        ease: "power2.out",
+      }
+    );
+
+    gsap.fromTo(
+      ".table-item",
+      { opacity: 0, y: 30 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        delay: 0.6,
+        stagger: 0.1,
+        ease: "power2.out",
+      }
+    );
+  }, []);
 
   return (
     <div className="min-h-screen bg-[#001117] pt-28 pb-12">
@@ -345,11 +420,21 @@ export default function MyBag() {
           <div className="table-content">
             {/* Header */}
             <div className="table-header">
-              <div className="header-cell"><span className='gradient-text text-md'>Item</span></div>
-              <div className="header-cell hidden sm:block"><span className='gradient-text text-md'>Date</span></div>
-              <div className="header-cell"><span className='gradient-text text-md'>Quantity</span></div>
-              <div className="header-cell"><span className='gradient-text text-md'>Payment</span></div>
-              <div className="header-cell"><span className='gradient-text text-md'>Remove</span></div>
+              <div className="header-cell">
+                <span className="gradient-text text-md">Item</span>
+              </div>
+              <div className="header-cell hidden sm:block">
+                <span className="gradient-text text-md">Date</span>
+              </div>
+              <div className="header-cell">
+                <span className="gradient-text text-md">Quantity</span>
+              </div>
+              <div className="header-cell">
+                <span className="gradient-text text-md">Payment</span>
+              </div>
+              <div className="header-cell">
+                <span className="gradient-text text-md">Remove</span>
+              </div>
             </div>
 
             {/* Items */}
@@ -404,16 +489,21 @@ export default function MyBag() {
         {/* Subtotal and Checkout */}
         <div className="flex justify-end items-center gap-12 mb-8">
           <div className="text-gray-400">
-            Subtotal <span className="text-yellow-600 font-semibold ml-4">${subtotal.toFixed(2)}</span>
+            Subtotal{" "}
+            <span className="text-yellow-600 font-semibold ml-4">
+              ${subtotal.toFixed(2)}
+            </span>
           </div>
         </div>
 
         {/* Proceed Checkout Button */}
         <div className="flex justify-end">
-          <div className="chalk-button" style={{ width: '200px' }}>
-            <button className="w-full py-3 text-white font-semibold uppercase tracking-wide text-sm">
-              <Link to="/checkout">Proceed to Checkout</Link>
-            </button>
+          <div className="">
+            <AnimatedButton
+              text="Proceed to Checkout"
+              onClick={() => navigate("/checkout")}
+              className="w-full py-3 text-sm"
+            />
           </div>
         </div>
       </div>

@@ -1,4 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import AccountButton from "../components/button/AccountButton";
+import AnimatedButton from "../components/button/AddButton";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Checkout() {
   const [formData, setFormData] = useState({
@@ -38,6 +44,33 @@ export default function Checkout() {
       [name]: value,
     }));
   };
+
+  useEffect(() => {
+    gsap.fromTo(
+      "h1, h2",
+      { opacity: 0, y: -30 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        ease: "power2.out",
+        stagger: 0.2,
+      }
+    );
+
+    gsap.fromTo(
+      ".form-section",
+      { opacity: 0, y: 40 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        stagger: 0.15,
+        ease: "power2.out",
+        delay: 0.3,
+      }
+    );
+  }, []);
 
   const handlePlaceOrder = () => {
     setShowConfirmation(true);
@@ -92,7 +125,7 @@ export default function Checkout() {
           left: 0;
           right: 0;
           bottom: 0;
-          border: 2px solid #C9A961;
+          border: 3px solid #9F854B;
           border-radius: 6px;
           opacity: 0.8;
           mix-blend-mode: screen;
@@ -142,7 +175,7 @@ export default function Checkout() {
           left: 2px;
           right: 2px;
           bottom: 2px;
-          border: 3px solid #C9A961;
+          border: 3px solid #9F854B;
           border-radius: 6px;
           opacity: 0.8;
           mix-blend-mode: screen;
@@ -165,7 +198,7 @@ export default function Checkout() {
           background: #8B2E2E;
           border-radius: 25px;
           overflow: hidden;
-          border: 2px solid #C9A961;
+          border: 2px solid #9F854B;
         }
 
         .chalk-button::before {
@@ -203,7 +236,7 @@ export default function Checkout() {
         .payment-button {
           position: relative;
           background: #8B2E2E;
-          border: 2px solid #C9A961;
+          border: 2px solid #9F854B;
           border-radius: 25px;
           padding: 8px 20px;
           color: white;
@@ -234,7 +267,7 @@ export default function Checkout() {
 
         .confirmation-card {
           position: relative;
-          background: #C9A961;
+          background: #9F854B;
           border-radius: 12px;
           padding: 40px;
           width: 90%;
@@ -407,7 +440,7 @@ export default function Checkout() {
   left: 2px;
   right: 2px;
   height: 2px;
-  border-top: 2px solid #C9A961;
+  border-top: 2px solid #9F854B;
   opacity: 0.8;
   mix-blend-mode: screen;
   filter: blur(0.8px) brightness(1.2) contrast(150%);
@@ -447,7 +480,7 @@ export default function Checkout() {
                   <span className="gradient-text">Contact Information</span>
                 </h2>
                 <div className="grid grid-cols-2 gap-4 mb-4">
-                  <div className="chalk-input">
+                  <div className="chalk-input form-section">
                     <input
                       type="text"
                       name="firstName"
@@ -456,7 +489,7 @@ export default function Checkout() {
                       onChange={handleChange}
                     />
                   </div>
-                  <div className="chalk-input">
+                  <div className="chalk-input form-section">
                     <input
                       type="text"
                       name="lastName"
@@ -466,7 +499,7 @@ export default function Checkout() {
                     />
                   </div>
                 </div>
-                <div className="chalk-input">
+                <div className="chalk-input form-section">
                   <input
                     type="email"
                     name="email"
@@ -484,7 +517,7 @@ export default function Checkout() {
                 <h2 className="text-2xl font-bold mb-6">
                   <span className="gradient-text">Shipping Address</span>
                 </h2>
-                <div className="chalk-input mb-4">
+                <div className="chalk-input mb-4 form-section">
                   <input
                     type="text"
                     name="addressLine1"
@@ -494,7 +527,7 @@ export default function Checkout() {
                   />
                 </div>
                 <div className="grid grid-cols-3 gap-4">
-                  <div className="chalk-input">
+                  <div className="chalk-input form-section">
                     <input
                       type="text"
                       name="city"
@@ -503,7 +536,7 @@ export default function Checkout() {
                       onChange={handleChange}
                     />
                   </div>
-                  <div className="chalk-input">
+                  <div className="chalk-input form-section">
                     <input
                       type="text"
                       name="state"
@@ -512,7 +545,7 @@ export default function Checkout() {
                       onChange={handleChange}
                     />
                   </div>
-                  <div className="chalk-input">
+                  <div className="chalk-input form-section">
                     <input
                       type="text"
                       name="zip"
@@ -529,26 +562,15 @@ export default function Checkout() {
             <div className="">
               <div className="chalk-section-content">
                 <h2 className="text-2xl font-bold mb-6">
-                <span className="gradient-text">Payment Method</span>
+                  <span className="gradient-text">Payment Method</span>
                 </h2>
-                <div className="flex gap-3 mb-6 flex-wrap">
+                <div className="flex gap-3 mb-6 flex-wrap form-section">
                   {["stripe", "paypal", "wallet"].map((method) => (
-                    <button
-                      key={method}
-                      onClick={() =>
-                        setFormData((prev) => ({
-                          ...prev,
-                          paymentMethod: method,
-                        }))
-                      }
-                      className={`payment-button ${formData.paymentMethod === method ? "active" : ""}`}
-                    >
-                      {method.charAt(0).toUpperCase() + method.slice(1)}
-                    </button>
+                    <AccountButton key={method} text={method.charAt(0).toUpperCase() + method.slice(1)} onClick={() => setFormData((prev) => ({ ...prev, paymentMethod: method }))} className={`payment-button ${formData.paymentMethod === method ? "active" : ""}`} />
                   ))}
                 </div>
 
-                <div className="chalk-input mb-4">
+                <div className="chalk-input mb-4 form-section">
                   <input
                     type="text"
                     name="cardholderName"
@@ -557,7 +579,7 @@ export default function Checkout() {
                     onChange={handleChange}
                   />
                 </div>
-                <div className="chalk-input mb-4">
+                <div className="chalk-input mb-4 form-section">
                   <input
                     type="text"
                     name="cardNumber"
@@ -567,7 +589,7 @@ export default function Checkout() {
                   />
                 </div>
                 <div className="grid grid-cols-2 gap-4 mb-4">
-                  <div className="chalk-input">
+                  <div className="chalk-input form-section">
                     <input
                       type="text"
                       name="expirationDate"
@@ -576,7 +598,7 @@ export default function Checkout() {
                       onChange={handleChange}
                     />
                   </div>
-                  <div className="chalk-input">
+                  <div className="chalk-input form-section">
                     <input
                       type="text"
                       name="cvc"
@@ -588,7 +610,7 @@ export default function Checkout() {
                 </div>
 
                 <div className="grid grid-cols-3 gap-4 mb-4">
-                  <div className="chalk-input">
+                  <div className="chalk-input form-section">
                     <input
                       type="text"
                       name="billingCity"
@@ -597,7 +619,7 @@ export default function Checkout() {
                       onChange={handleChange}
                     />
                   </div>
-                  <div className="chalk-input">
+                  <div className="chalk-input form-section">
                     <input
                       type="text"
                       name="billingState"
@@ -606,7 +628,7 @@ export default function Checkout() {
                       onChange={handleChange}
                     />
                   </div>
-                  <div className="chalk-input">
+                  <div className="chalk-input form-section">
                     <input
                       type="text"
                       name="billingZip"
@@ -617,7 +639,7 @@ export default function Checkout() {
                   </div>
                 </div>
 
-                <label className="flex items-center gap-3 text-gray-400 cursor-pointer">
+                <label className="flex items-center gap-3 text-gray-400 cursor-pointer form-section">
                   <input
                     type="checkbox"
                     name="sameAddress"
@@ -641,63 +663,66 @@ export default function Checkout() {
                   <span className="gradient-text">Order Summary</span>
                 </h2>
 
-                <div className="space-y-3 mb-6">
-                  {items.map((item, idx) => (
-                    <div
-                      key={idx}
-                      className="flex justify-between text-sm text-gray-400"
-                    >
-                      <span>{item.name}</span>
-                      <span className="text-yellow-600">{item.price}</span>
+                <div className="">
+                  <div className="space-y-3 mb-6 form-section">
+                    {items.map((item, idx) => (
+                      <div
+                        key={idx}
+                        className="flex justify-between text-sm text-gray-400"
+                      >
+                        <span>{item.name}</span>
+                        <span className="text-yellow-600">{item.price}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="chalk-top-border pt-4 space-y-2 mb-4 text-sm form-section">
+                    <div className="flex justify-between text-gray-400">
+                      <span>Subtotal</span>
+                      <span>$160.00</span>
                     </div>
-                  ))}
-                </div>
+                    <div className="flex justify-between text-gray-400">
+                      <span>Shipping</span>
+                      <span>$10.00</span>
+                    </div>
+                    <div className="flex justify-between text-gray-400">
+                      <span>Tier Discount</span>
+                      <span className="text-yellow-600">-$20.00</span>
+                    </div>
+                    <div className="flex justify-between text-gray-400 ">
+                      <span>Estimated Tax</span>
+                      <span>$150.00</span>
+                    </div>
+                  </div>
 
-                <div className="chalk-top-border pt-4 space-y-2 mb-4 text-sm">
-                  <div className="flex justify-between text-gray-400">
-                    <span>Subtotal</span>
-                    <span>$160.00</span>
+                  <div className="chalk-top-border pt-4 mb-6 form-section">
+                    <div className="flex justify-between text-xl font-bold text-yellow-600">
+                      <span>Total</span>
+                      <span>$150.00</span>
+                    </div>
                   </div>
-                  <div className="flex justify-between text-gray-400">
-                    <span>Shipping</span>
-                    <span>$10.00</span>
-                  </div>
-                  <div className="flex justify-between text-gray-400">
-                    <span>Tier Discount</span>
-                    <span className="text-yellow-600">-$20.00</span>
-                  </div>
-                  <div className="flex justify-between text-gray-400">
-                    <span>Estimated Tax</span>
-                    <span>$150.00</span>
-                  </div>
-                </div>
 
-                <div className="chalk-top-border pt-4 mb-6">
-                  <div className="flex justify-between text-xl font-bold text-yellow-600">
-                    <span>Total</span>
-                    <span>$150.00</span>
+                  <div className="mb-6 form-section">
+                    <label className="text-xs text-gray-400 mb-2 block">
+                      Add a note to the prophet:
+                    </label>
+                    <div className="chalk-input">
+                      <textarea
+                        name="note"
+                        placeholder=""
+                        value={formData.note}
+                        onChange={handleChange}
+                        rows={4}
+                      />
+                    </div>
                   </div>
-                </div>
 
-                <div className="mb-6">
-                  <label className="text-xs text-gray-400 mb-2 block">
-                    Add a note to the prophet:
-                  </label>
-                  <div className="chalk-input">
-                    <textarea
-                      name="note"
-                      placeholder=""
-                      value={formData.note}
-                      onChange={handleChange}
-                      rows={4}
-                    />
+                  <div
+                    className="form-section"
+                    onClick={handlePlaceOrder}
+                  >
+                    <AnimatedButton text="PLACE ORDER" className="w-full" />
                   </div>
-                </div>
-
-                <div className="chalk-button w-full" onClick={handlePlaceOrder}>
-                  <button className="w-full py-3 text-white font-semibold uppercase tracking-wide text-sm">
-                    PLACE ORDER
-                  </button>
                 </div>
               </div>
             </div>

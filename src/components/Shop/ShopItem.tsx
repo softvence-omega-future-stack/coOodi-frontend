@@ -1,4 +1,5 @@
 import React from "react";
+import AnimatedButton from "../button/AddButton";
 
 type ShopItemProps = {
   image: string;
@@ -21,9 +22,7 @@ const ShopItem: React.FC<ShopItemProps> = ({ image, title, price, fullWidth }) =
             <h3 className="text-lg sm:text-xl lg:text-2xl font-semibold text-yellow-400">{title}</h3>
             <p className="text-lg sm:text-xl text-yellow-400 font-bold">{price}</p>
           </div>
-          <button className="bg-gradient-to-r from-red-800 to-red-900 hover:from-red-700 hover:to-red-800 text-white px-16 py-2 rounded-full text-sm sm:text-base transition-all mt-3 hover:cursor-pointer">
-            ADD TO BAG
-          </button>
+          <AnimatedButton text="ADD TO BAG" className="mt-3" />
         </div>
       ) : (
         <div className="flex flex-col items-center space-y-5">
@@ -31,9 +30,7 @@ const ShopItem: React.FC<ShopItemProps> = ({ image, title, price, fullWidth }) =
           <h3 className="text-lg sm:text-xl lg:text-2xl font-semibold text-yellow-400 text-center">
             {title}
           </h3>
-          <button className="bg-gradient-to-r from-red-800 to-red-900 hover:from-red-700 hover:to-red-800 text-white px-16 py-2 rounded-full text-sm sm:text-base transition-all mt-2 hover:cusror-pointer">
-            ADD TO BAG
-          </button>
+          <AnimatedButton text="ADD TO BAG" className="mt-2" />
         </div>
       )}
     </div>
