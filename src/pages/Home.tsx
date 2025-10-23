@@ -1,7 +1,8 @@
-import React, { useEffect, useRef} from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { DropletIcon } from 'lucide-react';
+import React, { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { DropletIcon} from "lucide-react";
+import HomeButton from "../components/button/HomeButton";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -19,7 +20,7 @@ const HomePage: React.FC<HomePageProps> = ({ onEnterNow, navRef }) => {
   const extraIconsRef = useRef<(HTMLDivElement | null)[]>([]);
   const contentRef = useRef(null);
   const scrollMessageRef = useRef(null); // Add ref for scroll message
-  
+
   useEffect(() => {
     ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     gsap.to(window, { scrollTo: 0, duration: 0.8, ease: "power2.out" });
@@ -34,8 +35,8 @@ const HomePage: React.FC<HomePageProps> = ({ onEnterNow, navRef }) => {
         duration: 0.8,
         scrollTrigger: {
           trigger: containerRef.current,
-          start: 'top top',
-          end: '5% top',
+          start: "top top",
+          end: "5% top",
           scrub: 0.5,
         },
       }
@@ -50,8 +51,8 @@ const HomePage: React.FC<HomePageProps> = ({ onEnterNow, navRef }) => {
         rotation: 360,
         scrollTrigger: {
           trigger: containerRef.current,
-          start: 'top top',
-          end: '20% top',
+          start: "top top",
+          end: "20% top",
           scrub: 1,
         },
       }
@@ -62,7 +63,7 @@ const HomePage: React.FC<HomePageProps> = ({ onEnterNow, navRef }) => {
       duration: 4,
       repeat: -1,
       yoyo: true,
-      ease: 'power1.inOut',
+      ease: "power1.inOut",
     });
 
     gsap.fromTo(
@@ -74,8 +75,8 @@ const HomePage: React.FC<HomePageProps> = ({ onEnterNow, navRef }) => {
         rotation: -360,
         scrollTrigger: {
           trigger: containerRef.current,
-          start: '20% top',
-          end: '35% top',
+          start: "20% top",
+          end: "35% top",
           scrub: 1,
         },
       }
@@ -88,7 +89,7 @@ const HomePage: React.FC<HomePageProps> = ({ onEnterNow, navRef }) => {
       duration: 8,
       repeat: -1,
       yoyo: true,
-      ease: 'sine.inOut',
+      ease: "sine.inOut",
     });
 
     gsap.fromTo(
@@ -100,8 +101,8 @@ const HomePage: React.FC<HomePageProps> = ({ onEnterNow, navRef }) => {
         rotation: 360,
         scrollTrigger: {
           trigger: containerRef.current,
-          start: '35% top',
-          end: '50% top',
+          start: "35% top",
+          end: "50% top",
           scrub: 1,
         },
       }
@@ -113,7 +114,7 @@ const HomePage: React.FC<HomePageProps> = ({ onEnterNow, navRef }) => {
       duration: 5,
       repeat: -1,
       yoyo: true,
-      ease: 'power1.inOut',
+      ease: "power1.inOut",
     });
 
     extraIconsRef.current.forEach((icon, index) => {
@@ -126,11 +127,11 @@ const HomePage: React.FC<HomePageProps> = ({ onEnterNow, navRef }) => {
             scale: 1,
             rotation: 360,
             duration: 1.5,
-            ease: 'power2.out',
+            ease: "power2.out",
             scrollTrigger: {
               trigger: containerRef.current,
-              start: '50% top',
-              end: '55% top',
+              start: "50% top",
+              end: "55% top",
               scrub: 0.5,
             },
             delay: index * 0.1,
@@ -143,7 +144,7 @@ const HomePage: React.FC<HomePageProps> = ({ onEnterNow, navRef }) => {
           duration: 10 + index * 2,
           repeat: -1,
           yoyo: true,
-          ease: 'sine.inOut',
+          ease: "sine.inOut",
         });
       }
     });
@@ -156,8 +157,8 @@ const HomePage: React.FC<HomePageProps> = ({ onEnterNow, navRef }) => {
         y: 0,
         scrollTrigger: {
           trigger: containerRef.current,
-          start: '50% top',
-          end: '60% top',
+          start: "50% top",
+          end: "60% top",
           scrub: 1,
         },
       }
@@ -172,8 +173,8 @@ const HomePage: React.FC<HomePageProps> = ({ onEnterNow, navRef }) => {
         scale: 1,
         scrollTrigger: {
           trigger: containerRef.current,
-          start: '60% top',
-          end: '80% top',
+          start: "60% top",
+          end: "80% top",
           scrub: 1,
         },
       }
@@ -187,70 +188,121 @@ const HomePage: React.FC<HomePageProps> = ({ onEnterNow, navRef }) => {
   return (
     <div ref={containerRef} className="relative bg-[#051318] min-h-[400vh]">
       {/* Scroll to Explore Message - Initially visible */}
-      <div 
+      <div
         ref={scrollMessageRef}
         className="fixed bottom-10 left-1/2 transform -translate-x-1/2 z-50 pointer-events-none flex flex-col items-center space-y-2"
       >
-        <div className="text-slate-400 text-sm font-medium tracking-wide" >SCROLL TO EXPLORE</div>
+        <div className="text-slate-400 text-sm font-medium tracking-wide">
+          SCROLL TO EXPLORE
+        </div>
         <DropletIcon className="w-6 h-6 text-slate-400 animate-bounce" />
       </div>
 
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         {/* Top Left */}
-        <div ref={icon1Ref} className="absolute top-10 left-16 w-56 h-56 opacity-0">
+        <div
+          ref={icon1Ref}
+          className="absolute top-10 left-16 w-56 h-56 opacity-0"
+        >
           <img src="/Vector.png" alt="1" className="opacity-[0.4]" />
         </div>
 
         {/* Top Right */}
-        <div ref={icon2Ref} className="absolute top-50 right-20 w-72 h-72 opacity-0">
+        <div
+          ref={icon2Ref}
+          className="absolute top-50 right-20 w-72 h-72 opacity-0"
+        >
           <img src="/Vector2.png" alt="2" className="opacity-[0.35]" />
         </div>
 
         {/* Bottom Left */}
-        <div ref={icon3Ref} className="absolute bottom-10 left-20 w-64 h-64 opacity-0">
+        <div
+          ref={icon3Ref}
+          className="absolute bottom-10 left-20 w-64 h-64 opacity-0"
+        >
           <img src="/Vector3.png" alt="3" className="opacity-[0.4]" />
         </div>
 
         {/* Floating extras */}
-        <div ref={(el) => { extraIconsRef.current[0] = el; }} className="absolute top-1/4 left-[65%] w-44 h-44 opacity-0">
+        <div
+          ref={(el) => {
+            extraIconsRef.current[0] = el;
+          }}
+          className="absolute top-1/4 left-[65%] w-44 h-44 opacity-0"
+        >
           <img src="/Vector4.png" alt="" className="opacity-[0.45]" />
         </div>
 
-        <div ref={(el) => { extraIconsRef.current[1] = el; }} className="absolute top-[38%] left-[18%] w-48 h-48 opacity-0">
+        <div
+          ref={(el) => {
+            extraIconsRef.current[1] = el;
+          }}
+          className="absolute top-[38%] left-[18%] w-48 h-48 opacity-0"
+        >
           <img src="/Vector.png" alt="" className="opacity-[0.35]" />
         </div>
 
-        <div ref={(el) => { extraIconsRef.current[2] = el; }} className="absolute bottom-[22%] right-[28%] w-60 h-60 opacity-0">
+        <div
+          ref={(el) => {
+            extraIconsRef.current[2] = el;
+          }}
+          className="absolute bottom-[22%] right-[28%] w-60 h-60 opacity-0"
+        >
           <img src="/Vector2.png" alt="" className="opacity-[0.3]" />
         </div>
 
-        <div ref={(el) => { extraIconsRef.current[3] = el; }} className="absolute top-2 left-1/2 -translate-x-1/2 w-52 h-52 opacity-0">
+        <div
+          ref={(el) => {
+            extraIconsRef.current[3] = el;
+          }}
+          className="absolute top-2 left-1/2 -translate-x-1/2 w-52 h-52 opacity-0"
+        >
           <img src="/Vector3.png" alt="" className="opacity-[0.4]" />
         </div>
 
-        <div ref={(el) => { extraIconsRef.current[4] = el; }} className="absolute bottom-10 left-[42%] w-48 h-48 opacity-0">
+        <div
+          ref={(el) => {
+            extraIconsRef.current[4] = el;
+          }}
+          className="absolute bottom-10 left-[42%] w-48 h-48 opacity-0"
+        >
           <img src="/Vector4.png" alt="" className="opacity-[0.35]" />
         </div>
 
-        <div ref={(el) => { extraIconsRef.current[5] = el; }} className="absolute top-[50%] right-[50%] w-40 h-40 opacity-0">
+        <div
+          ref={(el) => {
+            extraIconsRef.current[5] = el;
+          }}
+          className="absolute top-[50%] right-[50%] w-40 h-40 opacity-0"
+        >
           <img src="/Vector.png" alt="" className="opacity-[0.4]" />
         </div>
       </div>
 
-      <div ref={contentRef} className="fixed inset-0 flex items-center justify-center pointer-events-none opacity-0">
+      <div
+        ref={contentRef}
+        className="fixed inset-0 flex items-center justify-center opacity-0"
+      >
         <div className="text-center space-y-8 px-4">
           <h1 className="text-7xl md:text-8xl font-bold gradient-text">
             <span> Welcome to</span>
             <br />
             <span>Yhe Silk Road</span>
           </h1>
-          <p className="text-xl text-[#B59652] max-w-2xl mx-auto">Collect. Trade. Discover the Unknown.</p>
-          <button 
+          <p className="text-xl text-[#B59652] max-w-2xl mx-auto">
+            Collect. Trade. Discover the Unknown.
+          </p>
+          <HomeButton
+            text="ENTER NOW"
+            onClick={onEnterNow}
+            className="text-[2rem]"
+          />
+          {/* <button 
             onClick={onEnterNow}
             className="pointer-events-auto bg-gradient-to-r from-rose-600 to-rose-700 hover:from-rose-500 hover:to-rose-600 text-white px-12 py-4 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg shadow-rose-500/50 "
           >
             ENTER NOW
-          </button>
+          </button> */}
         </div>
       </div>
     </div>

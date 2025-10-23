@@ -1,4 +1,4 @@
-import AnimatedButton from "../button/AddButton";
+import AnimatedButton from "../button/AnimatedButton";
 
 type TierCardProps = {
   leftImage: string;
@@ -56,7 +56,10 @@ const TierCard = ({
             ))}
           </ul>
 
-            <AnimatedButton text={buttonText} className="flex items-center justify-center mx-auto md:mx-0 w-fit" />
+          <AnimatedButton
+            text={buttonText}
+            className="flex items-center justify-center mx-auto md:mx-0 w-fit"
+          />
         </div>
 
         {/* Right Image */}

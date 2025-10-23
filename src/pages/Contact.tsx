@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import AnimatedButton from "../components/button/AddButton";
+import AnimatedButton from "../components/button/AnimatedButton";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -14,21 +14,20 @@ type StatsCardProps = {
 
 const StatsCard = ({ value, label, image, icon }: StatsCardProps) => {
   return (
-    <div className="relative w-full stats-card" style={{ aspectRatio: '1 / 1' }}>
+    <div
+      className="relative w-full stats-card"
+      style={{ aspectRatio: "1 / 1" }}
+    >
       {/* Background Frame Image */}
-      <img 
-        src={image} 
-        alt="Card Frame" 
+      <img
+        src={image}
+        alt="Card Frame"
         className="absolute inset-0 w-full h-full object-contain"
       />
-      
+
       {/* Content Overlay */}
       <div className="absolute inset-0 flex flex-col items-center justify-center p-6 md:p-8">
-        {icon && (
-          <div className="mb-3 md:mb-4">
-            {icon}
-          </div>
-        )}
+        {icon && <div className="mb-3 md:mb-4">{icon}</div>}
         <div className="text-xl md:text-2xl lg:text-3xl font-bold text-[#B59652] mb-1">
           {value}
         </div>
@@ -99,10 +98,11 @@ export default function Contact() {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, type } = e.target;
-    const value = type === "checkbox" 
-      ? (e.target as HTMLInputElement).checked 
-      : e.target.value;
-    
+    const value =
+      type === "checkbox"
+        ? (e.target as HTMLInputElement).checked
+        : e.target.value;
+
     setFormData((prev) => ({
       ...prev,
       [name]: value,
@@ -308,28 +308,80 @@ export default function Contact() {
 
       {/* Floating Decorative Icons */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <svg className="absolute top-12 left-8 md:left-12 w-8 h-8 md:w-12 md:h-12 text-yellow-500/10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg
+          className="absolute top-12 left-8 md:left-12 w-8 h-8 md:w-12 md:h-12 text-yellow-500/10"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
           <circle cx="12" cy="12" r="8" strokeWidth="2" />
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-        </svg>
-        
-        <svg className="absolute top-8 right-8 md:right-16 w-10 h-10 md:w-14 md:h-14 text-yellow-500/10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 12a4 4 0 11-8 0 4 4 0 018 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
-        </svg>
-
-        <svg className="absolute top-1/3 right-12 w-8 h-8 text-yellow-500/10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+          />
         </svg>
 
-        <svg className="absolute bottom-1/3 left-8 w-10 h-10 text-yellow-500/10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4" />
+        <svg
+          className="absolute top-8 right-8 md:right-16 w-10 h-10 md:w-14 md:h-14 text-yellow-500/10"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            d="M16 12a4 4 0 11-8 0 4 4 0 018 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"
+          />
         </svg>
 
-        <svg className="absolute bottom-1/4 right-16 w-12 h-12 text-yellow-500/10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+        <svg
+          className="absolute top-1/3 right-12 w-8 h-8 text-yellow-500/10"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"
+          />
         </svg>
 
-        <div className="absolute top-1/4 left-1/4 text-yellow-500/10 text-xl">△</div>
+        <svg
+          className="absolute bottom-1/3 left-8 w-10 h-10 text-yellow-500/10"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            d="M12 4v16m8-8H4"
+          />
+        </svg>
+
+        <svg
+          className="absolute bottom-1/4 right-16 w-12 h-12 text-yellow-500/10"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            d="M13 10V3L4 14h7v7l9-11h-7z"
+          />
+        </svg>
+
+        <div className="absolute top-1/4 left-1/4 text-yellow-500/10 text-xl">
+          △
+        </div>
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -337,7 +389,7 @@ export default function Contact() {
         <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-8 md:mb-12 ">
           <span className="gradient-text">Contact</span>
         </h1>
-        
+
         <h2 className="text-xl sm:text-2xl lg:text-3xl font-semibold text-center mb-8 md:mb-12">
           <span className="text-[#B59652]">Need a Help?</span>
         </h2>
@@ -346,7 +398,9 @@ export default function Contact() {
         <div className="space-y-6">
           {/* Email */}
           <div className="form-section">
-            <label className="block text-sm text-amber-400/80 mb-2">Email:</label>
+            <label className="block text-sm text-amber-400/80 mb-2">
+              Email:
+            </label>
             <div className="chalk-input">
               <input
                 type="email"
@@ -360,7 +414,9 @@ export default function Contact() {
 
           {/* Subject of Interest */}
           <div className="form-section">
-            <label className="block text-sm text-amber-400/80 mb-3">Subject of interest:</label>
+            <label className="block text-sm text-amber-400/80 mb-3">
+              Subject of interest:
+            </label>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <label className="flex items-center gap-3 cursor-pointer group">
                 <div className="chalk-checkbox">
@@ -372,7 +428,9 @@ export default function Contact() {
                   />
                   <span className="checkmark">✓</span>
                 </div>
-                <span className="text-sm text-gray-400 group-hover:text-amber-400 transition-colors">Order Issue</span>
+                <span className="text-sm text-gray-400 group-hover:text-amber-400 transition-colors">
+                  Order Issue
+                </span>
               </label>
 
               <label className="flex items-center gap-3 cursor-pointer group">
@@ -385,7 +443,9 @@ export default function Contact() {
                   />
                   <span className="checkmark">✓</span>
                 </div>
-                <span className="text-sm text-gray-400 group-hover:text-amber-400 transition-colors">Account/Tiers</span>
+                <span className="text-sm text-gray-400 group-hover:text-amber-400 transition-colors">
+                  Account/Tiers
+                </span>
               </label>
 
               <label className="flex items-center gap-3 cursor-pointer group">
@@ -398,7 +458,9 @@ export default function Contact() {
                   />
                   <span className="checkmark">✓</span>
                 </div>
-                <span className="text-sm text-gray-400 group-hover:text-amber-400 transition-colors">Website Bug</span>
+                <span className="text-sm text-gray-400 group-hover:text-amber-400 transition-colors">
+                  Website Bug
+                </span>
               </label>
 
               <label className="flex items-center gap-3 cursor-pointer group">
@@ -411,14 +473,18 @@ export default function Contact() {
                   />
                   <span className="checkmark">✓</span>
                 </div>
-                <span className="text-sm text-gray-400 group-hover:text-amber-400 transition-colors">General Questions</span>
+                <span className="text-sm text-gray-400 group-hover:text-amber-400 transition-colors">
+                  General Questions
+                </span>
               </label>
             </div>
           </div>
 
           {/* Order ID */}
           <div className="form-section">
-            <label className="block text-sm text-amber-400/80 mb-2">Enter Order ID:</label>
+            <label className="block text-sm text-amber-400/80 mb-2">
+              Enter Order ID:
+            </label>
             <div className="chalk-input">
               <input
                 type="text"
@@ -432,7 +498,9 @@ export default function Contact() {
 
           {/* Description */}
           <div className="form-section">
-            <label className="block text-sm text-amber-400/80 mb-2">Perks (Describe the problem)</label>
+            <label className="block text-sm text-amber-400/80 mb-2">
+              Perks (Describe the problem)
+            </label>
             <div className="chalk-input">
               <textarea
                 name="description"
@@ -446,7 +514,9 @@ export default function Contact() {
 
           {/* File Upload */}
           <div className="form-section">
-            <label className="block text-sm text-amber-400/80 mb-2">Attach File:</label>
+            <label className="block text-sm text-amber-400/80 mb-2">
+              Attach File:
+            </label>
             <label className="file-upload-area block">
               <input
                 type="file"
@@ -454,11 +524,23 @@ export default function Contact() {
                 className="hidden"
               />
               <div className="relative z-10 p-6 text-center">
-                <svg className="w-8 h-8 mx-auto mb-2 text-amber-500/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                <svg
+                  className="w-8 h-8 mx-auto mb-2 text-amber-500/60"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+                  />
                 </svg>
                 <p className="text-sm text-gray-400">
-                  {formData.file ? formData.file.name : "Click to upload or drag & drop file (Maximum file size 20 MB)"}
+                  {formData.file
+                    ? formData.file.name
+                    : "Click to upload or drag & drop file (Maximum file size 20 MB)"}
                 </p>
               </div>
             </label>
@@ -467,7 +549,7 @@ export default function Contact() {
           {/* Submit Button */}
           <div className="form-section flex justify-center pt-4">
             <div className="">
-              <AnimatedButton text="SUBMIT TICKET" onClick={handleSubmit}/>
+              <AnimatedButton text="SUBMIT TICKET" onClick={handleSubmit} />
             </div>
           </div>
         </div>
@@ -478,28 +560,69 @@ export default function Contact() {
             value="24-48h"
             label="Response Time"
             image="/test.png"
-            icon={<svg className="w-12 h-12 md:w-14 md:h-14 text-[#B59652]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>}
+            icon={
+              <svg
+                className="w-12 h-12 md:w-14 md:h-14 text-[#B59652]"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+            }
           />
-          
+
           <StatsCard
             value="FAQ"
             label=""
             image="/test.png"
-            icon={<svg className="w-12 h-12 md:w-14 md:h-14 text-[#B59652]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-            </svg>}
+            icon={
+              <svg
+                className="w-12 h-12 md:w-14 md:h-14 text-[#B59652]"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
+                />
+              </svg>
+            }
           />
-          
+
           <StatsCard
             value="COMMUNITY"
             label=""
             image="/test.png"
-            icon={<svg className="w-12 h-12 md:w-14 md:h-14 text-[#B59652]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-            </svg>}
+            icon={
+              <svg
+                className="w-12 h-12 md:w-14 md:h-14 text-[#B59652]"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                />
+              </svg>
+            }
           />
         </div>
       </div>
