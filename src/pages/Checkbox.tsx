@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import AccountButton from "../components/button/AccountButton";
-import AnimatedButton from "../components/button/AddButton";
+import AnimatedButton from "../components/button/AnimatedButton";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -566,7 +566,17 @@ export default function Checkout() {
                 </h2>
                 <div className="flex gap-3 mb-6 flex-wrap form-section">
                   {["stripe", "paypal", "wallet"].map((method) => (
-                    <AccountButton key={method} text={method.charAt(0).toUpperCase() + method.slice(1)} onClick={() => setFormData((prev) => ({ ...prev, paymentMethod: method }))} className={`payment-button ${formData.paymentMethod === method ? "active" : ""}`} />
+                    <AccountButton
+                      key={method}
+                      text={method.charAt(0).toUpperCase() + method.slice(1)}
+                      onClick={() =>
+                        setFormData((prev) => ({
+                          ...prev,
+                          paymentMethod: method,
+                        }))
+                      }
+                      className={`payment-button ${formData.paymentMethod === method ? "active" : ""}`}
+                    />
                   ))}
                 </div>
 
@@ -717,10 +727,7 @@ export default function Checkout() {
                     </div>
                   </div>
 
-                  <div
-                    className="form-section"
-                    onClick={handlePlaceOrder}
-                  >
+                  <div className="form-section" onClick={handlePlaceOrder}>
                     <AnimatedButton text="PLACE ORDER" className="w-full" />
                   </div>
                 </div>

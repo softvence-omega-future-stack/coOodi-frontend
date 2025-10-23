@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { gsap } from "gsap";
-import AnimatedButton from "../components/button/AddButton";
+import AnimatedButton from "../components/button/AnimatedButton";
 
 export default function MyBag() {
   const navigate = useNavigate();
