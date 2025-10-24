@@ -12,6 +12,7 @@ import SignUpPage from "../pages/Signup";
 import Checkbox from "../pages/Checkbox";
 import CustomCard from "../pages/CustomCard";
 import AccountPage from "../pages/Account";
+import EditProfile from "../pages/EditProfile";
 
 export const router = createBrowserRouter([
   {
@@ -28,6 +29,7 @@ export const router = createBrowserRouter([
       { path: "/checkout", element: <Checkbox /> },
       { path: "/custom", element: <CustomCard /> },
       { path: "/account", element: <AccountPage /> },
+      { path: "/edit-profile", element: <EditProfile /> },
       { path: "/*", element: <NotFound /> },
     ],
   },
