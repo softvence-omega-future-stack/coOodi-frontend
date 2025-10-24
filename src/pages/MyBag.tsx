@@ -123,7 +123,7 @@ export default function MyBag() {
           left: 2px;
           right: 2px;
           bottom: 2px;
-          border: 3px solid #C9A961;
+          border: 3px solid #9F854B;
           border-radius: 10px;
           opacity: 0.8;
           mix-blend-mode: screen;
@@ -176,7 +176,7 @@ export default function MyBag() {
           left: 0;
           right: 0;
           height: 2px;
-          background: #C9A961;
+          background: #9F854B;
           opacity: 0.8;
           mix-blend-mode: screen;
           filter: blur(0.8px) brightness(1.2) contrast(150%);
@@ -187,7 +187,7 @@ export default function MyBag() {
         }
 
         .header-cell {
-          color: #C9A961;
+          color: #9F854B;
           font-weight: 600;
           font-size: 12px;
         }
@@ -222,7 +222,7 @@ export default function MyBag() {
           left: 0;
           right: 0;
           height: 1px;
-          background: #C9A961;
+          background: #9F854B;
           opacity: 0.3;
           mix-blend-mode: screen;
           filter: blur(0.5px);
@@ -293,7 +293,7 @@ export default function MyBag() {
         }
 
         .item-price {
-          color: #C9A961;
+          color: #9F854B;
           font-weight: 600;
           font-size: 14px;
           margin-bottom: 8px;
@@ -316,7 +316,7 @@ export default function MyBag() {
           width: 20px;
           height: 20px;
           background: transparent;
-          border: 2px solid #C9A961;
+          border: 2px solid #9F854B;
           border-radius: 3px;
           cursor: pointer;
           display: flex;
@@ -361,7 +361,7 @@ export default function MyBag() {
         }
 
         .remove-btn {
-          color: #C9A961;
+          color: #9F854B;
           cursor: pointer;
           transition: all 0.3s ease;
           font-size: 14px;
@@ -374,10 +374,10 @@ export default function MyBag() {
 
         .chalk-button {
           position: relative;
-          background: #8B2E2E;
+          background: #9F854B;
           border-radius: 25px;
           overflow: hidden;
-          border: 2px solid #C9A961;
+          border: 2px solid #9F854B;
         }
 
         .chalk-button::before {
