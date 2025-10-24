@@ -10,6 +10,11 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function AccountPage() {
   const [activeTab, setActiveTab] = useState("active");
+  const [showChooseNetwork, setShowChooseNetwork] = useState(false);
+  const [showConnecting, setShowConnecting] = useState(false);
+  const [isConnected, setIsConnected] = useState(false);
+  const [selectedNetwork, setSelectedNetwork] = useState('');
+  const [selectedWallet, setSelectedWallet] = useState('');
   const navigate = useNavigate();
 
   const userProfile = {
@@ -76,6 +81,36 @@ export default function AccountPage() {
 
   const currentOrders = orders[activeTab as keyof typeof orders];
 
+  const handleConnectClick = () => {
+    setShowChooseNetwork(true);
+  };
+
+  const handleNetworkSelect = (network: string) => {
+    setSelectedNetwork(network);
+  };
+
+  const handleWalletSelect = (wallet: string) => {
+    setSelectedWallet(wallet);
+  };
+
+  const handleConnectWallet = () => {
+    if (selectedNetwork && selectedWallet) {
+      setShowChooseNetwork(false);
+      setShowConnecting(true);
+      
+      setTimeout(() => {
+        setShowConnecting(false);
+        setIsConnected(true);
+      }, 3000);
+    }
+  };
+
+  const handleDisconnect = () => {
+    setIsConnected(false);
+    setSelectedNetwork('');
+    setSelectedWallet('');
+  };
+
   useEffect(() => {
     gsap.fromTo(
       "h1, h2",
@@ -123,6 +158,11 @@ export default function AccountPage() {
         @keyframes chalkFlicker {
           0%, 100% { opacity: 0.7; }
           50% { opacity: 0.9; }
+        }
+
+        @keyframes dotFlashing {
+          0%, 100% { opacity: 0.3; }
+          50% { opacity: 1; }
         }
 
         .chalk-border {
@@ -207,7 +247,7 @@ export default function AccountPage() {
           left: 0;
           right: 0;
           bottom: 0;
-          border: 1px solid #C9A961;
+          border: 1px solid #9F854B;
           border-radius: 20px;
           opacity: 0.6;
           mix-blend-mode: screen;
@@ -229,7 +269,7 @@ export default function AccountPage() {
         }
 
         .tab-button {
-          background: #C9A961;
+          background: #9F854B;
           border: 2px solid #9F854B;
           color: #001117;
           padding: 8px 16px;
@@ -243,7 +283,7 @@ export default function AccountPage() {
 
         .tab-button.inactive {
           background: transparent;
-          border: 2px solid #C9A961;
+          border: 2px solid #9F854B;
           color: #C9A961;
         }
 
@@ -268,7 +308,7 @@ export default function AccountPage() {
           left: 0;
           right: 0;
           bottom: 0;
-          border: 2px solid #C9A961;
+          border: 2px solid #9F854B;
           border-radius: 50%;
           opacity: 0.8;
           mix-blend-mode: screen;
@@ -343,11 +383,11 @@ export default function AccountPage() {
         }
 
         thead tr {
-          border-bottom: 2px solid #C9A961;
+          border-bottom: 2px solid #9F854B;
         }
 
         tbody tr {
-          // border-bottom: 1px solid #C9A961;
+          // border-bottom: 1px solid #9F854B;
           border-opacity: 30%;
         }
 
@@ -359,7 +399,7 @@ export default function AccountPage() {
         th {
           font-weight: bold;
           font-size: 13px;
-          color: #C9A961;
+          color: #9F854B;
         }
 
         td {
@@ -368,14 +408,216 @@ export default function AccountPage() {
         }
 
         td:nth-child(4) {
-          color: #C9A961;
+          color: #9F854B;
           font-weight: 600;
         }
 
         td:nth-child(5) {
-          color: #C9A961;
+          color: #9F854B;
           cursor: pointer;
           font-weight: 500;
+        }
+
+        .chalk-modal {
+          position: relative;
+          background: #9F854B;
+          border-radius: 12px;
+          padding: 40px;
+          overflow: hidden;
+          box-shadow: 0 0 20px rgba(159, 133, 75, 0.3);
+        }
+
+        .chalk-modal::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          border: 3px solid #9F854B;
+          border-radius: 10px;
+          opacity: 0.8;
+          mix-blend-mode: screen;
+          filter: blur(0.8px) brightness(1.2) contrast(150%);
+          mask-image: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='4' seed='5'/%3E%3CfeDisplacementMap in='SourceGraphic' scale='5'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+          -webkit-mask-image: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='4' seed='5'/%3E%3CfeDisplacementMap in='SourceGraphic' scale='5'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+          mask-mode: alpha;
+          -webkit-mask-mode: alpha;
+          pointer-events: none;
+          animation: chalkFlicker 3s ease-in-out infinite;
+        }
+
+        .modal-content {
+          position: relative;
+          z-index: 10;
+        }
+
+        .close-btn {
+          position: absolute;
+          top: 20px;
+          right: 20px;
+          width: 40px;
+          height: 40px;
+          border: 2px solid #333;
+          border-radius: 50%;
+          background: transparent;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 24px;
+          color: #333;
+          z-index: 20;
+          transition: all 0.3s ease;
+        }
+
+        .close-btn:hover {
+          background: rgba(0, 0, 0, 0.1);
+        }
+
+        .option-card {
+          position: relative;
+          background: #9F854B;
+          border-radius: 8px;
+          padding: 16px;
+          display: flex;
+          align-items: center;
+          gap: 16px;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          overflow: hidden;
+        }
+
+        .option-card::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          border: 2px solid #333;
+          border-radius: 8px;
+          opacity: 0.8;
+          mix-blend-mode: multiply;
+          filter: blur(0.5px);
+          mask-image: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='4' seed='5'/%3E%3CfeDisplacementMap in='SourceGraphic' scale='5'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+          -webkit-mask-image: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='4' seed='5'/%3E%3CfeDisplacementMap in='SourceGraphic' scale='5'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+          mask-mode: alpha;
+          -webkit-mask-mode: alpha;
+          pointer-events: none;
+        }
+
+        .option-card.selected::before {
+          border: 3px solid #333;
+          opacity: 1;
+        }
+
+        .option-card:hover {
+          transform: translateY(-2px);
+        }
+
+        .option-content {
+          position: relative;
+          z-index: 2;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          width: 100%;
+        }
+
+        .checkbox {
+          width: 24px;
+          height: 24px;
+          border: 2px solid #333;
+          border-radius: 4px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+        }
+
+        .checkbox.checked {
+          background: #333;
+          color: #9F854B;
+        }
+
+        .connect-btn {
+          position: relative;
+          background: #1a1a1a;
+          border-radius: 8px;
+          padding: 14px 32px;
+          color: white;
+          font-weight: 600;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          overflow: hidden;
+          border: none;
+          width: 100%;
+        }
+
+        .connect-btn::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          border: 2px solid #333;
+          border-radius: 8px;
+          opacity: 0.6;
+          mix-blend-mode: multiply;
+          filter: blur(0.5px);
+          mask-image: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='4' seed='5'/%3E%3CfeDisplacementMap in='SourceGraphic' scale='5'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+          -webkit-mask-image: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='4' seed='5'/%3E%3CfeDisplacementMap in='SourceGraphic' scale='5'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+          mask-mode: alpha;
+          -webkit-mask-mode: alpha;
+          pointer-events: none;
+        }
+
+        .connect-btn span {
+          position: relative;
+          z-index: 2;
+        }
+
+        .connect-btn:hover {
+          opacity: 0.9;
+        }
+
+        .loading-dots {
+          display: flex;
+          gap: 8px;
+          justify-content: center;
+          margin: 20px 0;
+        }
+
+        .loading-dot {
+          width: 12px;
+          height: 12px;
+          border-radius: 50%;
+          background: #333;
+        }
+
+        .loading-dot:nth-child(1) {
+          animation: dotFlashing 1.5s infinite;
+        }
+
+        .loading-dot:nth-child(2) {
+          animation: dotFlashing 1.5s infinite 0.3s;
+        }
+
+        .loading-dot:nth-child(3) {
+          animation: dotFlashing 1.5s infinite 0.6s;
+        }
+
+        .modal-overlay {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: rgba(0, 0, 0, 0.6);
+          backdrop-filter: blur(4px);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          z-index: 1000;
         }
 
         @media (max-width: 1024px) {
@@ -437,9 +679,6 @@ export default function AccountPage() {
                   </span>
                 </p>
                 <AccountButton text="EDIT PROFILE" className="mb-2" onClick={() => navigate("/edit-profile")}/>
-                {/* <button className="chalk-button">
-                  <span>EDIT PROFILE</span>
-                </button> */}
               </div>
             </div>
 
@@ -457,7 +696,11 @@ export default function AccountPage() {
                 <p className="text-sm mb-2">
                   <span className="text-amber-500">Token Wallet Balance</span>
                 </p>
-                <AccountButton text="CONNECT" className="mb-2" />
+                <AccountButton 
+                  text={isConnected ? "DISCONNECT" : "CONNECT"} 
+                  className="mb-2" 
+                  onClick={isConnected ? handleDisconnect : handleConnectClick}
+                />
               </div>
             </div>
           </div>
@@ -556,6 +799,90 @@ export default function AccountPage() {
           </div>
         </div>
       </div>
+
+      {/* Choose Network Modal */}
+      {showChooseNetwork && (
+        <div className="modal-overlay">
+          <div className="chalk-modal" style={{ maxWidth: '500px', width: '60%' }}>
+            <button className="close-btn" onClick={() => setShowChooseNetwork(false)}>✕</button>
+            <div className="modal-content">
+              <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">Choose Network</h2>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                <div className={`option-card ${selectedNetwork === 'solana' ? 'selected' : ''}`} onClick={() => handleNetworkSelect('solana')}>
+                  <div className="option-content">
+                    <div className={`checkbox ${selectedNetwork === 'solana' ? 'checked' : ''}`}>
+                      {selectedNetwork === 'solana' && '✓'}
+                    </div>
+                    <div className="w-10 h-10 rounded-lg flex items-center justify-center text-white font-bold"><img src="/account/solana.svg" alt="Solana Logo" /></div>
+                    <span className="text-xl font-semibold text-gray-800">Solana</span>
+                  </div>
+                </div>
+
+                <div className={`option-card ${selectedNetwork === 'polygon' ? 'selected' : ''}`} onClick={() => handleNetworkSelect('polygon')}>
+                  <div className="option-content">
+                    <div className={`checkbox ${selectedNetwork === 'polygon' ? 'checked' : ''}`}>
+                      {selectedNetwork === 'polygon' && '✓'}
+                    </div>
+                    <div className="w-10 h-10 rounded-lg flex items-center justify-center text-white font-bold"><img src="/account/polygon.svg" alt="Polygon Logo" /></div>
+                    <span className="text-xl font-semibold text-gray-800">Polygon</span>
+                  </div>
+                </div>
+              </div>
+
+              <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">Select Wallet</h2>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                <div className={`option-card ${selectedWallet === 'metamask' ? 'selected' : ''}`} onClick={() => handleWalletSelect('metamask')}>
+                  <div className="option-content">
+                    <div className={`checkbox ${selectedWallet === 'metamask' ? 'checked' : ''}`}>
+                      {selectedWallet === 'metamask' && '✓'}
+                    </div>
+                    <div className="w-16 h-10 bg-orange-500 rounded-lg flex items-center justify-center text-white font-bold">M</div>
+                    <span className="text-xl font-semibold text-gray-800">Metamask</span>
+                  </div>
+                </div>
+
+                <div className={`option-card ${selectedWallet === 'coinbase' ? 'selected' : ''}`} onClick={() => handleWalletSelect('coinbase')}>
+                  <div className="option-content">
+                    <div className={`checkbox ${selectedWallet === 'coinbase' ? 'checked' : ''}`}>
+                      {selectedWallet === 'coinbase' && '✓'}
+                    </div>
+                    <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold">C</div>
+                    <span className="text-xl font-semibold text-gray-800">Coinbase</span>
+                  </div>
+                </div>
+              </div>
+
+              <button className="connect-btn" onClick={handleConnectWallet}>
+                <span>Connect Wallet</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Connecting Modal */}
+      {showConnecting && (
+        <div className="modal-overlay">
+          <div className="chalk-modal" style={{ maxWidth: '500px', width: '90%' }}>
+            <div className="modal-content text-center">
+              <h2 className="text-3xl font-bold text-gray-800 mb-4">Connecting</h2>
+              
+              <div className="loading-dots">
+                <div className="loading-dot"></div>
+                <div className="loading-dot"></div>
+                <div className="loading-dot"></div>
+              </div>
+
+              <h3 className="text-2xl font-semibold text-gray-800 mt-8 mb-4">Connecting Wallet</h3>
+              <p className="text-gray-700 text-lg leading-relaxed">
+                Please wait a while to connect with {selectedWallet} wallet via {selectedNetwork} network.
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

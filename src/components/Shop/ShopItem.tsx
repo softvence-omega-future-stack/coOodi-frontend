@@ -28,10 +28,10 @@ const ShopItem: React.FC<ShopItemProps> = ({
             className="w-32 h-32 sm:w-40 sm:h-40 lg:w-48 lg:h-48 object-contain"
           />
           <div className="text-center">
-            <h3 className="text-lg sm:text-xl lg:text-2xl font-semibold text-yellow-400">
+            <h3 className="text-lg sm:text-xl lg:text-2xl font-semibold text-[#9F854B]">
               {title}
             </h3>
-            <p className="text-lg sm:text-xl text-yellow-400 font-bold">
+            <p className="text-lg sm:text-xl text-[#9F854B] font-bold">
               {price}
             </p>
           </div>
@@ -44,7 +44,7 @@ const ShopItem: React.FC<ShopItemProps> = ({
             alt={title}
             className="w-32 h-32 sm:w-40 sm:h-40 lg:w-48 lg:h-48 object-contain"
           />
-          <h3 className="text-lg sm:text-xl lg:text-2xl font-semibold text-yellow-400 text-center">
+          <h3 className="text-lg sm:text-xl lg:text-2xl font-semibold text-[#9F854B] text-center">
             {title}
           </h3>
           <AnimatedButton text="ADD TO BAG" className="mt-2" />

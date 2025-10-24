@@ -140,20 +140,20 @@ const Navbar: React.FC<NavbarProps> = ({ navRef }) => {
                 >
                   <NavLink
                     to="/account"
-                    className="block w-full text-left px-6 py-3 text-[#d4b373] hover:bg-[#3d0c0a]/60 transition-all duration-200"
+                    className="block w-full text-left px-6 py-3  text-amber-300 hover:text-amber-300 transition-all duration-200"
                   >
                     My Account
                   </NavLink>
                   <NavLink
                     to="/tiers"
-                    className="block w-full text-left px-6 py-3 text-[#d4b373] hover:bg-[#3d0c0a]/60 transition-all duration-200"
+                    className="block w-full text-left px-6 py-3 text-amber-300 hover:text-amber-300 transition-all duration-200"
                   >
                     Tiers
                   </NavLink>
                   <Link to="/login">
                     <button
                       onClick={() => setDropdownOpen(false)}
-                      className="w-full text-left px-6 py-3 text-[#d4b373] border-t border-[#9F854B]/40 hover:bg-[#3d0c0a]/60 transition-all duration-200"
+                      className="w-full text-left px-6 py-3 border-t  text-slate-300 border-[#9F854B]/40 hover:text-amber-300 transition-all duration-200"
                     >
                       Log Out
                     </button>
@@ -200,10 +200,10 @@ const Navbar: React.FC<NavbarProps> = ({ navRef }) => {
                   <span className="text-teal-400 font-bold">$22,450</span>
                 </div>
               </div>
-              <Link to="/login">
+              <Link to="/login" className="text-slate-300">
                 <button
                   onClick={() => closeMobileMenu()}
-                  className="w-full text-left px-4 py-3 text-amber-100 hover:bg-amber-800/50 transition-colors border-t border-slate-700/50"
+                  className="w-full text-left px-4 py-3 hover:bg-amber-800/50 transition-colors border-t border-slate-700/50"
                 >
                   Log Out
                 </button>

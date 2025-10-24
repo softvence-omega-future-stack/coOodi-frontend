@@ -65,7 +65,7 @@ export default function Tiers() {
         </h1>
 
         {/* Tiers */}
-        <div className="tiers-container space-y-6 md:space-y-8 lg:space-y-10">
+        <div className="space-y-6 md:space-y-8 lg:space-y-10">
           {tiers.map((tier, index) => (
             <TierCard key={index} {...tier} index={index} />
           ))}
