@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useNavigate } from "react-router-dom";
 import TierCard from "../components/Tiers/TierCard";
 import StatsCard from "../components/account/StatsCard";
 import AccountButton from "../components/button/AccountButton";
@@ -9,6 +10,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function AccountPage() {
   const [activeTab, setActiveTab] = useState("active");
+  const navigate = useNavigate();
 
   const userProfile = {
     name: "Josof Yad",
@@ -434,7 +436,7 @@ export default function AccountPage() {
                     Joined: {userProfile.joined}
                   </span>
                 </p>
-                <AccountButton text="EDIT PROFILE" className="mb-2" />
+                <AccountButton text="EDIT PROFILE" className="mb-2" onClick={() => navigate("/edit-profile")}/>
                 {/* <button className="chalk-button">
                   <span>EDIT PROFILE</span>
                 </button> */}
@@ -455,10 +457,7 @@ export default function AccountPage() {
                 <p className="text-sm mb-2">
                   <span className="text-amber-500">Token Wallet Balance</span>
                 </p>
-                <AccountButton text="DISCONNECT" className="mb-2" />
-                {/* <button className="chalk-button">
-                  <span>DISCONNECT</span>
-                </button> */}
+                <AccountButton text="CONNECT" className="mb-2" />
               </div>
             </div>
           </div>

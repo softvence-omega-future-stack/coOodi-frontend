@@ -23,7 +23,6 @@ export default function LoginPage() {
           <div className="flex justify-center mb-6">
             <img src="/login.svg" alt="Eye Icon" className="w-20 h-20" />
           </div>
-
           {/* Title */}
           <h1 className="text-center text-gray-800 text-3xl font-semibold mb-8">Login</h1>
 
