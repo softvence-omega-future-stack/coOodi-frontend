@@ -448,30 +448,7 @@ export default function AccountPage() {
           position: relative;
           z-index: 10;
         }
-
-        .close-btn {
-          position: absolute;
-          top: 20px;
-          right: 20px;
-          width: 40px;
-          height: 40px;
-          border: 2px solid #333;
-          border-radius: 50%;
-          background: transparent;
-          cursor: pointer;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-size: 24px;
-          color: #333;
-          z-index: 20;
-          transition: all 0.3s ease;
-        }
-
-        .close-btn:hover {
-          background: rgba(0, 0, 0, 0.1);
-        }
-
+          
         .option-card {
           position: relative;
           background: #9F854B;
@@ -803,19 +780,19 @@ export default function AccountPage() {
       {/* Choose Network Modal */}
       {showChooseNetwork && (
         <div className="modal-overlay">
-          <div className="chalk-modal" style={{ maxWidth: '500px', width: '60%' }}>
-            <button className="close-btn" onClick={() => setShowChooseNetwork(false)}>✕</button>
+          <div className="chalk-modal" style={{ maxWidth: '600px', width: '90%' }}>
+            <button className="absolute top-4 right-4 text-gray-600 hover:text-gray-800" onClick={() => setShowChooseNetwork(false)}>✕</button>
             <div className="modal-content">
-              <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">Choose Network</h2>
+              <h2 className="text-3xl font-bold text-gray-800 mb-2 sm:mb-6 text-center text-nowrap">Choose Network</h2>
               
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+              <div className="grid grid-cols-2 gap-4 mb-2 sm:mb-6">
                 <div className={`option-card ${selectedNetwork === 'solana' ? 'selected' : ''}`} onClick={() => handleNetworkSelect('solana')}>
                   <div className="option-content">
                     <div className={`checkbox ${selectedNetwork === 'solana' ? 'checked' : ''}`}>
                       {selectedNetwork === 'solana' && '✓'}
                     </div>
                     <div className="w-10 h-10 rounded-lg flex items-center justify-center text-white font-bold"><img src="/account/solana.svg" alt="Solana Logo" /></div>
-                    <span className="text-xl font-semibold text-gray-800">Solana</span>
+                    <span className="hidden sm:block text-xl font-semibold text-gray-800">Solana</span>
                   </div>
                 </div>
 
@@ -825,21 +802,21 @@ export default function AccountPage() {
                       {selectedNetwork === 'polygon' && '✓'}
                     </div>
                     <div className="w-10 h-10 rounded-lg flex items-center justify-center text-white font-bold"><img src="/account/polygon.svg" alt="Polygon Logo" /></div>
-                    <span className="text-xl font-semibold text-gray-800">Polygon</span>
+                    <span className="hidden sm:block text-xl font-semibold text-gray-800">Polygon</span>
                   </div>
                 </div>
               </div>
 
-              <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">Select Wallet</h2>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+              <h2 className="text-3xl font-bold text-gray-800 mb-2 sm:mb-6 text-center text-nowrap">Select Wallet</h2>
+
+              <div className="grid grid-cols-2 gap-4 mb-2 sm:mb-6">
                 <div className={`option-card ${selectedWallet === 'metamask' ? 'selected' : ''}`} onClick={() => handleWalletSelect('metamask')}>
                   <div className="option-content">
                     <div className={`checkbox ${selectedWallet === 'metamask' ? 'checked' : ''}`}>
                       {selectedWallet === 'metamask' && '✓'}
                     </div>
                     <div className="w-16 h-10 bg-orange-500 rounded-lg flex items-center justify-center text-white font-bold">M</div>
-                    <span className="text-xl font-semibold text-gray-800">Metamask</span>
+                    <span className="hidden sm:block text-xl font-semibold text-gray-800">Metamask</span>
                   </div>
                 </div>
 
@@ -849,7 +826,7 @@ export default function AccountPage() {
                       {selectedWallet === 'coinbase' && '✓'}
                     </div>
                     <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold">C</div>
-                    <span className="text-xl font-semibold text-gray-800">Coinbase</span>
+                    <span className="hidden sm:block text-xl font-semibold text-gray-800">Coinbase</span>
                   </div>
                 </div>
               </div>

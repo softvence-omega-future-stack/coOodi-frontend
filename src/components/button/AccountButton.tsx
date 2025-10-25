@@ -50,7 +50,7 @@ const AccountButton: React.FC<AccountButtonProps> = ({
     >
       <span 
         ref={textRef}
-        className="block text-[#d4b896] text-sm tracking-[0.08em] relative"
+        className="block text-[#d4b896] text-sm tracking-[0.08em] relative text-nowrap"
         style={{
           textShadow: '2px 2px 4px rgba(0,0,0,0.7)'
         }}
