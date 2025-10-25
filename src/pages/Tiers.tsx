@@ -72,12 +72,10 @@ export default function Tiers() {
         </div>
 
         {/* Bottom Icon */}
-        <div className="flex justify-center mt-12 md:mt-16">
-          <svg className="w-12 h-12 md:w-16 md:h-16 text-yellow-500/20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-          </svg>
-        </div>
       </div>
+        <div className="flex justify-center mt-12 md:mt-16">
+          <img src="/tiers/Group.svg" alt="Decorative Icon" className="w-16 h-16 md:w-20 md:h-20 absolute bottom-0" />
+        </div>
     </div>
   );
 }

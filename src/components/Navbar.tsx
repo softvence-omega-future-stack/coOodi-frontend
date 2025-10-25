@@ -166,7 +166,7 @@ const Navbar: React.FC<NavbarProps> = ({ navRef }) => {
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="lg:hidden mt-2 bg-slate-900/95 backdrop-blur-md rounded-lg border border-slate-700/50 overflow-hidden">
+          <div className="lg:hidden mt-2 bg-slate-900/95 backdrop-blur-md rounded-lg border border-slate-700/50 overflow-hidden w-[90%] max-w-sm mx-auto shadow-lg">
             <div className="py-2">
               <NavLink to="/shop" className="block w-full text-left px-4 py-3">
                 Shop

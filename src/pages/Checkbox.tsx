@@ -279,10 +279,7 @@ export default function Checkout() {
         .confirmation-card::before {
           content: "";
           position: absolute;
-          top: 2px;
-          left: 2px;
-          right: 2px;
-          bottom: 2px;
+          inset: 0;
           border: 3px solid #9F854B;
           border-radius: 10px;
           opacity: 0.8;
@@ -301,23 +298,6 @@ export default function Checkout() {
           z-index: 10;
         }
 
-        .close-btn {
-          position: absolute;
-          top: 20px;
-          right: 20px;
-          width: 32px;
-          height: 32px;
-          border: 2px solid #333;
-          border-radius: 50%;
-          background: transparent;
-          cursor: pointer;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-size: 18px;
-          color: #333;
-          z-index: 20;
-        }
 
         .gift-icon {
           font-size: 48px;
@@ -742,10 +722,10 @@ export default function Checkout() {
         <div className="modal-overlay">
           <div className="confirmation-modal confirmation-card">
             <button
-              className="close-btn"
+              className="absolute top-5 right-5 w-10 h-10"
               onClick={() => setShowConfirmation(false)}
             >
-              ✕
+              <img src="/xlogin.svg" alt="Close" />
             </button>
             <div className="confirmation-content">
               <div className="gift-icon">🎁</div>
