@@ -131,7 +131,7 @@ const Shop = () => {
       {/* Cards */}
       <div className="shop-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 sm:gap-6">
         <ShopItem image="/shop1.png" title="Poster" />
-        <ShopItem image="/shop3.png" title="Token Pack" />
+        <ShopItem image="/shop2.png" title="Hoodie" />
         <ShopItem image="/shop3.png" title="Token Pack" />
         <ShopItem image="/shop4.png" title="Collectible Coin ($25)" />
         <ShopItem image="/shop5.png" title="Mystery Box" price="$50" fullWidth />
