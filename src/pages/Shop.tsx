@@ -1,8 +1,9 @@
-import { useEffect } from "react";
+import { useEffect, lazy, Suspense } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
-import ShopItem from "../components/Shop/ShopItem"; // adjust import path if needed
+
+const ShopItem = lazy(() => import("../components/Shop/ShopItem")); // lazy load
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
@@ -19,7 +20,12 @@ const Shop = () => {
         scale: 1,
         rotationX: 0,
         duration: 0.8,
-        stagger: { amount: 0.3, from: "start", grid: "auto", ease: "power2.out" },
+        stagger: {
+          amount: 0.3,
+          from: "start",
+          grid: "auto",
+          ease: "power2.out",
+        },
         ease: "back.out(1.7)",
         scrollTrigger: {
           trigger: ".shop-grid",
@@ -41,7 +47,12 @@ const Shop = () => {
           ease: "power2.out",
         });
         if (btn)
-          gsap.to(btn, { scale: 1.05, y: -2, duration: 0.3, ease: "power2.out" });
+          gsap.to(btn, {
+            scale: 1.05,
+            y: -2,
+            duration: 0.3,
+            ease: "power2.out",
+          });
       });
 
       el.addEventListener("mouseleave", () => {
@@ -51,7 +62,8 @@ const Shop = () => {
           duration: 0.3,
           ease: "power2.out",
         });
-        if (btn) gsap.to(btn, { scale: 1, y: 0, duration: 0.3, ease: "power2.out" });
+        if (btn)
+          gsap.to(btn, { scale: 1, y: 0, duration: 0.3, ease: "power2.out" });
       });
     });
 
@@ -82,7 +94,12 @@ const Shop = () => {
           stroke="currentColor"
           viewBox="0 0 24 24"
         >
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 3v1m0 16v1m8-9h1M3 12H2m16.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707" />
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            d="M12 3v1m0 16v1m8-9h1M3 12H2m16.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707"
+          />
         </svg>
 
         <svg
@@ -91,7 +108,12 @@ const Shop = () => {
           stroke="currentColor"
           viewBox="0 0 24 24"
         >
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+          />
         </svg>
 
         <svg
@@ -100,7 +122,12 @@ const Shop = () => {
           stroke="currentColor"
           viewBox="0 0 24 24"
         >
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+          />
         </svg>
 
         <svg
@@ -118,24 +145,44 @@ const Shop = () => {
           stroke="currentColor"
           viewBox="0 0 24 24"
         >
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            d="M5 13l4 4L19 7"
+          />
         </svg>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Title */}
-      <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-center mb-10 lg:mb-16">
-        <span className="gradient-text">Shop</span>
-      </h1>
+        <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-center mb-10 lg:mb-16">
+          <span className="gradient-text">Shop</span>
+        </h1>
 
-      {/* Cards */}
-      <div className="shop-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 sm:gap-6">
-        <ShopItem image="/shop1.png" title="Poster" />
-        <ShopItem image="/shop2.png" title="Hoodie" />
-        <ShopItem image="/shop3.png" title="Token Pack" />
-        <ShopItem image="/shop4.png" title="Collectible Coin ($25)" />
-        <ShopItem image="/shop5.png" title="Mystery Box" price="$50" fullWidth />
-      </div>
+        {/* Cards */}
+        <div className="shop-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 sm:gap-6">
+          <Suspense
+            fallback={
+              <div className="fixed inset-0 flex items-center justify-center z-50">
+                <div className="text-yellow-400 text-xl font-semibold animate-pulse">
+                  Loading ...
+                </div>
+              </div>
+            }
+          >
+            <ShopItem image="/shop1.png" title="Poster" />
+            <ShopItem image="/shop2.png" title="Hoodie" />
+            <ShopItem image="/shop3.png" title="Token Pack" />
+            <ShopItem image="/shop4.png" title="Collectible Coin ($25)" />
+            <ShopItem
+              image="/shop5.png"
+              title="Mystery Box"
+              price="$50"
+              fullWidth
+            />
+          </Suspense>
+        </div>
       </div>
     </div>
   );

@@ -1,10 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense, lazy } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useNavigate } from "react-router-dom";
-import TierCard from "../components/Tiers/TierCard";
-import StatsCard from "../components/account/StatsCard";
-import AccountButton from "../components/button/AccountButton";
+
+const TierCard = lazy(() => import("../components/Tiers/TierCard"));
+const StatsCard = lazy(() => import("../components/account/StatsCard"));
+const AccountButton = lazy(() => import("../components/button/AccountButton"));
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -13,8 +14,8 @@ export default function AccountPage() {
   const [showChooseNetwork, setShowChooseNetwork] = useState(false);
   const [showConnecting, setShowConnecting] = useState(false);
   const [isConnected, setIsConnected] = useState(false);
-  const [selectedNetwork, setSelectedNetwork] = useState('');
-  const [selectedWallet, setSelectedWallet] = useState('');
+  const [selectedNetwork, setSelectedNetwork] = useState("");
+  const [selectedWallet, setSelectedWallet] = useState("");
   const navigate = useNavigate();
 
   const userProfile = {
@@ -97,7 +98,7 @@ export default function AccountPage() {
     if (selectedNetwork && selectedWallet) {
       setShowChooseNetwork(false);
       setShowConnecting(true);
-      
+
       setTimeout(() => {
         setShowConnecting(false);
         setIsConnected(true);
@@ -107,8 +108,8 @@ export default function AccountPage() {
 
   const handleDisconnect = () => {
     setIsConnected(false);
-    setSelectedNetwork('');
-    setSelectedWallet('');
+    setSelectedNetwork("");
+    setSelectedWallet("");
   };
 
   useEffect(() => {
@@ -130,7 +131,7 @@ export default function AccountPage() {
       {
         opacity: 1,
         y: 0,
-        duration: .9,
+        duration: 0.9,
         stagger: 0.15,
         ease: "power2.out",
         delay: 0.3,
@@ -144,7 +145,7 @@ export default function AccountPage() {
         opacity: 1,
         y: 0,
         scale: 1,
-        duration: .9,
+        duration: 0.9,
         stagger: 0.2,
         ease: "back.out(1.7)",
         delay: 0.6,
@@ -271,6 +272,7 @@ export default function AccountPage() {
         .tab-button {
           background: #9F854B;
           border: 2px solid #9F854B;
+          border-radius: 10px;
           color: #001117;
           padding: 8px 16px;
           margin-right: 8px;
@@ -511,8 +513,8 @@ export default function AccountPage() {
         }
 
         .checkbox.checked {
-          background: #333;
-          color: #9F854B;
+          // background: #333;
+          color: black;
         }
 
         .connect-btn {
@@ -630,203 +632,263 @@ export default function AccountPage() {
           }
         }
       `}</style>
+      <Suspense
+        fallback={
+          <div className="text-center text-yellow-600 py-10">Loading...</div>
+        }
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Header */}
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-center mb-10 lg:mb-16">
+            <span className="gradient-text">Account</span>
+          </h1>
+          {/* Profile & Wallet Section */}
+          <div className="form-section">
+            <div className="flex flex-col sm:flex-row items-center justify-center sm:justify-between w-full gap-4 md:gap-0 mb-12">
+              {/* Left: Profile */}
+              <div className="flex items-center gap-4 sm:gap-4">
+                <div className="">
+                  <img src={userProfile.UserImage} alt="User Avatar" />
+                </div>
+                <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
+                  <h2 className="font-bold text-[#9F854B]">
+                    <span className="text-xl sm:text-2xl md:text-3xl lg:text-4xl">
+                      {userProfile.name}
+                    </span>
+                  </h2>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-center mb-10 lg:mb-16">
-          <span className="gradient-text">Account</span>
-        </h1>
-
-        {/* Profile & Wallet Section */}
-        <div className="form-section">
-          <div className="flex flex-col sm:flex-row items-center justify-center sm:justify-between w-full gap-4 md:gap-0 mb-12">
-            {/* Left: Profile */}
-            <div className="flex items-center gap-4 sm:gap-4">
-              <div className="">
-                <img src={userProfile.UserImage} alt="User Avatar" />
+                  <p className="text-sm mb-2">
+                    <span className="text-amber-500">
+                      Joined: {userProfile.joined}
+                    </span>
+                  </p>
+                  <AccountButton
+                    text="EDIT PROFILE"
+                    className="mb-2"
+                    onClick={() => navigate("/edit-profile")}
+                  />
+                </div>
               </div>
-              <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
-                <h2 className="font-bold text-[#9F854B]">
-                  <span className="text-xl sm:text-2xl md:text-3xl lg:text-4xl">{userProfile.name}</span>
-                </h2>
 
-                <p className="text-sm mb-2">
-                  <span className="text-amber-500">
-                    Joined: {userProfile.joined}
-                  </span>
-                </p>
-                <AccountButton text="EDIT PROFILE" className="mb-2" onClick={() => navigate("/edit-profile")}/>
-              </div>
-            </div>
-
-            {/* Right: Wallet */}
-            <div className=" flex items-center sm:gap-6">
-              <div className="">
-                <img src={wallet.icon} alt="Wallet Icon" />
-              </div>
-              <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
-                <h2 className="font-bold text-[#9F854B]">
-                  <span className="text-xl sm:text-2xl md:text-3xl lg:text-4xl">
-                    {wallet.balance}
-                  </span>
-                </h2>
-                <p className="text-sm mb-2">
-                  <span className="text-amber-500">Token Wallet Balance</span>
-                </p>
-                <AccountButton 
-                  text={isConnected ? "DISCONNECT" : "CONNECT"} 
-                  className="mb-2" 
-                  onClick={isConnected ? handleDisconnect : handleConnectClick}
-                />
+              {/* Right: Wallet */}
+              <div className=" flex items-center sm:gap-6">
+                <div className="">
+                  <img src={wallet.icon} alt="Wallet Icon" />
+                </div>
+                <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
+                  <h2 className="font-bold text-[#9F854B]">
+                    <span className="text-xl sm:text-2xl md:text-3xl lg:text-4xl">
+                      {wallet.balance}
+                    </span>
+                  </h2>
+                  <p className="text-sm mb-2">
+                    <span className="text-amber-500">Token Wallet Balance</span>
+                  </p>
+                  <AccountButton
+                    text={isConnected ? "DISCONNECT" : "CONNECT"}
+                    className="mb-2"
+                    onClick={
+                      isConnected ? handleDisconnect : handleConnectClick
+                    }
+                  />
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-        {/* Stats Cards */}
-        <div className="flex flex-wrap gap-6 mb-18 justify-evenly form-section">
-          {stats.map((card, idx) => (
-            <StatsCard
-              key={idx}
-              value={card.value}
-              label={card.label}
-              image={card.image}
-            />
-          ))}
-        </div>
+          {/* Stats Cards */}
+          <div className="flex flex-wrap gap-6 mb-18 justify-evenly form-section">
+            {stats.map((card, idx) => (
+              <StatsCard
+                key={idx}
+                value={card.value}
+                label={card.label}
+                image={card.image}
+              />
+            ))}
+          </div>
 
-        {/* Tier Status */}
-        <div className="form-section">
-          <h2>
-            <span className="gradient-text text-2xl">Your Tier Status</span>
-          </h2>
-          <div
-            className="chalk-border 
+          {/* Tier Status */}
+          <div className="form-section">
+            <h2>
+              <span className="gradient-text text-2xl">Your Tier Status</span>
+            </h2>
+            <div
+              className="chalk-border 
           my-5 "
-          >
-            <TierCard
-              leftImage="/tiers/TC.svg"
-              rightImage="/tiers/help.svg"
-              title="Adventurer (Active)"
-              requirement="10,000 Silkroad Coins"
-              duration="3 months"
-              perks={[
-                "All Tier 1 Perks",
-                "Early Access to Cartoon/Music Releases",
-              ]}
-              buttonText="UPGRADE TIER"
-            />
-          </div>
-        </div>
-
-        {/* Order History */}
-        <div className="form-section">
-          <h2 className="text-2xl font-bold text-yellow-600 mb-6">
-            <span className="gradient-text">Order History</span>
-          </h2>
-
-          {/* Tabs */}
-          <div className="flex gap-2 mb-6 flex-wrap">
-            <button
-              className={`tab-button ${activeTab === "active" ? "" : "inactive"}`}
-              onClick={() => setActiveTab("active")}
             >
-              Active
-            </button>
-            <button
-              className={`tab-button ${activeTab === "completed" ? "" : "inactive"}`}
-              onClick={() => setActiveTab("completed")}
-            >
-              Completed
-            </button>
-            <button
-              className={`tab-button ${activeTab === "cancelled" ? "" : "inactive"}`}
-              onClick={() => setActiveTab("cancelled")}
-            >
-              Cancelled
-            </button>
+              <TierCard
+                leftImage="/tiers/TC.svg"
+                rightImage="/tiers/help.svg"
+                title="Adventurer (Active)"
+                requirement="10,000 Silkroad Coins"
+                duration="3 months"
+                perks={[
+                  "All Tier 1 Perks",
+                  "Early Access to Cartoon/Music Releases",
+                ]}
+                buttonText="UPGRADE TIER"
+              />
+            </div>
           </div>
 
-          {/* Table */}
-          <div className="chalk-border overflow-x-auto">
-            <div className="p-4 md:p-6">
-              <table>
-                <thead>
-                  <tr>
-                    <th>Order ID</th>
-                    <th>Item</th>
-                    <th>Date</th>
-                    <th>Payment</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {currentOrders.map((order, idx) => (
-                    <tr key={idx}>
-                      <td>{order.id}</td>
-                      <td>{order.item}</td>
-                      <td>{order.date}</td>
-                      <td>{order.payment}</td>
-                      <td>{order.action}</td>
+          {/* Order History */}
+          <div className="form-section">
+            <h2 className="text-2xl font-bold text-yellow-600 mb-6">
+              <span className="gradient-text">Order History</span>
+            </h2>
+
+            {/* Tabs */}
+            <div className="flex gap-2 mb-6 flex-wrap">
+              <button
+                className={`tab-button ${activeTab === "active" ? "" : "inactive"}`}
+                onClick={() => setActiveTab("active")}
+              >
+                Active
+              </button>
+              <button
+                className={`tab-button ${activeTab === "completed" ? "" : "inactive"}`}
+                onClick={() => setActiveTab("completed")}
+              >
+                Completed
+              </button>
+              <button
+                className={`tab-button ${activeTab === "cancelled" ? "" : "inactive"}`}
+                onClick={() => setActiveTab("cancelled")}
+              >
+                Cancelled
+              </button>
+            </div>
+
+            {/* Table */}
+            <div className="chalk-border overflow-x-auto">
+              <div className="p-4 md:p-6">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Order ID</th>
+                      <th>Item</th>
+                      <th>Date</th>
+                      <th>Payment</th>
+                      <th>Action</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                    {currentOrders.map((order, idx) => (
+                      <tr key={idx}>
+                        <td>{order.id}</td>
+                        <td>{order.item}</td>
+                        <td>{order.date}</td>
+                        <td>{order.payment}</td>
+                        <td>{order.action}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </Suspense>
 
       {/* Choose Network Modal */}
       {showChooseNetwork && (
         <div className="modal-overlay">
-          <div className="chalk-modal" style={{ maxWidth: '600px', width: '90%' }}>
-            <button className="absolute top-4 right-4 text-gray-600 hover:text-gray-800" onClick={() => setShowChooseNetwork(false)}>✕</button>
+          <div
+            className="chalk-modal"
+            style={{ maxWidth: "600px", width: "90%" }}
+          >
+            <button
+              className="absolute top-4 right-4 text-gray-600 hover:text-gray-800"
+              onClick={() => setShowChooseNetwork(false)}
+            >
+              ✕
+            </button>
             <div className="modal-content">
-              <h2 className="text-3xl font-bold text-gray-800 mb-2 sm:mb-6 text-center text-nowrap">Choose Network</h2>
-              
+              <h2 className="text-3xl font-bold text-gray-800 mb-2 sm:mb-6 text-center text-nowrap">
+                Choose Network
+              </h2>
+
               <div className="grid grid-cols-2 gap-4 mb-2 sm:mb-6">
-                <div className={`option-card ${selectedNetwork === 'solana' ? 'selected' : ''}`} onClick={() => handleNetworkSelect('solana')}>
+                <div
+                  className={`option-card ${selectedNetwork === "solana" ? "selected" : ""}`}
+                  onClick={() => handleNetworkSelect("solana")}
+                >
                   <div className="option-content">
-                    <div className={`checkbox ${selectedNetwork === 'solana' ? 'checked' : ''}`}>
-                      {selectedNetwork === 'solana' && '✓'}
+                    <div
+                      className={`checkbox ${selectedNetwork === "solana" ? "checked" : ""}`}
+                    >
+                      {selectedNetwork === "solana" && "✓"}
                     </div>
-                    <div className="w-10 h-10 rounded-lg flex items-center justify-center text-white font-bold"><img src="/account/solana.svg" alt="Solana Logo" /></div>
-                    <span className="hidden sm:block text-xl font-semibold text-gray-800">Solana</span>
+                    <div className="w-10 h-10 rounded-lg flex items-center justify-center text-white font-bold">
+                      <img src="/account/solana.svg" alt="Solana Logo" />
+                    </div>
+                    <span className="hidden sm:block text-xl font-semibold text-gray-800">
+                      Solana
+                    </span>
                   </div>
                 </div>
 
-                <div className={`option-card ${selectedNetwork === 'polygon' ? 'selected' : ''}`} onClick={() => handleNetworkSelect('polygon')}>
+                <div
+                  className={`option-card ${selectedNetwork === "polygon" ? "selected" : ""}`}
+                  onClick={() => handleNetworkSelect("polygon")}
+                >
                   <div className="option-content">
-                    <div className={`checkbox ${selectedNetwork === 'polygon' ? 'checked' : ''}`}>
-                      {selectedNetwork === 'polygon' && '✓'}
+                    <div
+                      className={`checkbox ${selectedNetwork === "polygon" ? "checked" : ""}`}
+                    >
+                      {selectedNetwork === "polygon" && "✓"}
                     </div>
-                    <div className="w-10 h-10 rounded-lg flex items-center justify-center text-white font-bold"><img src="/account/polygon.svg" alt="Polygon Logo" /></div>
-                    <span className="hidden sm:block text-xl font-semibold text-gray-800">Polygon</span>
+                    <div className="w-10 h-10 rounded-lg flex items-center justify-center text-white font-bold">
+                      <img src="/account/polygon.svg" alt="Polygon Logo" />
+                    </div>
+                    <span className="hidden sm:block text-xl font-semibold text-gray-800">
+                      Polygon
+                    </span>
                   </div>
                 </div>
               </div>
 
-              <h2 className="text-3xl font-bold text-gray-800 mb-2 sm:mb-6 text-center text-nowrap">Select Wallet</h2>
+              <h2 className="text-3xl font-bold text-gray-800 mb-2 sm:mb-6 text-center text-nowrap">
+                Select Wallet
+              </h2>
 
               <div className="grid grid-cols-2 gap-4 mb-2 sm:mb-6">
-                <div className={`option-card ${selectedWallet === 'metamask' ? 'selected' : ''}`} onClick={() => handleWalletSelect('metamask')}>
+                <div
+                  className={`option-card ${selectedWallet === "metamask" ? "selected" : ""}`}
+                  onClick={() => handleWalletSelect("metamask")}
+                >
                   <div className="option-content">
-                    <div className={`checkbox ${selectedWallet === 'metamask' ? 'checked' : ''}`}>
-                      {selectedWallet === 'metamask' && '✓'}
+                    <div
+                      className={`checkbox ${selectedWallet === "metamask" ? "checked" : ""}`}
+                    >
+                      {selectedWallet === "metamask" && "✓"}
                     </div>
-                    <div className="w-16 h-10 bg-orange-500 rounded-lg flex items-center justify-center text-white font-bold">M</div>
-                    <span className="hidden sm:block text-xl font-semibold text-gray-800">Metamask</span>
+                    <div className="w-16 h-10 bg-orange-500 rounded-lg flex items-center justify-center text-white font-bold">
+                      M
+                    </div>
+                    <span className="hidden sm:block text-xl font-semibold text-gray-800">
+                      Metamask
+                    </span>
                   </div>
                 </div>
 
-                <div className={`option-card ${selectedWallet === 'coinbase' ? 'selected' : ''}`} onClick={() => handleWalletSelect('coinbase')}>
+                <div
+                  className={`option-card ${selectedWallet === "coinbase" ? "selected" : ""}`}
+                  onClick={() => handleWalletSelect("coinbase")}
+                >
                   <div className="option-content">
-                    <div className={`checkbox ${selectedWallet === 'coinbase' ? 'checked' : ''}`}>
-                      {selectedWallet === 'coinbase' && '✓'}
+                    <div
+                      className={`checkbox ${selectedWallet === "coinbase" ? "checked" : ""}`}
+                    >
+                      {selectedWallet === "coinbase" && "✓"}
                     </div>
-                    <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold">C</div>
-                    <span className="hidden sm:block text-xl font-semibold text-gray-800">Coinbase</span>
+                    <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold">
+                      C
+                    </div>
+                    <span className="hidden sm:block text-xl font-semibold text-gray-800">
+                      Coinbase
+                    </span>
                   </div>
                 </div>
               </div>
@@ -842,19 +904,27 @@ export default function AccountPage() {
       {/* Connecting Modal */}
       {showConnecting && (
         <div className="modal-overlay">
-          <div className="chalk-modal" style={{ maxWidth: '500px', width: '90%' }}>
+          <div
+            className="chalk-modal"
+            style={{ maxWidth: "500px", width: "90%" }}
+          >
             <div className="modal-content text-center">
-              <h2 className="text-3xl font-bold text-gray-800 mb-4">Connecting</h2>
-              
+              <h2 className="text-3xl font-bold text-gray-800 mb-4">
+                Connecting
+              </h2>
+
               <div className="loading-dots">
                 <div className="loading-dot"></div>
                 <div className="loading-dot"></div>
                 <div className="loading-dot"></div>
               </div>
 
-              <h3 className="text-2xl font-semibold text-gray-800 mt-8 mb-4">Connecting Wallet</h3>
+              <h3 className="text-2xl font-semibold text-gray-800 mt-8 mb-4">
+                Connecting Wallet
+              </h3>
               <p className="text-gray-700 text-lg leading-relaxed">
-                Please wait a while to connect with {selectedWallet} wallet via {selectedNetwork} network.
+                Please wait a while to connect with {selectedWallet} wallet via{" "}
+                {selectedNetwork} network.
               </p>
             </div>
           </div>
