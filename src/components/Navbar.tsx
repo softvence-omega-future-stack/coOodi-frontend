@@ -69,7 +69,7 @@ const Navbar: React.FC<NavbarProps> = ({ navRef }) => {
               closeMobileMenu();
             }}
           >
-            <span className="gradient-text text-lg lg:text-[1.75rem] font-semibold">
+            <span className="gradient-text text-lg sm:text-2xl lg:text-3xl font-semibold">
               Yhe Silk Road
             </span>
           </div>

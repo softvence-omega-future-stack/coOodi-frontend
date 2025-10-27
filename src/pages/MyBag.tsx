@@ -254,11 +254,10 @@ export default function MyBag() {
 
         .item-name {
           display: flex;
-          items-center;
+          align-items: center;
           gap: 12px;
           color: #d1d5db;
           font-weight: 500;
-          margin-bottom: 8px;
           font-size: 13px;
         }
 
@@ -271,7 +270,7 @@ export default function MyBag() {
         .item-date {
           color: #9ca3af;
           font-size: 12px;
-          margin-bottom: 4px;
+          // margin-bottom: 4px;
         }
 
         @media (min-width: 640px) {
@@ -283,7 +282,7 @@ export default function MyBag() {
         .item-qty {
           color: #9ca3af;
           font-size: 12px;
-          margin-bottom: 8px;
+          // margin-bottom: 8px;
         }
 
         @media (min-width: 640px) {
@@ -296,7 +295,7 @@ export default function MyBag() {
           color: #9F854B;
           font-weight: 600;
           font-size: 14px;
-          margin-bottom: 8px;
+          // margin-bottom: 8px;
         }
 
         @media (min-width: 640px) {
