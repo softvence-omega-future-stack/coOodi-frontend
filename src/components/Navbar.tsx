@@ -60,7 +60,7 @@ const Navbar: React.FC<NavbarProps> = ({ navRef }) => {
       className="fixed top-0 left-0 right-0 z-50 transition-opacity duration-500"
     >
         {/* ✅ Navbar height fixed so dropdown never moves it */}
-        <div className="flex items-center justify-between h-[64px] backdrop-blur bg-transparent relative max-w-7xl px-4 sm:px-6 lg:px-8 mx-auto">
+        <div className="flex items-center justify-between h-[64px] relative max-w-7xl px-4 sm:px-6 lg:px-8 mx-auto">
           {/* Logo */}
           <div
             className="flex items-center space-x-2 cursor-pointer flex-shrink-0"
@@ -104,6 +104,11 @@ const Navbar: React.FC<NavbarProps> = ({ navRef }) => {
           <div className="hidden lg:flex items-center space-x-3 relative">
             <div className="flex items-center space-x-2 min-w-[90px]">
               <span className="gradient-text font-semibold text-lg">
+                <img
+                  src="/nav/nav-dol.svg"
+                  alt="Wallet Icon"
+                  className="w-5 h-4 inline-block mr-1"
+                />
                 $22,450
               </span>
             </div>

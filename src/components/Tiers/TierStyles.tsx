@@ -8,16 +8,12 @@ export default function TierStyles() {
       }
       .tier-card {
         position: relative;
-        background: rgba(0, 26, 36, 0.6);
         overflow: hidden;
       }
       .tier-card::before {
         content: "";
         position: absolute;
-        top: 2px;
-        left: 2px;
-        right: 2px;
-        bottom: 2px;
+        inset: 0;
         border: 4px solid #9F854B;
         border-radius: 6px;
         opacity: 0.8;

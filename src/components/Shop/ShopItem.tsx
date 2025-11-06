@@ -16,7 +16,7 @@ const ShopItem: React.FC<ShopItemProps> = ({
 }) => {
   return (
     <div
-      className={`py-8 px-6 chalk-frame shop-item relative transition-all overflow-hidden bg-transparent ${
+      className={`py-8 px-6 chalk-frame shop-item relative transition-all overflow-hidden ${
         fullWidth ? "col-span-full" : ""
       }`}
     >
