@@ -1060,8 +1060,11 @@
 
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, lazy, Suspense } from "react";
 import HomeButton from "../components/button/HomeButton";
+
+// Lazy load background wrapper
+const LazyBackground = lazy(() => import("../components/LazyBackground"));
 
 type HomePageProps = {
   onEnterNow: () => void;
@@ -1071,26 +1074,30 @@ type HomePageProps = {
 const HomePage: React.FC<HomePageProps> = ({ onEnterNow }) => {
   const [bgLoaded, setBgLoaded] = useState(false);
 
-  // Preload background
   useEffect(() => {
     const img = new Image();
-    img.src = "/home/homebg.png";
+    img.src = "/home/homebg.png"; // your background image
     img.onload = () => setBgLoaded(true);
   }, []);
 
-  return (
-    <div
-      className="relative flex flex-col items-center justify-center min-h-screen bg-cover bg-center bg-no-repeat transition-opacity duration-700 ease-out"
-      style={{
-        backgroundImage: bgLoaded ? "url('/home/homebg.png')" : "none",
-        backgroundColor: "#001117", // fallback so no white flash
-      }}
-    >
-      {/* Optional overlay for better text contrast */}
-      {bgLoaded && <div className="absolute inset-0 bg-black/40"></div>}
+  if (!bgLoaded) {
+    // show nothing until image loaded (optional: could show loader)
+    return (
+      <div className="fixed inset-0 flex items-center justify-center bg-[#001117]">
+        <div className="text-[#d4b87a] text-lg animate-pulse">Loading...</div>
+      </div>
+    );
+  }
 
-      {/* Main content */}
-      <div className="relative z-10 text-center space-y-8 px-4">
+  return (
+    <Suspense fallback={null}>
+      <LazyBackground src="/home/homebg.png" />
+
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-black/40 pointer-events-none" />
+
+      {/* Content */}
+      <div className="relative z-10 text-center space-y-8 px-4 fade-in flex flex-col items-center justify-center min-h-screen">
         <h1 className="text-5xl sm:text-6xl md:text-8xl font-bold text-white drop-shadow-lg">
           <span className="gradient-text">Welcome to</span> <br />
           <span className="gradient-text">The Silk Road</span>
@@ -1100,9 +1107,12 @@ const HomePage: React.FC<HomePageProps> = ({ onEnterNow }) => {
         </p>
         <HomeButton text="ENTER NOW" onClick={onEnterNow} />
       </div>
-    </div>
+    </Suspense>
   );
 };
 
 export default HomePage;
+
+
+
 
