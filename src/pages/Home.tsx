@@ -1060,7 +1060,7 @@
 
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import HomeButton from "../components/button/HomeButton";
 
 type HomePageProps = {
@@ -1069,16 +1069,25 @@ type HomePageProps = {
 };
 
 const HomePage: React.FC<HomePageProps> = ({ onEnterNow }) => {
+  const [bgLoaded, setBgLoaded] = useState(false);
+
+  // Preload background
+  useEffect(() => {
+    const img = new Image();
+    img.src = "/home/homebg.png";
+    img.onload = () => setBgLoaded(true);
+  }, []);
+
   return (
     <div
-      className="relative flex flex-col items-center justify-center min-h-screen bg-cover bg-center bg-no-repeat"
+      className="relative flex flex-col items-center justify-center min-h-screen bg-cover bg-center bg-no-repeat transition-opacity duration-700 ease-out"
       style={{
-        backgroundImage:
-          "url('/home/homebg.png')",
+        backgroundImage: bgLoaded ? "url('/home/homebg.png')" : "none",
+        backgroundColor: "#001117", // fallback so no white flash
       }}
     >
       {/* Optional overlay for better text contrast */}
-      <div className="absolute inset-0 bg-black/40"></div>
+      {bgLoaded && <div className="absolute inset-0 bg-black/40"></div>}
 
       {/* Main content */}
       <div className="relative z-10 text-center space-y-8 px-4">
@@ -1096,3 +1105,4 @@ const HomePage: React.FC<HomePageProps> = ({ onEnterNow }) => {
 };
 
 export default HomePage;
+

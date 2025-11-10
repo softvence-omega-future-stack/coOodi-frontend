@@ -154,7 +154,9 @@ export default function AccountPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#001117] pt-28 pb-12">
+    <div className="min-h-screen bg-[#001117] pt-28 pb-12" 
+      style={{ backgroundImage: 'url("/account/Account.png")', backgroundSize: "100% 100%", backgroundPosition: "center", backgroundRepeat: "no-repeat" }}
+    >
       <style>{`
         @keyframes chalkFlicker {
           0%, 100% { opacity: 0.7; }

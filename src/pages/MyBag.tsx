@@ -103,7 +103,14 @@ export default function MyBag() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#001117] pt-28 pb-12">
+    <div className="min-h-screen bg-[#001117] pt-28 pb-12 relative"
+      style={{
+        backgroundImage: 'url("/mybag/MyBag.png")', 
+        backgroundSize: "100% 100%",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
       <style>{`
         @keyframes chalkFlicker {
           0%, 100% { opacity: 0.7; }
@@ -411,7 +418,7 @@ export default function MyBag() {
       `}</style>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-center mb-10 lg:mb-16">
+        <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-center mb-10 lg:mb-26">
           <span className="gradient-text">My Bag</span>
         </h1>
         {/* Table */}

@@ -164,16 +164,7 @@ export default function FogTransition() {
 
     const prevPath = sessionStorage.getItem("prevPath");
     const isEnteringShop =
-      (prevPath === "/" && location.pathname === "/shop") ||
-      (prevPath === "/" && location.pathname === "/tiers") ||
-      (prevPath === "/" && location.pathname === "/faq") ||
-      (prevPath === "/" && location.pathname === "/contact") ||
-      (prevPath === "/" && location.pathname === "/my-bag") ||
-      (prevPath === "/shop" && location.pathname === "/") ||
-      (prevPath === "/tiers" && location.pathname === "/") ||
-      (prevPath === "/faq" && location.pathname === "/") ||
-      (prevPath === "/contact" && location.pathname === "/") ||
-      (prevPath === "/my-bag" && location.pathname === "/");
+      (prevPath === "/" && location.pathname === "/shop");
 
     if (isEnteringShop) {
       setActive(true);
