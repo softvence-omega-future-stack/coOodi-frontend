@@ -90,7 +90,7 @@ export default function Checkout() {
 
   return (
     <div className="min-h-screen bg-[#001117] pt-28 pb-12"
-      style={{ backgroundImage: 'url("/checkout/CheckOut.png")', backgroundSize: "100% 100%", backgroundPosition: "center", backgroundRepeat: "no-repeat" }}
+      style={{ backgroundImage: 'url("/checkout/CheckOut.webp")', backgroundSize: "100% 100%", backgroundPosition: "center", backgroundRepeat: "no-repeat" }}
     >
       <style>{`
         @keyframes chalkFlicker {

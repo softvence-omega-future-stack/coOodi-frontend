@@ -124,7 +124,7 @@ export default function Contact() {
 
   return (
     <div className="min-h-screen bg-[#001117] pt-28 pb-12 relative overflow-hidden"
-      style={{ backgroundImage: 'url("/contact/ContactBg.png")', backgroundSize: "100% 100%", backgroundPosition: "center", backgroundRepeat: "no-repeat" }}
+      style={{ backgroundImage: 'url("/contact/Contact.webp")', backgroundSize: "100% 100%", backgroundPosition: "center", backgroundRepeat: "no-repeat" }}
     >
       <style>{`
         @keyframes chalkFlicker {

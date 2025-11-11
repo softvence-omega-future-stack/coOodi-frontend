@@ -46,8 +46,8 @@ const Navbar: React.FC<NavbarProps> = ({ navRef }) => {
       }}
       className={`${
         currentPath === to
-          ? "text-[#B59652] font-bold"
-          : "text-slate-300 hover:text-[#B59652]"
+          ? "text-[#B59652] font-bold scale-[1.02]"
+          : "text-[#B59652] hover:text-[#d6b56e] hover:scale-[1.02]"
       } ${className} transition-colors`}
     >
       {children}
@@ -95,7 +95,11 @@ const Navbar: React.FC<NavbarProps> = ({ navRef }) => {
             <NavLink to="/faq">FAQ</NavLink>
             <NavLink to="/contact">Contact</NavLink>
             <NavLink to="/my-bag" className="flex items-center space-x-1">
-              <LockKeyhole className="w-4 h-4" />
+              <img
+                src="/mybag/mybag.svg"
+                alt="My Bag Icon"
+                className="w-4 h-4 mr-1"
+              />
               My Bag
             </NavLink>
           </div>

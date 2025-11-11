@@ -13,7 +13,7 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen bg-[#001117] flex items-center justify-center p-4 py-20"
-      style={{ backgroundImage: 'url("/empty-bg.png")', backgroundSize: "100% 100%", backgroundPosition: "center", backgroundRepeat: "no-repeat" }}
+      style={{ backgroundImage: 'url("/empty-bg.webp")', backgroundSize: "100% 100%", backgroundPosition: "center", backgroundRepeat: "no-repeat" }}
     >
       <div className="chalk-container">
         <div className="chalk-content">

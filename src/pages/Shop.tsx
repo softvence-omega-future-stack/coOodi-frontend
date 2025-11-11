@@ -435,7 +435,7 @@ const Shop = () => {
   // Preload background
   useEffect(() => {
     const bgImage = new Image();
-    bgImage.src = "/shop/Shop.png";
+    bgImage.src = "/shop/Shop.webp";
     bgImage.onload = () => setBgLoaded(true);
   }, []);
 
@@ -486,7 +486,7 @@ const Shop = () => {
     <div
       className="shop-container min-h-screen pt-28 pb-12 relative bg-[#001117]"
       style={{
-        backgroundImage: bgLoaded ? "url('/shop/Shop.png')" : "none",
+        backgroundImage: bgLoaded ? "url('/shop/Shop.webp')" : "none",
         backgroundSize: "100% 100%",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",

@@ -1060,11 +1060,8 @@
 
 "use client";
 
-import React, { useState, useEffect, lazy, Suspense } from "react";
+import React from "react";
 import HomeButton from "../components/button/HomeButton";
-
-// Lazy load background wrapper
-const LazyBackground = lazy(() => import("../components/LazyBackground"));
 
 type HomePageProps = {
   onEnterNow: () => void;
@@ -1072,26 +1069,15 @@ type HomePageProps = {
 };
 
 const HomePage: React.FC<HomePageProps> = ({ onEnterNow }) => {
-  const [bgLoaded, setBgLoaded] = useState(false);
 
-  useEffect(() => {
-    const img = new Image();
-    img.src = "/home/homebg.png"; // your background image
-    img.onload = () => setBgLoaded(true);
-  }, []);
-
-  if (!bgLoaded) {
-    // show nothing until image loaded (optional: could show loader)
-    return (
-      <div className="fixed inset-0 flex items-center justify-center bg-[#001117]">
-        <div className="text-[#d4b87a] text-lg animate-pulse">Loading...</div>
-      </div>
-    );
-  }
 
   return (
-    <Suspense fallback={null}>
-      <LazyBackground src="/home/homebg.png" />
+    <div className="relative min-h-screen">
+      {/* Background */}
+      <div
+        className="absolute inset-0 bg-cover bg-center"
+        style={{ backgroundImage: "url('/home/Home-bg.webp')" }}
+      />
 
       {/* Overlay */}
       <div className="absolute inset-0 bg-black/40 pointer-events-none" />
@@ -1107,11 +1093,13 @@ const HomePage: React.FC<HomePageProps> = ({ onEnterNow }) => {
         </p>
         <HomeButton text="ENTER NOW" onClick={onEnterNow} />
       </div>
-    </Suspense>
+    </div>
   );
 };
 
 export default HomePage;
+
+
 
 
 

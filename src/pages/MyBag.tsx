@@ -105,7 +105,7 @@ export default function MyBag() {
   return (
     <div className="min-h-screen bg-[#001117] pt-28 pb-12 relative"
       style={{
-        backgroundImage: 'url("/mybag/MyBag.png")', 
+        backgroundImage: 'url("/mybag/MyBag.webp")', 
         backgroundSize: "100% 100%",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
@@ -427,19 +427,19 @@ export default function MyBag() {
             {/* Header */}
             <div className="table-header">
               <div className="header-cell">
-                <span className="gradient-text text-md">Item</span>
+                <span className="gradient-text text-lg">Item</span>
               </div>
               <div className="header-cell hidden sm:block">
-                <span className="gradient-text text-md">Date</span>
+                <span className="gradient-text text-lg">Date</span>
               </div>
               <div className="header-cell">
-                <span className="gradient-text text-md">Quantity</span>
+                <span className="gradient-text text-lg">Quantity</span>
               </div>
               <div className="header-cell">
-                <span className="gradient-text text-md">Payment</span>
+                <span className="gradient-text text-lg">Payment</span>
               </div>
               <div className="header-cell">
-                <span className="gradient-text text-md">Remove</span>
+                <span className="gradient-text text-lg">Remove</span>
               </div>
             </div>
 

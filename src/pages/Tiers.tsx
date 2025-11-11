@@ -51,7 +51,7 @@ export default function Tiers() {
 
   return (
     <div className="min-h-screen bg-[#001117] pt-28 pb-12 relative overflow-hidden w-full"
-      style={{ backgroundImage: 'url("/tiers/Tiers.png")', backgroundSize: "100% 100%", backgroundPosition: "center", backgroundRepeat: "no-repeat" }}
+      style={{ backgroundImage: 'url("/tiers/Tiers.webp")', backgroundSize: "100% 100%", backgroundPosition: "center", backgroundRepeat: "no-repeat" }}
     >
       {/** Tier Styles **/}
         <TierStyles />

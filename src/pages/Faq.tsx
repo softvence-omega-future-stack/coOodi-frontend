@@ -177,7 +177,7 @@ export default function FAQ() {
 
   return (
     <div className="min-h-screen bg-[#001117] pt-28 pb-12 relative overflow-hidden" 
-      style={{ backgroundImage: 'url("/faq/FAQ.png")', backgroundSize: "100% 100%", backgroundPosition: "center", backgroundRepeat: "no-repeat" }}
+      style={{ backgroundImage: 'url("/faq/FAQ.webp")', backgroundSize: "100% 100%", backgroundPosition: "center", backgroundRepeat: "no-repeat" }}
     >
       <style>{`
         @keyframes chalkFlicker {

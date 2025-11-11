@@ -154,8 +154,14 @@ export default function AccountPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#001117] pt-28 pb-12" 
-      style={{ backgroundImage: 'url("/account/Account.png")', backgroundSize: "100% 100%", backgroundPosition: "center", backgroundRepeat: "no-repeat" }}
+    <div
+      className="min-h-screen bg-[#001117] pt-28 pb-12"
+      style={{
+        backgroundImage: 'url("/account/Account.webp")',
+        backgroundSize: "100% 100%",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
     >
       <style>{`
         @keyframes chalkFlicker {
@@ -499,7 +505,8 @@ export default function AccountPage() {
           z-index: 2;
           display: flex;
           align-items: center;
-          gap: 10px;
+          justify-content: center;
+          gap: 15px;
           width: 100%;
         }
 
@@ -822,8 +829,12 @@ export default function AccountPage() {
                     >
                       {selectedNetwork === "solana" && "✓"}
                     </div>
-                    <div className="w-10 h-10 rounded-lg flex items-center justify-center text-white font-bold">
-                      <img src="/account/solana.svg" alt="Solana Logo" />
+                    <div className="w-10 h-10 rounded-lg flex items-center justify-center text-white font-bold bg-gray-900">
+                      <img
+                        src="/account/solana.svg"
+                        alt="Solana Logo"
+                        className="w-full h-full p-2 object-contain"
+                      />
                     </div>
                     <span className="hidden sm:block text-xl font-semibold text-gray-800">
                       Solana
@@ -841,8 +852,12 @@ export default function AccountPage() {
                     >
                       {selectedNetwork === "polygon" && "✓"}
                     </div>
-                    <div className="w-10 h-10 rounded-lg flex items-center justify-center text-white font-bold">
-                      <img src="/account/polygon.svg" alt="Polygon Logo" />
+                    <div className="w-10 h-10 rounded-lg flex items-center justify-center text-white font-bold bg-gray-300">
+                      <img
+                        src="/account/pg.png"
+                        alt="Polygon Logo"
+                        className="w-full h-full p-2 object-contain"
+                      />
                     </div>
                     <span className="hidden sm:block text-xl font-semibold text-gray-800">
                       Polygon
@@ -866,8 +881,12 @@ export default function AccountPage() {
                     >
                       {selectedWallet === "metamask" && "✓"}
                     </div>
-                    <div className="w-16 h-10 bg-orange-500 rounded-lg flex items-center justify-center text-white font-bold">
-                      M
+                    <div className="w-10 h-10 rounded-lg flex items-center justify-center text-white font-bold bg-gray-300">
+                      <img
+                        src="/account/metamask.png"
+                        alt="Metamask Logo"
+                        className="w-full h-full p-2 object-contain"
+                      />
                     </div>
                     <span className="hidden sm:block text-xl font-semibold text-gray-800">
                       Metamask
@@ -885,8 +904,12 @@ export default function AccountPage() {
                     >
                       {selectedWallet === "coinbase" && "✓"}
                     </div>
-                    <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold">
-                      C
+                    <div className="w-10 h-10 rounded-lg flex items-center justify-center text-white font-bold bg-gray-300">
+                      <img
+                        src="/account/coinbase.png"
+                        alt="Coinbase Logo"
+                        className="w-full h-full object-contain"
+                      />
                     </div>
                     <span className="hidden sm:block text-xl font-semibold text-gray-800">
                       Coinbase
