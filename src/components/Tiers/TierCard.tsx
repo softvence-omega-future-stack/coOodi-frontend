@@ -23,7 +23,7 @@ const TierCard = ({
 }: TierCardProps) => {
   return (
     <div
-      className={`tier-card relative p-6 md:p-8 lg:p-10 shadow-2xl hover:shadow-amber-500/20 transition-all duration-300 delay-${index} w-full`}
+      className={`tier-card relative p-6 md:p-8 lg:p-10 transition-all duration-300 delay-${index} w-full`}
     >
       <div className="w-full flex flex-col md:flex-row items-center md:items-stretch gap-6 md:gap-10 lg:gap-12">
         {/* Left Image */}

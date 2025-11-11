@@ -163,7 +163,8 @@ export default function FogTransition() {
     if (!container || !fog1 || !fog2 || !fog3 || !fog4) return;
 
     const prevPath = sessionStorage.getItem("prevPath");
-    const isEnteringShop = (prevPath === "/" && location.pathname === "/shop");
+    const isEnteringShop =
+      (prevPath === "/" && location.pathname === "/shop");
 
     if (isEnteringShop) {
       setActive(true);
@@ -217,7 +218,6 @@ export default function FogTransition() {
         ease: "power2.inOut",
       });
 
-      
       // --- Fade out all fogs after a delay ---
       gsap.delayedCall(3.5, () => {
         const tl = gsap.timeline({

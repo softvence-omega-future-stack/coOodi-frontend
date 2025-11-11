@@ -16,7 +16,7 @@ const ShopItem: React.FC<ShopItemProps> = ({
 }) => {
   return (
     <div
-      className={`py-8 px-6 chalk-frame shop-item relative transition-all overflow-hidden bg-transparent ${
+      className={`py-8 px-6 chalk-frame shop-item relative transition-all overflow-hidden ${
         fullWidth ? "col-span-full" : ""
       }`}
     >
@@ -44,7 +44,7 @@ const ShopItem: React.FC<ShopItemProps> = ({
             alt={title}
             className="w-32 h-32 sm:w-40 sm:h-40 lg:w-48 lg:h-48 object-contain"
           />
-          <h3 className="text-lg sm:text-xl lg:text-2xl font-semibold text-[#9F854B] text-center">
+          <h3 className={`text-lg sm:text-xl lg:text-2xl font-semibold text-[#9F854B] text-center`}>
             {title}
           </h3>
           <AnimatedButton text="ADD TO BAG" className="mt-2" />

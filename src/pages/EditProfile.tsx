@@ -19,7 +19,9 @@ export default function EditProfile() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 flex items-center justify-center p-4 py-22">
+    <div className="min-h-screen bg-gray-900 flex items-center justify-center p-4 py-22"
+      style={{ backgroundImage: 'url("/empty-bg.webp")', backgroundSize: "100% 100%", backgroundPosition: "center", backgroundRepeat: "no-repeat" }}
+    >
       <div className="chalk-container">
         <div className="chalk-content">
           {/* Title */}

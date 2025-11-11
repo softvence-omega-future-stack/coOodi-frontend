@@ -123,7 +123,9 @@ export default function Contact() {
   };
 
   return (
-    <div className="min-h-screen bg-[#001117] pt-28 pb-12 relative overflow-hidden">
+    <div className="min-h-screen bg-[#001117] pt-28 pb-12 relative overflow-hidden"
+      style={{ backgroundImage: 'url("/contact/Contact.webp")', backgroundSize: "100% 100%", backgroundPosition: "center", backgroundRepeat: "no-repeat" }}
+    >
       <style>{`
         @keyframes chalkFlicker {
           0%, 100% { opacity: 0.7; }
@@ -237,7 +239,7 @@ export default function Contact() {
           left: 0;
           right: 0;
           bottom: 0;
-          border: 2px solid #9F854B;
+          // border: 2px solid #9F854B;
           border-radius: 4px;
           opacity: 0.8;
           mix-blend-mode: screen;
@@ -307,7 +309,7 @@ export default function Contact() {
       `}</style>
 
       {/* Floating Decorative Icons */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+      {/* <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <svg
           className="absolute top-12 left-8 md:left-12 w-8 h-8 md:w-12 md:h-12 text-yellow-500/10"
           fill="none"
@@ -382,11 +384,11 @@ export default function Contact() {
         <div className="absolute top-1/4 left-1/4 text-yellow-500/10 text-xl">
           △
         </div>
-      </div>
+      </div> */}
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Title */}
-        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-8 md:mb-12 ">
+        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-10 lg:mb-26 ">
           <span className="gradient-text">Contact</span>
         </h1>
 

@@ -11,7 +11,7 @@ const Layout = () => {
   useEffect(() => {
     if (navRef.current) {
       if (location.pathname === "/") {
-        navRef.current.style.opacity = "0";
+        navRef.current.style.opacity = "1";
       } else {
         navRef.current.style.opacity = "1";
         navRef.current.style.transform = "translateY(0px)";

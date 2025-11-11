@@ -50,7 +50,10 @@ export default function Tiers() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#001117] pt-28 pb-12 relative overflow-hidden w-full">
+    <div className="min-h-screen bg-[#001117] pt-28 pb-12 relative overflow-hidden w-full"
+      style={{ backgroundImage: 'url("/tiers/Tiers.webp")', backgroundSize: "100% 100%", backgroundPosition: "center", backgroundRepeat: "no-repeat" }}
+    >
+      {/** Tier Styles **/}
         <TierStyles />
       {/* Decorative Floating Elements */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
@@ -66,7 +69,7 @@ export default function Tiers() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Title */}
-        <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-center mb-10 lg:mb-16">
+        <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-center mb-10 lg:mb-26">
           <span className="gradient-text">The Silk Tiers</span>
         </h1>
 
@@ -80,7 +83,7 @@ export default function Tiers() {
               </div>
             }
           >
-          <div className="space-y-6 md:space-y-8 lg:space-y-10">
+          <div className="space-y-4 md:space-y-6 lg:space-y-8">
             {tiers.map((tier, index) => (
               <TierCard key={index} {...tier} index={index} />
             ))}
@@ -89,13 +92,13 @@ export default function Tiers() {
       </div>
 
       {/* Bottom Icon */}
-      <div className="flex justify-center mt-12 md:mt-16">
+      {/* <div className="flex justify-center mt-12 md:mt-16">
         <img
           src="/tiers/Group.svg"
           alt="Decorative Icon"
           className="w-16 h-16 md:w-20 md:h-20 absolute bottom-0"
         />
-      </div>
+      </div> */}
     </div>
   );
 }

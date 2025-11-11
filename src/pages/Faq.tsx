@@ -176,7 +176,9 @@ export default function FAQ() {
   const currentFAQs = faqData[activeCategory as keyof typeof faqData];
 
   return (
-    <div className="min-h-screen bg-[#001117] pt-28 pb-12 relative overflow-hidden">
+    <div className="min-h-screen bg-[#001117] pt-28 pb-12 relative overflow-hidden" 
+      style={{ backgroundImage: 'url("/faq/FAQ.webp")', backgroundSize: "100% 100%", backgroundPosition: "center", backgroundRepeat: "no-repeat" }}
+    >
       <style>{`
         @keyframes chalkFlicker {
           0%, 100% { opacity: 0.7; }
@@ -344,7 +346,7 @@ export default function FAQ() {
       `}</style>
 
       {/* Floating Decorative Icons */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+      {/* <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <svg
           className="absolute top-12 left-8 md:left-12 w-10 h-10 md:w-14 md:h-14 text-yellow-500/10"
           fill="none"
@@ -407,11 +409,11 @@ export default function FAQ() {
         <div className="absolute top-1/2 right-1/4 text-yellow-500/10 text-xl rotate-45">
           ✦
         </div>
-      </div>
+      </div> */}
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Title */}
-        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-8 md:mb-10 ">
+        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-10 md:mb-26 ">
           <span className="gradient-text">FAQ's</span>
         </h1>
 
