@@ -23,7 +23,7 @@ const AccountButton: React.FC<AccountButtonProps> = ({
       tl.to(textRef.current, {
         y: -50,
         opacity: 0,
-        duration: 0.3,
+        duration: 0.2,
         ease: "power2.in"
       })
       .set(textRef.current, {
@@ -32,7 +32,7 @@ const AccountButton: React.FC<AccountButtonProps> = ({
       .to(textRef.current, {
         y: 0,
         opacity: 1,
-        duration: 0.3,
+        duration: 0.2,
         ease: "power2.out"
       });
     }
@@ -43,7 +43,7 @@ const AccountButton: React.FC<AccountButtonProps> = ({
       ref={buttonRef}
       onClick={onClick}
       onMouseEnter={handleMouseEnter}
-      className={`relative px-4 py-2 bg-gradient-to-b from-[#6b1a1a] to-[#4a0d0d] rounded-full border-2 border-[#9F854B] overflow-hidden transition-all duration-300 hover:shadow-[0_0_30px_rgba(193,122,74,0.5)] hover:border-[#d4995f] ${className}`}
+      className={`relative px-4 py-2 bg-gradient-to-b from-[#6b1a1a] to-[#4a0d0d] rounded-full border-2 border-[#9F854B] cursor-pointer overflow-hidden transition-all duration-300 hover:shadow-[0_0_30px_rgba(193,122,74,0.5)] hover:border-[#d4995f] ${className}`}
       style={{
         boxShadow: '0 0 20px rgba(193, 122, 74, 0.3), inset 0 2px 10px rgba(0,0,0,0.5)'
       }}

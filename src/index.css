@@ -79,7 +79,7 @@
 .chalk-dropdown {
   /* background: #011419; */
   border-radius: 10px;
-  background-color: #9F854B;
+  background-color: #B59652;
   /* border: 3px solid #9F854B; */
   box-shadow:
     inset 0 0 10px rgba(159, 133, 75, 0.3),
@@ -92,7 +92,7 @@
   content: "";
   position: absolute;
   inset: 0;
-  border: 3px solid #9F854B;
+  border: 3px solid #B59652;
   border-radius: 8px;
   mix-blend-mode: screen;
   filter:

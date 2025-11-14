@@ -178,7 +178,7 @@ export default function FogTransition() {
         y: "-30%",
         opacity: 0.7,
         scale: 2.5,
-        duration: 1.8,
+        duration: 1,
         ease: "power2.out",
       });
 
@@ -189,8 +189,8 @@ export default function FogTransition() {
         y: "-30%",
         opacity: 0.6,
         scale: 3.5,
-        duration: 2.2,
-        delay: 0.3,
+        duration: 1,
+        delay: 0.2,
         ease: "power1.inOut",
       });
 
@@ -201,8 +201,8 @@ export default function FogTransition() {
         y: "30%",
         opacity: 0.5,
         scale: 2.0,
-        duration: 2,
-        delay: 0.6,
+        duration: 1,
+        delay: 0.4,
         ease: "sine.inOut",
       });
 
@@ -213,13 +213,13 @@ export default function FogTransition() {
         y: "30%",
         opacity: 0.4,
         scale: 2.0,
-        duration: 2.5,
-        delay: 0.9,
+        duration: 1,
+        delay: 0.6,
         ease: "power2.inOut",
       });
 
       // --- Fade out all fogs after a delay ---
-      gsap.delayedCall(3.5, () => {
+      gsap.delayedCall(2, () => {
         const tl = gsap.timeline({
           onComplete: () => {
             gsap.set(container, { display: "none" });
@@ -228,10 +228,10 @@ export default function FogTransition() {
           },
         });
 
-        tl.to(fog1, { opacity: 0, duration: 1.2, x: "+=20%", y: "-=10%" });
-        tl.to(fog2, { opacity: 0, duration: 1.2, x: "-=20%", y: "-=5%" }, "<");
-        tl.to(fog3, { opacity: 0, duration: 1.2, x: "+=15%", y: "+=10%" }, "<");
-        tl.to(fog4, { opacity: 0, duration: 1.2, x: "-=15%", y: "+=5%" }, "<");
+        tl.to(fog1, { opacity: 0, duration: .8, x: "+=20%", y: "-=10%" });
+        tl.to(fog2, { opacity: 0, duration: .8, x: "-=20%", y: "-=5%" }, "<");
+        tl.to(fog3, { opacity: 0, duration: .8, x: "+=15%", y: "+=10%" }, "<");
+        tl.to(fog4, { opacity: 0, duration: .8, x: "-=15%", y: "+=5%" }, "<");
       });
     }
 
