@@ -520,3 +520,126 @@ const Shop = () => {
 };
 
 export default Shop;
+
+
+
+
+// "use client";
+
+// import { useEffect, lazy, Suspense, useState } from "react";
+// import gsap from "gsap";
+// import { ScrollTrigger } from "gsap/ScrollTrigger";
+// import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+
+// const ShopItem = lazy(() => import("../components/Shop/ShopItem"));
+// gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+
+// const Shop = () => {
+//   const [bgLoaded, setBgLoaded] = useState(false);
+//   const [bgSrc, setBgSrc] = useState("");
+
+//   // 🔥 Function to determine background image based on width
+//   const getBackgroundForWidth = (width: number) => {
+//     if (width <= 375) return "/shop/shop375.webp";
+//     if (width >= 1920) return "/shop/shop1920.webp";
+//     if (width >= 1440) return "/shop/shop.webp";
+//     if (width >= 1024) return "/shop/shop.webp";
+//     if (width >= 768) return "/shop/shop768.webp";
+//     return "/shop/shop.webp"; // fallback
+//   };
+
+//   // 🔥 Set background on load + resize
+//   useEffect(() => {
+//     const updateBg = () => {
+//       const img = getBackgroundForWidth(window.innerWidth);
+
+//       const bgImg = new Image();
+//       bgImg.src = img;
+//       bgImg.onload = () => {
+//         setBgSrc(img);
+//         setBgLoaded(true);
+//       };
+//     };
+
+//     updateBg(); // On load
+//     window.addEventListener("resize", updateBg);
+
+//     return () => window.removeEventListener("resize", updateBg);
+//   }, []);
+
+//   useEffect(() => {
+//     if (!bgLoaded) return;
+
+//     ScrollTrigger.getAll().forEach((t) => t.kill());
+
+//     gsap.to(".shop-container", { opacity: 1, duration: 0.8 });
+
+//     gsap.fromTo(
+//       ".shop-item",
+//       { opacity: 0, y: 60, scale: 0.85 },
+//       {
+//         opacity: 1,
+//         y: 0,
+//         scale: 1,
+//         duration: 0.8,
+//         stagger: { amount: 0.3 },
+//         ease: "back.out(1.7)",
+//         scrollTrigger: {
+//           trigger: ".shop-grid",
+//           start: "top 80%",
+//         },
+//       }
+//     );
+
+//     gsap.utils.toArray(".shop-item").forEach((item) => {
+//       const el = item as HTMLElement;
+//       const btn = el.querySelector("button");
+//       el.addEventListener("mouseenter", () => {
+//         gsap.to(el, { scale: 1.02, boxShadow: "0 10px 20px rgba(251,191,36,0.3)" });
+//         if (btn) gsap.to(btn, { scale: 1.05, y: -2 });
+//       });
+//       el.addEventListener("mouseleave", () => {
+//         gsap.to(el, { scale: 1, boxShadow: "0 0 0 rgba(0,0,0,0)" });
+//         if (btn) gsap.to(btn, { scale: 1, y: 0 });
+//       });
+//     });
+//   }, [bgLoaded]);
+
+//   return (
+//     <div
+//       className="shop-container min-h-screen pt-28 pb-12 relative bg-[#001117]"
+//       style={{
+//         backgroundImage: bgLoaded ? `url('${bgSrc}')` : "none",
+//         backgroundSize: "100% 100%",
+//         backgroundPosition: "center",
+//         backgroundRepeat: "no-repeat",
+//       }}
+//     >
+//       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+//         <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-center mb-10 lg:mb-26">
+//           <span className="gradient-text">Shop</span>
+//         </h1>
+
+//         <div className="shop-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 sm:gap-6">
+//           <Suspense
+//             fallback={
+//               <div className="fixed inset-0 flex items-center justify-center z-50">
+//                 <div className="text-yellow-600 text-xl font-semibold animate-pulse">
+//                   Loading ...
+//                 </div>
+//               </div>
+//             }
+//           >
+//             <ShopItem image="/shop1.png" title="Poster"/>
+//             <ShopItem image="/shop2.png" title="Hoodie" />
+//             <ShopItem image="/shop3.png" title="Token Pack" />
+//             <ShopItem image="/shop4.png" title="Collectible Coin ($25)" />
+//             <ShopItem image="/shop5.png" title="Mystery Box" price="$50" fullWidth />
+//           </Suspense>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default Shop;

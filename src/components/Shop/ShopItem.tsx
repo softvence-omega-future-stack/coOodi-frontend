@@ -1,5 +1,6 @@
 import React from "react";
 import AnimatedButton from "../button/AnimatedButton";
+import { useNavigate } from "react-router-dom";
 
 type ShopItemProps = {
   image: string;
@@ -14,6 +15,9 @@ const ShopItem: React.FC<ShopItemProps> = ({
   price,
   fullWidth,
 }) => {
+
+  const navigate = useNavigate();
+
   return (
     <div
       className={`py-8 px-6 chalk-frame shop-item relative transition-all overflow-hidden ${
@@ -35,7 +39,7 @@ const ShopItem: React.FC<ShopItemProps> = ({
               {price}
             </p>
           </div>
-          <AnimatedButton text="ADD TO BAG" className="mt-3" />
+          <AnimatedButton text="ADD TO BAG" className="mt-3" onClick={() => navigate("/my-bag")}/>
         </div>
       ) : (
         <div className="flex flex-col items-center space-y-5">
@@ -47,7 +51,7 @@ const ShopItem: React.FC<ShopItemProps> = ({
           <h3 className={`text-lg sm:text-xl lg:text-2xl font-semibold text-[#9F854B] text-center`}>
             {title}
           </h3>
-          <AnimatedButton text="ADD TO BAG" className="mt-2" />
+          <AnimatedButton text="ADD TO BAG" className="mt-2" onClick={() => navigate("/my-bag")}/>
         </div>
       )}
     </div>

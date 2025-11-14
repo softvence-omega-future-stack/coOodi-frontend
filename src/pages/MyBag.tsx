@@ -171,7 +171,7 @@ export default function MyBag() {
 
         @media (min-width: 640px) {
           .table-header {
-            grid-template-columns: repeat(5, 1fr);
+            grid-template-columns: 1.8fr repeat(4, 1fr);
             gap: 40px;
           }
         }
@@ -197,6 +197,7 @@ export default function MyBag() {
           color: #9F854B;
           font-weight: 600;
           font-size: 12px;
+          text-align: center;
         }
 
         @media (min-width: 640px) {
@@ -243,12 +244,13 @@ export default function MyBag() {
           display: grid;
           grid-template-columns: 1.5fr 1fr 0.8fr 0.5fr;
           gap: 8px;
-          align-items: start;
+          align-items: center;
+          justify-items: center;
         }
 
         @media (min-width: 640px) {
           .item-row {
-            grid-template-columns: repeat(5, 1fr);
+            grid-template-columns: 1.8fr repeat(4, 1fr);
             gap: 40px;
           }
         }
@@ -256,7 +258,8 @@ export default function MyBag() {
         .item-col {
           color: #gray-300;
           min-width: 0;
-          justify-self: start;
+          align-self: center;
+          justify-self: center;
         }
 
         .item-name {
@@ -426,20 +429,20 @@ export default function MyBag() {
           <div className="table-content">
             {/* Header */}
             <div className="table-header">
-              <div className="header-cell">
-                <span className="gradient-text text-lg">Item</span>
+              <div className="min-w-0 self-start justify-self-start">
+                <span className="gradient-text text-sm sm:text-lg">Item</span>
               </div>
               <div className="header-cell hidden sm:block">
-                <span className="gradient-text text-lg">Date</span>
+                <span className="gradient-text text-sm sm:text-lg">Date</span>
               </div>
               <div className="header-cell">
-                <span className="gradient-text text-lg">Quantity</span>
+                <span className="gradient-text text-sm sm:text-lg">Quantity</span>
               </div>
               <div className="header-cell">
-                <span className="gradient-text text-lg">Payment</span>
+                <span className="gradient-text text-sm sm:text-lg">Payment</span>
               </div>
               <div className="header-cell">
-                <span className="gradient-text text-lg">Remove</span>
+                <span className="gradient-text text-sm sm:text-lg">Remove</span>
               </div>
             </div>
 
@@ -449,7 +452,7 @@ export default function MyBag() {
                 <div key={item.id} className="table-item">
                   <div className="item-row">
                     {/* Item Column */}
-                    <div className="item-col">
+                    <div className="text-gray-300 min-w-0 self-start justify-self-start">
                       <div className="checkbox-wrapper">
                         <label className="chalk-checkbox">
                           <input
@@ -459,23 +462,23 @@ export default function MyBag() {
                           />
                           <span className="checkmark">✓</span>
                         </label>
-                        <span className="item-name">{item.name}</span>
+                        <span className="item-name text-xs text-nowrap">{item.name}</span>
                       </div>
                     </div>
 
                     {/* Date Column */}
                     <div className="item-col hidden sm:block">
-                      <div className="item-date">{item.date}</div>
+                      <div className="item-date text-xs lg:text-sm text-nowrap">{item.date}</div>
                     </div>
 
                     {/* Quantity Column */}
                     <div className="item-col">
-                      <div className="item-qty">{item.quantity}</div>
+                      <div className="item-qty text-xs lg:text-sm">{item.quantity}</div>
                     </div>
 
                     {/* Payment Column */}
                     <div className="item-col">
-                      <div className="item-price">{item.payment}</div>
+                      <div className="item-price text-xs lg:text-sm">{item.payment}</div>
                     </div>
                     <div className="item-col">
                       <button

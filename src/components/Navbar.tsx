@@ -57,7 +57,7 @@ const Navbar: React.FC<NavbarProps> = ({ navRef }) => {
   return (
     <nav
       ref={navRef}
-      className="fixed top-0 left-0 right-0 z-50 transition-opacity duration-500"
+      className="fixed top-0 left-0 right-0 z-50 transition-opacity duration-500 bg-transparent backdrop-blur-sm border-b border-[#001117]/20"
     >
         {/* ✅ Navbar height fixed so dropdown never moves it */}
         <div className="flex items-center justify-between h-[64px] relative max-w-7xl px-4 sm:px-6 lg:px-8 mx-auto">
@@ -69,7 +69,7 @@ const Navbar: React.FC<NavbarProps> = ({ navRef }) => {
               closeMobileMenu();
             }}
           >
-            <span className="gradient-text text-lg sm:text-2xl lg:text-3xl font-semibold">
+            <span className="gradient-text text-xl sm:text-3xl font-semibold">
               Yhe Silk Road
             </span>
           </div>
@@ -90,11 +90,11 @@ const Navbar: React.FC<NavbarProps> = ({ navRef }) => {
 
           {/* Desktop Links */}
           <div className="hidden lg:flex items-center space-x-6">
-            <NavLink to="/shop">Shop</NavLink>
-            <NavLink to="/tiers">Tiers</NavLink>
-            <NavLink to="/faq">FAQ</NavLink>
-            <NavLink to="/contact">Contact</NavLink>
-            <NavLink to="/my-bag" className="flex items-center space-x-1">
+            <NavLink to="/shop" className="cursor-pointer">Shop</NavLink>
+            <NavLink to="/tiers" className="cursor-pointer">Tiers</NavLink>
+            <NavLink to="/faq" className="cursor-pointer">FAQ</NavLink>
+            <NavLink to="/contact" className="cursor-pointer">Contact</NavLink>
+            <NavLink to="/my-bag" className="flex items-center space-x-1 cursor-pointer">
               <img
                 src="/mybag/mybag.svg"
                 alt="My Bag Icon"
@@ -121,7 +121,7 @@ const Navbar: React.FC<NavbarProps> = ({ navRef }) => {
             <div className="relative">
               <button
                 onClick={() => setDropdownOpen(!dropdownOpen)}
-                className="p-2 hover:bg-slate-800/50 rounded-lg transition-colors flex items-center space-x-1"
+                className="p-2 hover:bg-slate-800/50 rounded-lg transition-colors flex items-center space-x-1 cursor-pointer"
               >
                 <img
                   src="/user.svg"
@@ -144,25 +144,25 @@ const Navbar: React.FC<NavbarProps> = ({ navRef }) => {
                     chalk-dropdown
                     absolute right-0 top-[calc(100%+10px)]
                     w-56 z-[9999]
-                    backdrop-blur-md shadow-xl
+                    backdrop-blur-md shadow-xl cursor-pointer
                   "
                 >
                   <NavLink
                     to="/account"
-                    className="block w-full text-left px-6 py-3  text-amber-300 hover:text-amber-300 transition-all duration-200"
+                    className="block w-full text-left px-6 py-3  text-amber-300 hover:text-amber-300 transition-all duration-200 cursor-pointer"
                   >
                     My Account
                   </NavLink>
                   <NavLink
                     to="/tiers"
-                    className="block w-full text-left px-6 py-3 text-amber-300 hover:text-amber-300 transition-all duration-200"
+                    className="block w-full text-left px-6 py-3 text-amber-300 hover:text-amber-300 transition-all duration-200 cursor-pointer"
                   >
                     Tiers
                   </NavLink>
                   <Link to="/login">
                     <button
                       onClick={() => setDropdownOpen(false)}
-                      className="w-full text-left px-6 py-3 border-t  text-slate-300 border-[#9F854B]/40 hover:text-amber-300 transition-all duration-200"
+                      className="w-full text-left px-6 py-3 border-t  text-slate-300 border-[#9F854B]/40 hover:text-amber-300 transition-all duration-200 cursor-pointer"
                     >
                       Log Out
                     </button>
@@ -177,28 +177,28 @@ const Navbar: React.FC<NavbarProps> = ({ navRef }) => {
         {mobileMenuOpen && (
           <div className="lg:hidden mt-2 bg-slate-900/95 backdrop-blur-md rounded-lg border border-slate-700/50 overflow-hidden w-[90%] max-w-sm mx-auto shadow-lg">
             <div className="py-2">
-              <NavLink to="/shop" className="block w-full text-left px-4 py-3">
+              <NavLink to="/shop" className="block w-full text-left px-4 py-3 cursor-pointer">
                 Shop
               </NavLink>
-              <NavLink to="/tiers" className="block w-full text-left px-4 py-3">
+              <NavLink to="/tiers" className="block w-full text-left px-4 py-3 cursor-pointer">
                 Tiers
               </NavLink>
-              <NavLink to="/faq" className="block w-full text-left px-4 py-3">
+              <NavLink to="/faq" className="block w-full text-left px-4 py-3 cursor-pointer">
                 FAQ
               </NavLink>
-              <NavLink to="/contact" className="block w-full text-left px-4 py-3">
+              <NavLink to="/contact" className="block w-full text-left px-4 py-3 cursor-pointer">
                 Contact
               </NavLink>
               <NavLink
                 to="/my-bag"
-                className=" w-full text-left px-4 py-3 flex items-center"
+                className=" w-full text-left px-4 py-3 flex items-center cursor-pointer"
               >
                 <LockKeyhole className="w-4 h-4 mr-2" />
                 My Bag
               </NavLink>
               <NavLink
                 to="/account"
-                className="block w-full text-left px-4 py-3 border-t border-slate-700/50"
+                className="block w-full text-left px-4 py-3 border-t border-slate-700/50 cursor-pointer"
               >
                 My Account
               </NavLink>
@@ -209,7 +209,7 @@ const Navbar: React.FC<NavbarProps> = ({ navRef }) => {
                   <span className="text-teal-400 font-bold">$22,450</span>
                 </div>
               </div>
-              <Link to="/login" className="text-slate-300">
+              <Link to="/login" className="text-slate-300 cursor-pointer">
                 <button
                   onClick={() => closeMobileMenu()}
                   className="w-full text-left px-4 py-3 hover:bg-amber-800/50 transition-colors border-t border-slate-700/50"
